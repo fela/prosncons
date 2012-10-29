@@ -1,0 +1,5 @@
+%h1 Log in
+= simple_form_for :login, url: session_path do |f|
+  = f.input :name, label: 'User name'
+  = f.input :password
+  = f.button :submit#, 'Log In'

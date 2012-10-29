@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate(username, pw)
-    user = find_by_username(username)
+    user = find_by_name(username)
     if user && PasswordHash.valid_password?(pw, user.password_hash)
       user
     else
