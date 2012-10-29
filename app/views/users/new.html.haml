@@ -1,0 +1,11 @@
+%h2 New Profile
+:markdown
+  **Note**: This website is a proof of concept, the data could be **deleted**
+  at any time. While the best effort is being made to keep private data confidential,
+  there is no guarantee that it will remain so. **Do not use a important passwords**.
+= simple_form_for @user, :validate => true do |f|
+  = f.input :name, label: 'Choose a username'
+  = f.input :password
+  = f.input :password_confirmation
+  = f.button :submit, 'Create Profile'
+

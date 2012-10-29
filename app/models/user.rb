@@ -1,14 +1,16 @@
+require 'passwordhash'
+
 class User < ActiveRecord::Base
   NAME_FORMAT = /\A\w\w\w\w+\z/
   NAME_MSG = 'Username can contain only letters, numbers and underscore'
   attr_accessible :name, :password, :password_confirmation
-  validates :username, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true
   validates :password, presence: true, confirmation: true
-  validates_format_of :username, with: NAME_FORMAT, message: NAME_MSG
+  validates_format_of :name, with: NAME_FORMAT, message: NAME_MSG
 
+  attr_accessor :password
+  before_save :encrypt_password
 
-
-  #include PasswordHash
   def encrypt_password
     if password.present?
       self.password_hash = PasswordHash.create_hash(password)
