@@ -1,4 +1,6 @@
 Prosncons::Application.routes.draw do
+  resources :pages
+
   root :to => 'home#index'
 
   resources :users
