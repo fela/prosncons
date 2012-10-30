@@ -1,7 +1,9 @@
 %p#notice= notice
 
 %h2
-  = @page.title
+  =@page.title
+  %small
+    [#{link_to 'edit', edit_page_path(@page)}]
 %p
   :markdown
     #{@page.content}
@@ -11,6 +13,3 @@
   = render partial: 'arguments', locals: { option: @page.option2 }
 
 %hr
-= link_to 'Edit', edit_page_path(@page)
-\|
-= link_to 'Back', pages_path
