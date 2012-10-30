@@ -1,5 +1,4 @@
 Prosncons::Application.routes.draw do
-  resources :pages
 
   root :to => 'home#index'
 
@@ -8,6 +7,10 @@ Prosncons::Application.routes.draw do
 
   match 'login' => 'sessions#new', as: :login
   match 'logout' => 'sessions#destroy', as: :logout
+
+  resources :pages
+  get 'pages/:page_id/arguments/:option/new' => 'arguments#new'
+  put 'pages/:page_id/arguments/:option' => 'arguments#create'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

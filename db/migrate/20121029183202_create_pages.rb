@@ -3,8 +3,8 @@ class CreatePages < ActiveRecord::Migration
     create_table :pages do |t|
       t.string :title
       t.text :content
-      t.string :option1
-      t.string :option2
+      t.string :option1, default: 'pros'
+      t.string :option2, default: 'cons'
 
       t.timestamps
     end

@@ -5,12 +5,12 @@
 %p
   :markdown
     #{@page.content}
+%hr
 .row
-  .span5
-    %h2= @page.option1
-  .span5
-    %h2= @page.option2
+  = render partial: 'arguments', locals: { option: @page.option1 }
+  = render partial: 'arguments', locals: { option: @page.option2 }
 
+%hr
 = link_to 'Edit', edit_page_path(@page)
 \|
 = link_to 'Back', pages_path
