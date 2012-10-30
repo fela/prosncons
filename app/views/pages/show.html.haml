@@ -1,17 +1,15 @@
 %p#notice= notice
 
-%p
-  %b Title:
+%h2
   = @page.title
 %p
-  %b Content:
-  = @page.content
-%p
-  %b Option1:
-  = @page.option1
-%p
-  %b Option2:
-  = @page.option2
+  :markdown
+    #{@page.content}
+.row
+  .span5
+    %h2= @page.option1
+  .span5
+    %h2= @page.option2
 
 = link_to 'Edit', edit_page_path(@page)
 \|
