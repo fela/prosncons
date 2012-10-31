@@ -13,6 +13,8 @@ Prosncons::Application.routes.draw do
   post 'pages/:page_id/arguments/:option' => 'arguments#create'
   get 'pages/:page_id/arguments/:option/:id/edit' => 'arguments#edit'
   put 'pages/:page_id/arguments/:option/:id' => 'arguments#update'
+
+  match 'pages/votes/:argument_id/:vote' => 'votes#create'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -15,8 +15,16 @@
 //= require twitter/bootstrap
 //= require_tree .
 
-function vote(id, diff) {
-    var elem = id.parentNode.getElementsByTagName('div')[0];
-    elem.innerHTML = Number(elem.innerHTML) + Number(diff);
-
+function vote(action, id, diff) {
+    id = Number(id);
+    var xmlhttp=new XMLHttpRequest();
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+            document.getElementById('votes'+id).innerHTML=xmlhttp.responseText;
+        }
+    }
+    xmlhttp.open('GET','/pages/votes/'+id+'/'+action,true);
+    xmlhttp.send();
 }

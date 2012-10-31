@@ -3,10 +3,12 @@
   - @page.arguments_for(option).each do |a|
     %hr
     .row
-      .span1.align-center.votes
-        = link_to glyph('chevron-up'), '#', onclick: 'vote(this, 1)'
-        %div 0
-        = link_to glyph('chevron-down'), '#', onclick: 'vote(this, -1)'
+      .span1.votes
+        %a{onclick: "vote('up', #{a.id}, 1)"}
+          = glyph('chevron-up')
+        %div{id: 'votes'+a.id.to_s} 0
+        %a{onclick: "vote('down', #{a.id}, 1)"}
+          = glyph('chevron-down')
       .span
         %h3
           = a.summary
