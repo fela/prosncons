@@ -8,10 +8,12 @@
         %div 0
         = link_to glyph('chevron-down'), '#', onclick: 'vote(this, -1)'
       .span
-        %h3= a.summary
+        %h3
+          = a.summary
+          %small [#{link_to 'edit', edit_argument_path(a, option)}]
         :markdown
           #{a.description}
 
   - unless @page.arguments_for(option).empty?
     %hr
-  =link_to 'Add argument', new_argument_path(@page, option), class: 'btn'
+  =link_to 'Add argument', new_argument_path(option), class: 'btn'
