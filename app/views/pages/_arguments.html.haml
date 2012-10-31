@@ -2,9 +2,15 @@
   %h2= option
   - @page.arguments_for(option).each do |a|
     %hr
-    %h3= a.summary
-    :markdown
-      #{a.description}
+    .row
+      .span1.align-center.votes
+        = link_to glyph('chevron-up'), '#', onclick: 'vote(this, 1)'
+        %div 0
+        = link_to glyph('chevron-down'), '#', onclick: 'vote(this, -1)'
+      .span
+        %h3= a.summary
+        :markdown
+          #{a.description}
 
   - unless @page.arguments_for(option).empty?
     %hr

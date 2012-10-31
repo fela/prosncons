@@ -14,3 +14,9 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+
+function vote(id, diff) {
+    var elem = id.parentNode.getElementsByTagName('div')[0];
+    elem.innerHTML = Number(elem.innerHTML) + Number(diff);
+
+}
