@@ -4,7 +4,7 @@ class CreateArguments < ActiveRecord::Migration
       t.string :summary
       t.string :option
       t.text :description
-      t.integer :page_id
+      t.references :page
 
       t.timestamps
     end

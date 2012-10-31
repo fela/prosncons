@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121029211907) do
+ActiveRecord::Schema.define(:version => 20121031174151) do
 
   create_table "arguments", :force => true do |t|
     t.string   "summary"
@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(:version => 20121029211907) do
     t.string   "password_hash"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
+  end
+
+  create_table "votes", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "votable_id"
+    t.string   "votable_type"
+    t.integer  "vote"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
 end

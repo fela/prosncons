@@ -3,6 +3,7 @@ class Page < ActiveRecord::Base
   validates_presence_of :title, :content
 
   has_many :arguments, dependent: :destroy
+  has_many :votes, as: :votable
 
   def arguments_for(option)
     arguments.select{|x| x.option.parameterize == option.parameterize}
