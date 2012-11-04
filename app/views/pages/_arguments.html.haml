@@ -1,12 +1,14 @@
 .span5
-  %h2= option
+  %h2
+    = option
+    =link_to 'Add', new_argument_path(option), class: 'btn btn-primary'
   - @page.arguments_for(option).each do |a|
     %hr
     .row
       .span1.votes
         %a{onclick: "vote('up', #{a.id}, 1)"}
           = glyph('chevron-up')
-        %div{id: 'votes'+a.id.to_s} 0
+        %div{id: "votes#{a.id}"}= a.score
         %a{onclick: "vote('down', #{a.id}, 1)"}
           = glyph('chevron-down')
       .span
@@ -18,4 +20,3 @@
 
   - unless @page.arguments_for(option).empty?
     %hr
-  =link_to 'Add argument', new_argument_path(option), class: 'btn'

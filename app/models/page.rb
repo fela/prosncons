@@ -6,7 +6,8 @@ class Page < ActiveRecord::Base
   has_many :votes, as: :votable
 
   def arguments_for(option)
-    arguments.select{|x| x.option.parameterize == option.parameterize}
+    res = arguments.select{|x| x.option.parameterize == option.parameterize}
+    res.sort {|x, y| y.score <=> x.score}
   end
 
   def arguments1
