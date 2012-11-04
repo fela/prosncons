@@ -8,6 +8,10 @@ Prosncons::Application.routes.draw do
   match 'login' => 'sessions#new', as: :login
   match 'logout' => 'sessions#destroy', as: :logout
 
+
+  match 'persona/login' => 'persona#new'
+  match 'persona/logout' => 'persona#destroy'
+
   resources :pages
   get 'pages/:page_id/arguments/:option/new' => 'arguments#new'
   post 'pages/:page_id/arguments/:option' => 'arguments#create'
