@@ -2,12 +2,10 @@
 %table
   %tr
     %th ID
-    %th Username
+    %th email
+    %th Real name
   - @users.each do |user|
     %tr
-      %td= user.id
+      %td= link_to user.id, user
+      %td= link_to user.email, user
       %td= link_to user.name, user
-
-
-%br/
-= link_to 'New User', new_user_path

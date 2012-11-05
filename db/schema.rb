@@ -32,10 +32,10 @@ ActiveRecord::Schema.define(:version => 20121031174151) do
   end
 
   create_table "users", :force => true do |t|
+    t.string   "email"
     t.string   "name"
-    t.string   "password_hash"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "votes", :force => true do |t|
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20121031174151) do
     t.integer  "votable_id"
     t.string   "votable_type"
     t.integer  "vote"
+    t.string   "ip"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
