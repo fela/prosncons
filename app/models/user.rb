@@ -9,4 +9,13 @@ class User < ActiveRecord::Base
       u.save
     end
   end
+
+  def display_name
+    name or "user#{id}"
+  end
+
+  def avatar_url(size=24)
+    id = Digest::MD5.hexdigest(email.downcase)
+    "http://gravatar.com/avatar/#{id}.png?s=#{size}"
+  end
 end
