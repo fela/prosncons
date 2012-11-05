@@ -1,9 +1,9 @@
 $(document).ready(function(){
-    $('#signin').click(function(event){
+    $('#login').click(function(event){
         navigator.id.request();
         event.preventDefault();
     });
-    $('#signout').click(function(event){
+    $('#logout').click(function(event){
         navigator.id.logout();
         event.preventDefault();
     });

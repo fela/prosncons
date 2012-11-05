@@ -5,12 +5,8 @@ Prosncons::Application.routes.draw do
   resources :users
   resource :session
 
-  match 'login' => 'sessions#new', as: :login
-  match 'logout' => 'sessions#destroy', as: :logout
-
-
-  match 'persona/login' => 'persona#new'
-  match 'persona/logout' => 'persona#destroy'
+  match '/persona/login' => 'persona#new'
+  match '/persona/logout' => 'persona#destroy'
 
   resources :pages
   get 'pages/:page_id/arguments/:option/new' => 'arguments#new'

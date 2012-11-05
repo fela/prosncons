@@ -15,14 +15,14 @@ class PersonaController < ApplicationController
     resp = http.post("/verify", data, headers)
     res = JSON.parse(resp.body())
     if res['status'] == 'okay'
-      session['username'] = res['email']
+      session[:email] = res['email']
     end
 
     render_nothing
   end
   def destroy
     puts "Logging out!!!"
-    session[:username] = nil
+    session[:email] = nil
     render_nothing
   end
 

@@ -20,7 +20,7 @@
 
   %body
     %script
-      loggedInEmail = #{session[:username] ? "'#{session[:username]}'": 'null'}
+      loggedInEmail = #{session[:email] ? "'#{session[:email]}'": 'null'}
     .navbar.navbar-fixed-top
       .navbar-inner
         .container

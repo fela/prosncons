@@ -9,7 +9,7 @@
     %li= link_to "Users", users_path
     %li= link_to "Pages", pages_path
   %ul.nav.pull-right
-    - if session[:username]
+    - if session[:email]
       = render 'layouts/logged_in'
     - else
       = render 'layouts/not_logged_in'
