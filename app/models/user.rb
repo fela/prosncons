@@ -4,10 +4,11 @@ class User < ActiveRecord::Base
     if user
       user.touch
     else
-      u = User.new()
-      u.email = email
-      u.save
+      user = User.new()
+      user.email = email
+      user.save
     end
+    user
   end
 
   def display_name

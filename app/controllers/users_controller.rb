@@ -26,17 +26,4 @@ class UsersController < ApplicationController
       render :new
     end
   end
-
-
-private
-  def own_profile_action
-    @user = User.find(params[:id])
-    if session[:email].nil?
-      raise AuthorizationError.new 'action requires log in'
-    elsif @user.user != session[:email]
-      raise AuthorizationError.new 'action permitted only by the user itself'
-    end
-  #rescue ActiveRecord::RecordNotFound
-  #  render :invalid_user
-  end
 end

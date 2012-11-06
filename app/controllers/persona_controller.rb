@@ -17,7 +17,8 @@ class PersonaController < ApplicationController
     if res['status'] == 'okay' && res['audience'] == audience
       flash[:success] = 'Successfully logged in'
       session[:email] = res['email']
-      User.logged_in(res['email'])
+      @user = User.logged_in(res['email'])
+      session[:id] = @user.id
     else
       flash[:error] = 'Error logging in'
     end

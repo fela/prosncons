@@ -1,0 +1,4 @@
+%h2
+  Profile of #{@user.display_name}:
+  %a{href:'https://en.gravatar.com/emails', rel:'tooltip', title:'change you profile picture on Gravatar', class: 'pull-right'}
+    =image_tag @user.avatar_url(128)
