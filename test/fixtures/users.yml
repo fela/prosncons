@@ -1,9 +1,2 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  name: MyString
-  password_hash: MyString
-
-two:
-  name: MyString
-  password_hash: MyString

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121031174151) do
+ActiveRecord::Schema.define(:version => 20121107112311) do
 
   create_table "arguments", :force => true do |t|
     t.string   "summary"
@@ -20,6 +20,13 @@ ActiveRecord::Schema.define(:version => 20121031174151) do
     t.integer  "page_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+  end
+
+  create_table "credentials", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "pages", :force => true do |t|
@@ -32,10 +39,11 @@ ActiveRecord::Schema.define(:version => 20121031174151) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email"
+    t.string   "primary_email"
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.text     "urls"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "votes", :force => true do |t|

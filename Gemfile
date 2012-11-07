@@ -25,9 +25,15 @@ group :development do
   gem 'haml-rails'
 end
 
+group :test do
+  gem 'test-unit'
+end
+
 gem 'jquery-rails'
 gem 'simple_form'
 gem 'rdiscount'
+
+#gem 'debugger', group: [:development, :test]
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

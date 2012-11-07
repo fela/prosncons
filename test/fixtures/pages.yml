@@ -1,13 +1,2 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-one:
-  title: MyString
-  content: MyText
-  option1: MyString
-  option2: MyString
-
-two:
-  title: MyString
-  content: MyText
-  option1: MyString
-  option2: MyString
