@@ -27,6 +27,7 @@ end
 
 group :test do
   gem 'test-unit'
+  gem 'timecop'
 end
 
 gem 'jquery-rails'

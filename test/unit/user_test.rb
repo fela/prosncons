@@ -2,13 +2,6 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
 
-  test 'can save with primary email' do
-    u = User.new
-    u.primary_email = credentials(:unused).email
-    assert u.valid?
-    assert u.save
-  end
-
   test 'cannot save without primary email' do
     u = User.new
     assert !u.valid?, "#{u.inspect} is valid, it shouldn't be"
@@ -59,5 +52,66 @@ class UserTest < ActiveSupport::TestCase
     end
     u.primary_email = email2
     assert_equal email, u.primary_email
+  end
+
+  test 'logged_in does not create new users if existing' do
+    user_count = User.count
+    cred_count = Credential.count
+    User.logged_in(users(:alice).primary_email)
+    assert_equal user_count, User.count
+    assert_equal cred_count, Credential.count
+    User.logged_in(credentials(:alice2).email)
+    assert_equal user_count, User.count
+    assert_equal cred_count, Credential.count
+  end
+
+  test 'logged_in updates the creation time if user is existing' do
+    time = 1.day.from_now
+    u = nil
+    Timecop.freeze(time) do
+      u = User.logged_in(users(:alice).primary_email)
+    end
+    # for some reason the two times are not ==, but this way it works
+    assert_equal 0.0, time - u.updated_at
+  end
+
+  test 'logged_in returns the correct existing user' do
+    u = User.logged_in(users(:alice).primary_email)
+    assert_equal users(:alice), u
+  end
+
+  test 'logged_in creates a new user and credential if not existing' do
+    user_count = User.count
+    cred_count = Credential.count
+    email = 'new_unused_email@email.com'
+    u = User.logged_in(email)
+    assert_equal u, User.find_by_primary_email(email)
+    assert_equal email, u.primary_email
+    assert_equal user_count+1, User.count
+    assert_equal cred_count+1, Credential.count
+    assert_equal 1, Credential.find_all_by_email(email).count
+  end
+
+  test 'no credential for primary_email' do
+    u = User.new
+    u.primary_email = 'an_unique_email@abc.com'
+    assert !u.valid?
+  end
+
+  test 'no credential after changing primary_email' do
+    u = users(:alice)
+    u.primary_email = 'an_unique_email@abc.com'
+    assert !u.valid?
+  end
+
+  test 'url serialization' do
+    u = users(:alice)
+    first = 'http://www.google.com'
+    second = 'http://www.microsoft.com'
+    u.urls = [first, second]
+    u.save!
+    u = User.find(u.id)
+    assert_equal first, u.urls.first
+    assert_equal second, u.urls.second
   end
 end
