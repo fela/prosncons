@@ -47,22 +47,20 @@ class UserTest < ActiveSupport::TestCase
     u = User.new
     email = credentials(:unused).email
     email2 = email.upcase
-    Credential.create do |c|
-      c.email = email2
-    end
     u.primary_email = email2
     assert_equal email, u.primary_email
   end
 
-  test 'logged_in does not create new users if existing' do
-    user_count = User.count
-    cred_count = Credential.count
-    User.logged_in(users(:alice).primary_email)
-    assert_equal user_count, User.count
-    assert_equal cred_count, Credential.count
-    User.logged_in(credentials(:alice2).email)
-    assert_equal user_count, User.count
-    assert_equal cred_count, Credential.count
+  test 'validation: no credential for primary_email' do
+    u = User.new
+    u.primary_email = 'an_unique_email@abc.com'
+    assert !u.valid?
+  end
+
+  test 'validation: no credential after changing primary_email' do
+    u = users(:alice)
+    u.primary_email = 'an_unique_email@abc.com'
+    assert !u.valid?
   end
 
   test 'logged_in updates the creation time if user is existing' do
@@ -80,11 +78,11 @@ class UserTest < ActiveSupport::TestCase
     assert_equal users(:alice), u
   end
 
-  test 'logged_in creates a new user and credential if not existing' do
+  test 'create_account creates a new account and credential' do
     user_count = User.count
     cred_count = Credential.count
     email = 'new_unused_email@email.com'
-    u = User.logged_in(email)
+    u = User.create_account(email)
     assert_equal u, User.find_by_primary_email(email)
     assert_equal email, u.primary_email
     assert_equal user_count+1, User.count
@@ -92,19 +90,35 @@ class UserTest < ActiveSupport::TestCase
     assert_equal 1, Credential.find_all_by_email(email).count
   end
 
-  test 'no credential for primary_email' do
-    u = User.new
-    u.primary_email = 'an_unique_email@abc.com'
-    assert !u.valid?
+  test 'find_by_email returns nil if the email is not in Credentials' do
+    assert_nil User.find_by_email('longandunexisitingemail342@blahh.com')
   end
 
-  test 'no credential after changing primary_email' do
+  test 'find_by_email returns nil if an unused credential is passed' do
+    assert_nil User.find_by_email(credentials(:unused).email)
+  end
+
+  test 'find_by_email should work for existing primary email' do
+    assert_equal users(:alice), User.find_by_email(users(:alice).primary_email)
+  end
+
+  test 'find_by_email should work for other correct email' do
+    assert_equal users(:alice), User.find_by_email(credentials(:alice2).email)
+  end
+
+  test 'add_email adds a credential' do
+    user_count = User.count
+    cred_count = Credential.count
+    email = 'new_unused_email@email.com'
     u = users(:alice)
-    u.primary_email = 'an_unique_email@abc.com'
-    assert !u.valid?
+    u.add_email(email)
+    assert_equal user_count, User.count
+    assert_equal cred_count+1, Credential.count
+    assert_equal 1, Credential.find_all_by_email(email).count
+    assert u.credentials.any?{|c| c.email == email}
   end
 
-  test 'url serialization' do
+  test 'urls serialization' do
     u = users(:alice)
     first = 'http://www.google.com'
     second = 'http://www.microsoft.com'

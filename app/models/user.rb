@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
     user = find_by_email(email)
     user.touch
     user.save!
+    user
   end
 
   def self.create_account(email)
@@ -29,7 +30,7 @@ class User < ActiveRecord::Base
   end
 
   def self.find_by_email(email)
-    c = Credential.find_by_email(email)
+    c = Credential.find_by_email(email.downcase)
     c && c.user
   end
 
