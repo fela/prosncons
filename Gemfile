@@ -19,15 +19,17 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
-end
-
-group :development do
   gem 'haml-rails'
 end
 
 group :test do
   gem 'test-unit'
   gem 'timecop'
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'poltergeist'
+  gem 'database_cleaner' # needed by capybara
+  gem 'launchy'
 end
 
 gem 'jquery-rails'

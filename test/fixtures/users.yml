@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 alice:
-  primary_email: alice@email.com
+  primary_email: alice@mockmyid.com
   name: Alice
 
 bob:
-  primary_email: bob@email.com
+  primary_email: bob@mockmyid.com
   name: Bob
