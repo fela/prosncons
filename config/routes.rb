@@ -5,8 +5,8 @@ Prosncons::Application.routes.draw do
   resources :users
   resource :session
 
-  match '/persona/login' => 'persona#new'
-  match '/persona/logout' => 'persona#destroy'
+  post '/persona/login' => 'persona#login'
+  post '/persona/logout' => 'persona#logout'
 
   resources :pages
   get 'pages/:page_id/arguments/:option/new' => 'arguments#new'
@@ -14,7 +14,14 @@ Prosncons::Application.routes.draw do
   get 'pages/:page_id/arguments/:option/:id/edit' => 'arguments#edit'
   put 'pages/:page_id/arguments/:option/:id' => 'arguments#update'
 
-  match 'pages/votes/:argument_id/:vote' => 'votes#create'
+  post 'pages/votes/:argument_id/:vote' => 'votes#create'
+
+
+  # XXX: should be POST
+  match 'persona/create_account' => 'persona#create_account'
+
+  post 'persona/login_and_add_email' => 'persona#login_and_add_email'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

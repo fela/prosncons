@@ -13,17 +13,17 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    @user = User.new
+    #@user = User.new
   end
 
   # POST /users
-  def create
-    @user = User.new(params[:user])
-    if @user.save
-      flash[:success] = 'User was successfully created.'
-      redirect_to root_path
-    else
-      render :new
-    end
-  end
+  #def create
+  #  @user = User.new(params[:user])
+  #  if @user.save
+  #    flash[:success] = 'User was successfully created.'
+  #    redirect_to root_path
+  #  else
+  #    render :new
+  #  end
+  #end
 end

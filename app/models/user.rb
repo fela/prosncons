@@ -15,15 +15,15 @@ class User < ActiveRecord::Base
 
   def self.logged_in(email)
     user = find_by_email(email)
-    if user
-      user.touch
-      user.save!
-    else
-      cred = Credential.create!(email: email)
-      user = User.create! do |u|
-        u.primary_email = email
-        u.credentials << cred
-      end
+    user.touch
+    user.save!
+  end
+
+  def self.create_account(email)
+    cred = Credential.create!(email: email)
+    user = User.create! do |u|
+      u.primary_email = email
+      u.credentials << cred
     end
     user
   end
@@ -31,6 +31,13 @@ class User < ActiveRecord::Base
   def self.find_by_email(email)
     c = Credential.find_by_email(email)
     c && c.user
+  end
+
+  def add_email(email)
+    Credential.create! do |c|
+      c.email = email
+      c.user = self
+    end
   end
 
   def avatar_url(size=24)
