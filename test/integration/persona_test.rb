@@ -1,9 +1,27 @@
 require 'test_helper'
 
 class PersonaTest < ActionDispatch::IntegrationTest
-  setup do
-    #require 'capybara/poltergeist'
-    Capybara.current_driver = :selenium
+  def self.startup
+    #Capybara.current_driver = :selenium
+    Capybara.default_driver = :selenium
+    window = Capybara.current_session.driver.browser.manage.window
+    window.resize_to(1024, 768)
+  end
+
+  teardown do
+    #Capybara.current_session.driver.quit
+    sleep(0.2)
+    page.execute_script("navigator.id.logout()")
+    assert page.has_content?('you are not logged in')
+    click_link('you are not logged in')
+    click_link('Log In')
+    main_window, persona_popup = page.driver.browser.window_handles
+    within_window(persona_popup) do
+      click_link('thisIsNotMe')
+      sleep(0.2)
+      page.execute_script "window.close();"
+    end
+    page.driver.browser.switch_to.window(main_window)
   end
 
 
@@ -28,29 +46,35 @@ class PersonaTest < ActionDispatch::IntegrationTest
     assert page.has_content?('New Profile')
     visit(root_path)
     assert page.has_content?('you are not logged in')
+
+    page.execute_script("navigator.id.logout()")
+    assert page.has_content?('you are not logged in')
   end
 
 
   private
   def login(email=users(:alice).primary_email)
     Capybara.default_wait_time = 20 # persona login could take some time
-    within('.navbar') do
-      click_link('you are not logged in')
-      click_link('Log In')
-    end
+    page.execute_script("navigator.id.request()")
     #page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
     main_window, persona_popup = page.driver.browser.window_handles
     within_window(persona_popup) do
       fill_in('email', :with => email)
       click_button('next')
     end
-    within_window(main_window) do
-      within('.navbar') do
-        # wait till the login completed: this could take some time
-        page.has_content?(email)
-      end
+    page.driver.browser.switch_to.window(main_window)
+    within('.navbar') do
+      # wait till the login completed: this could take some time
+      page.has_content?(email)
     end
   ensure
     Capybara.default_wait_time = 5
+  end
+
+  def display_cookies
+    #puts '=== begin of cookies ==='
+    #puts page.driver.browser.manage.all_cookies.map(&:inspect).join("\n")
+    #"#{puts '===  end of cookies  ==='
+    #puts
   end
 end
