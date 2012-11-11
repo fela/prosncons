@@ -2,8 +2,10 @@ require 'test_helper'
 
 class PersonaTest < ActionDispatch::IntegrationTest
   def self.startup
-    #Capybara.current_driver = :selenium
     Capybara.default_driver = :selenium
+    # problem with other drivers:
+    # poltergeist doesn't provide proper multi-window
+    # webkit doesn't allow the request to persona
     window = Capybara.current_session.driver.browser.manage.window
     window.resize_to(1024, 768)
   end
@@ -18,7 +20,7 @@ class PersonaTest < ActionDispatch::IntegrationTest
     main_window, persona_popup = page.driver.browser.window_handles
     within_window(persona_popup) do
       click_link('thisIsNotMe')
-      sleep(0.2)
+      sleep(1)
       page.execute_script "window.close();"
     end
     page.driver.browser.switch_to.window(main_window)
@@ -64,6 +66,7 @@ class PersonaTest < ActionDispatch::IntegrationTest
     end
     page.driver.browser.switch_to.window(main_window)
     within('.navbar') do
+      sleep(6)
       # wait till the login completed: this could take some time
       page.has_content?(email)
     end

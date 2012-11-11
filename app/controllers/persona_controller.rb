@@ -61,7 +61,6 @@ class PersonaController < ApplicationController
   end
 
   def logout
-    puts "Logging out!!!"
     session[:email] = nil
     session[:id] = nil
     session[:new_email] = nil
