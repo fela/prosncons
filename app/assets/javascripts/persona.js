@@ -49,6 +49,7 @@ navigator.id.watch({
             data: {referer: document.URL},
             success: function(res, status, xhr) {
                 if (ProsNCons.persona.redirect_on_logout)
+                    window.location = res;
                 // reset for next call (might not be needed..)
                 ProsNCons.persona.redirect_on_logout = true;
             },
