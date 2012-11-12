@@ -3,12 +3,12 @@
   **Note**: This website is a proof of concept, the data could be **deleted**
   at any time. While the best effort is being made to keep private data confidential,
   there is no guarantee that it will remain so. **Do not use a important passwords**.
-%a#login_add{href: javascript_link}
-  I already have an account, log in with different email address, you will be
-  able to link the accounts together.
-%br
-%a{href: '/persona/create_account'}
+%a{href: '/persona/create_account', class: 'btn btn-primary'}
   Create new account
+%a#login_add{href: javascript_link, class: 'btn btn-primary'}
+  Add email to existing account
+%a#logout_follow_link{href: session[:referer], class: 'btn'}
+  Cancel
 
 
 

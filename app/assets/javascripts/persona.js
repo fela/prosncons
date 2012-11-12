@@ -1,5 +1,7 @@
 // default value
-ProsNCons = {persona:{login_action: '/persona/login'}};
+ProsNCons = {persona:{login_action: '/persona/login',
+                      redirect_on_logout: true
+}};
 
 $(document).ready(function(){
     $('#login').click(function(event){
@@ -20,6 +22,10 @@ $(document).ready(function(){
         navigator.id.logout();
         event.preventDefault();
     });
+    $('#logout_follow_link').click(function(event){
+        ProsNCons.persona.redirect_on_logout = false;
+        navigator.id.logout();
+    });
 });
 
 var currentUser = 'bob@example.com';
@@ -31,16 +37,21 @@ navigator.id.watch({
             type: 'POST',
             url: ProsNCons.persona.login_action,
             data: {assertion: assertion, referer: document.URL},
-            success: function(res, status, xhr) { window.location = res },
+            success: function(res, status, xhr) { window.location = res; },
             error: function(xhr, status, err) { alert("Login failure: " + err); }
         });
+
     },
     onlogout: function() {
         $.ajax({
             type: 'POST',
             url: '/persona/logout',
             data: {referer: document.URL},
-            success: function(res, status, xhr) { window.location = res; },
+            success: function(res, status, xhr) {
+                if (ProsNCons.persona.redirect_on_logout)
+                // reset for next call (might not be needed..)
+                ProsNCons.persona.redirect_on_logout = true;
+            },
             error: function(xhr, status, err) { alert("Logout failure: " + err); }
         });
     }
