@@ -1,2 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+page1:
+  title: Some page
+  content:
+    Some more complicated content with even **bold text**, unfortunately
+    lists seem not to work. Okay doesn't matter
+  author: alice
 
+page2:
+  title: Another page
+  content: Not sure which option is best
+  author: alice

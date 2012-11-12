@@ -4,9 +4,12 @@
   =@page.title
   %small
     [#{link_to 'edit', edit_page_path(@page)}]
-%p
+.container.page-content
   :markdown
     #{@page.content}
+  .pull-right
+    = render partial: 'users/signature',
+             locals: {user: @page.author, time: @page.created_at}
 %hr
 .row
   = render partial: 'arguments', locals: { option: @page.option1 }

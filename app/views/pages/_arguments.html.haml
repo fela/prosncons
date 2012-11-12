@@ -11,12 +11,16 @@
         %div{id: "votes#{a.id}"}= a.score
         %a{onclick: "vote('down', #{a.id}, 1)"}
           = glyph('chevron-down')
-      .span
+      .span4
         %h3
           = a.summary
           %small [#{link_to 'edit', edit_argument_path(a, option)}]
         :markdown
           #{a.description}
+        .pull-right
+          = render partial: 'users/signature',
+                   locals: {user: a.author, time: a.created_at}
+
 
   - unless @page.arguments_for(option).empty?
     %hr

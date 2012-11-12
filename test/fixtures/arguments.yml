@@ -1,0 +1,75 @@
+page1arg1:
+  option: pros
+  summary: brief argument
+  description: This is a description which should be a little longer than the
+    argument. Blah blab blah. I don't **know** what to write mmh.
+  page: page1
+  author: bob
+
+page1arg2:
+  option: pros
+  summary: another brief argument
+  description: This is a description which should be a little longer than the
+    argument. Blah blab blah. I don't **know** what to write mmh.
+  page: page1
+  author: alice
+
+page1arg3:
+  option: cons
+  summary: this is not good
+  description: This is a description which should be a little longer than the
+    argument. Blah blab blah. I don't **know** what to write mmh.
+  page: page1
+  author: bob
+
+page1arg4:
+  option: cons
+  summary: another brief argument
+  description: This is a description which should be a little longer than the
+    argument. Blah blab blah. I don't **know** what to write mmh. This
+    agrument is the longest of all!!!!!!!!!
+  page: page1
+  author: bob
+
+page1arg5:
+  option: cons
+  summary: ultimate argument
+  description: This is a description which should be a little longer than the
+    argument. Blah blab blah. I don't **know** what to write mmh. This
+    agrument is the longest of all!!!!!!!!!
+  page: page1
+  author: alice
+
+page1arg5:
+  option: cons
+  summary: ultimate argument
+  description: This is a description which should be a little longer than the
+    argument. Blah blab blah. I don't **know** what to write mmh. This
+    agrument is the longest of all!!!!!!!!!
+  page: page1
+  author: alice
+page1arg5:
+  option: cons
+  summary: shortest
+  description: A short **argument**
+  page: page1
+  author: alice
+
+
+page2arg1:
+  option: pro
+  summary: another brief arg
+  description: This is a description which should be a little longer than the
+    argument. Blah blab blah. I don't **know** what to write mmh. This
+    agrument is the longest of all!!!!!!!!!
+  page: page2
+  author: bob
+
+page2arg2:
+  option: cons
+  summary: ultimate argument!
+  description: This is a description which should be a little longer than the
+    argument. Blah blab blah. I don't **know** what to write mmh. This
+    agrument is the longest of all!!!!!!!!!
+  page: page2
+  author: alice

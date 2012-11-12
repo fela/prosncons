@@ -5,6 +5,7 @@ class CreatePages < ActiveRecord::Migration
       t.text :content
       t.string :option1, default: 'pros'
       t.string :option2, default: 'cons'
+      t.references :author
 
       t.timestamps
     end

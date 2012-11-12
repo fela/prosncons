@@ -30,10 +30,10 @@ textarea {
 }
 
 .footer {
-    padding: 70px 0;
+    padding: 70px;
     margin-top: 70px;
     border-top: 1px solid #E5E5E5;
-    background-color: whiteSmoke;
+    background-color: whitesmoke;
 }
 
 tr {
@@ -48,4 +48,15 @@ tr.hovered {
 th {
     background: white;
     cursor: auto;
+}
+
+.page-content {
+    padding: 20px;
+    background: whitesmoke;
+}
+
+.signature {
+    font-size: smaller;
+    color: gray;
+    text-align: right;
 }
