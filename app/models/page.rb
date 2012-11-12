@@ -4,6 +4,7 @@ class Page < ActiveRecord::Base
 
   has_many :arguments, dependent: :destroy
   has_many :votes, as: :votable
+  belongs_to
 
   def arguments_for(option)
     res = arguments.select{|x| x.option.parameterize == option.parameterize}

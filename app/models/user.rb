@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
 
   serialize :urls # array of strings
   has_many :credentials
+  has_many :pages
 
   def display_name
     name or "user#{id}"
