@@ -57,7 +57,7 @@ page1arg5:
 
 
 page2arg1:
-  option: pro
+  option: pros
   summary: another brief arg
   description: This is a description which should be a little longer than the
     argument. Blah blab blah. I don't **know** what to write mmh. This

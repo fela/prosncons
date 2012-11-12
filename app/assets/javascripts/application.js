@@ -18,11 +18,12 @@
 function vote(action, id, diff) {
     id = Number(id);
     var url = '/pages/votes/'+id+'/'+action;
-    var update = function(result) {
-        $('#votes'+id).html(result);
-    };
 
-    $.ajax(url, {success: update});
+    $.ajax({
+        type: 'POST',
+        url: url,
+        success: function(res) { $('#votes'+id).html(res) }
+    });
 }
 
 $(document).ready(function(){
