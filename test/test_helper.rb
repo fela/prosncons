@@ -32,4 +32,25 @@ class ActionDispatch::IntegrationTest
     Capybara.reset_sessions!    # Forget the (simulated) browser state
     Capybara.use_default_driver # Revert Capybara.current_driver to Capybara.default_driver
   end
+
+  private
+  def login(email=users(:alice).primary_email)
+    Capybara.default_wait_time = 20 # persona login could take some time
+    sleep(0.2)
+    page.execute_script("navigator.id.request()")
+                                    #page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+    main_window, persona_popup = page.driver.browser.window_handles
+    within_window(persona_popup) do
+      fill_in('email', :with => email)
+      click_button('next')
+    end
+    page.driver.browser.switch_to.window(main_window)
+    within('.navbar') do
+      sleep(8)
+      # wait till the login completed: this could take some time
+      page.has_content?(email)
+    end
+  ensure
+    Capybara.default_wait_time = 5
+  end
 end

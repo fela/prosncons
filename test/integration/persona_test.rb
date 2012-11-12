@@ -3,6 +3,7 @@ require 'test_helper'
 class PersonaTest < ActionDispatch::IntegrationTest
   def self.startup
     Capybara.default_driver = :selenium
+    Capybara.default_wait_time = 5
     # problem with other drivers:
     # poltergeist doesn't provide proper multi-window
     # webkit doesn't allow the request to persona
@@ -45,34 +46,77 @@ class PersonaTest < ActionDispatch::IntegrationTest
     visit(root_path)
     email = 'neverbeforeusedemail212324@mockmyid.com'
     login(email)
-    assert page.has_content?('New Profile')
+    within('h2') do
+      assert page.has_content?('New Profile')
+    end
     visit(root_path)
-    assert page.has_content?('you are not logged in')
-
-    page.execute_script("navigator.id.logout()")
-    assert page.has_content?('you are not logged in')
+    sleep(1)
+    within('.navbar') do
+      assert page.has_content?('you are not logged in')
+    end
   end
 
+  test 'unused login and create new profile' do
+    user_count = User.count
+    cred_count = Credential.count
+    visit(root_path)
+    email = 'neverbeforeusedemail212324@mockmyid.com'
+    login(email)
+    within('h2') do
+      assert page.has_content?('New Profile')
+    end
+    click_link('Create new account')
+    assert_equal root_path, current_path
+    within('.navbar') do
+      assert page.has_content?(email)
+    end
 
-  private
-  def login(email=users(:alice).primary_email)
+    assert_equal user_count+1, User.count
+    assert_equal cred_count+1, Credential.count
+    assert User.find_by_primary_email(email)
+    assert_equal 1, Credential.find_all_by_email(email).count
+  end
+
+  test 'unused login and merge to existing account' do begin
+    user_count = User.count
+    cred_count = Credential.count
+    visit(root_path)
+    email = 'neverbeforeusedemail212324@mockmyid.com'
+    login(email)
+    within('h2') do
+      assert page.has_content?('New Profile')
+    end
+    click_link('Add email to existing account')
+
+    email2 = users(:alice).primary_email
     Capybara.default_wait_time = 20 # persona login could take some time
-    page.execute_script("navigator.id.request()")
-    #page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
+    sleep(0.2)
     main_window, persona_popup = page.driver.browser.window_handles
     within_window(persona_popup) do
-      fill_in('email', :with => email)
-      click_button('next')
+      click_link('Add another email address')
+      fill_in('email', :with => email2)
+      click_button('add')
     end
     page.driver.browser.switch_to.window(main_window)
     within('.navbar') do
-      sleep(6)
-      # wait till the login completed: this could take some time
-      page.has_content?(email)
+      sleep(8)
+      assert page.has_content?(email2)
     end
+
+    assert_equal root_path, current_path
+
+    assert_equal user_count, User.count
+    assert_equal cred_count+1, Credential.count
+    assert !User.find_by_primary_email(email2)
+    assert_equal email, User.find_by_email(email2).primary_email
+    assert_equal 1, Credential.find_all_by_email(email).count
   ensure
     Capybara.default_wait_time = 5
-  end
+  end end
+
+
+  private
+
 
   def display_cookies
     #puts '=== begin of cookies ==='
