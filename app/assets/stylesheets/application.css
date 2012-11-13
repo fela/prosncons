@@ -53,10 +53,15 @@ th {
 .page-content {
     padding: 20px;
     background: whitesmoke;
+    border-radius: 5px;
 }
 
 .signature {
     font-size: smaller;
     color: gray;
     text-align: right;
+}
+
+hr {
+    border-top-color: #BBB;
 }

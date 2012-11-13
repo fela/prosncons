@@ -7,8 +7,7 @@
     %th
 
   - @pages.each do |page|
-    %tr
-
+    %tr{url: page_path(page)}
       %td.span5
         %strong= link_to page.title, page
       %td.span1= link_to 'Edit', edit_page_path(page)
