@@ -1,2 +1,5 @@
 .signature
-  by #{link_to user.display_name, user}, on #{time}
+  - if user
+    by #{link_to user.display_name, user}, on #{time}
+  - else
+    by anonimous, on #{time}
