@@ -1,5 +1,3 @@
 .signature
-  - if user
-    by #{link_to user.display_name, user}, on #{time}
-  - else
-    by anonimous, on #{time}
+  - disp_name = user ? link_to(user.display_name, user) : 'anonimous'
+  by #{disp_name}, on #{time.to_s(:short)}
