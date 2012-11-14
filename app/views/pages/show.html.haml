@@ -1,10 +1,10 @@
 %p#notice= notice
 
-%h2
+%h3
   =@page.title
   %small
     [#{link_to 'edit', edit_page_path(@page)}]
-.container.page-content
+.page-content
   :markdown
     #{@page.content}
   .pull-right

@@ -1,20 +1,15 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 page1:
-  title: Some page
+  title: Advantages of this approce as opposed to traditional QA apps
   content:
-    Some more complicated content with even **bold text**.
-
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-    Lorem Ipsum has been the industry's standard dummy text ever since the
-    1500s, when an unknown printer took a galley of type and scrambled it to
-    make a type specimen book. It has survived not only five centuries, but
-    also the leap into electronic typesetting, remaining essentially unchanged.
-    It was popularised in the 1960s with the release of Letraset sheets
-    containing Lorem Ipsum passages, and more recently with desktop publishing
-    software like Aldus PageMaker including versions of Lorem Ipsum.
+    What are the advantages and disadvatages of the model of crowdsoursing
+    used in this
+    application as opposed to more traditional Q&A websites
+    as [Yahoo Answers](http://answers.yahoo.com/) and
+    the [StackExchange](http://stackexchange.com) network?
   author: alice
 
 page2:
-  title: Another page
-  content: Not sure which option is best
+  title: Some other page
+  content: Some interesting question..
   author: alice

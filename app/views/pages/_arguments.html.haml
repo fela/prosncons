@@ -12,7 +12,7 @@
         %a{onclick: "vote('down', #{a.id}, 1)"}
           = glyph('chevron-down')
       .span4
-        %h3
+        %h4
           = a.summary
           %small [#{link_to 'edit', edit_argument_path(a, option)}]
         :markdown

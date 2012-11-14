@@ -1,75 +1,64 @@
 page1arg1:
   option: pros
-  summary: brief argument
-  description: This is a description which should be a little longer than the
-    argument. Blah blab blah. I don't **know** what to write mmh.
+  summary: granularity
+  description:
+    More granularity is encouraged, as there is not one correct answer,
+    but rather an ordered list of
+    claims. There is therefore more control regarding which pieces of
+    information get voted up or down.
   page: page1
   author: bob
 
 page1arg2:
   option: pros
-  summary: another brief argument
-  description: This is a description which should be a little longer than the
-    argument. Blah blab blah. I don't **know** what to write mmh.
+  summary: more robust to polarization
+  description: The standard Q&A format doesn't work well when strong opinions are
+    involved. In such a case voting of a claim is often only driven by
+    whether it goes for or agains one's preference. When splitting the claims
+    in two categories, those for and those against the initial statement, the effect of this polarization
+    is likely reduced, and it will be only the **relative** ordering inside
+    the lists that will matter.
   page: page1
   author: alice
 
 page1arg3:
   option: cons
-  summary: this is not good
-  description: This is a description which should be a little longer than the
-    argument. Blah blab blah. I don't **know** what to write mmh.
+  summary: complexity
+  description: It is more complex than the simple Q&A format, this might
+    make it less intuitive to new users.
   page: page1
   author: bob
 
 page1arg4:
   option: cons
-  summary: another brief argument
-  description: This is a description which should be a little longer than the
-    argument. Blah blab blah. I don't **know** what to write mmh. This
-    agrument is the longest of all!!!!!!!!!
+  summary: hard to describe complex interrelations
+  description: Often the whole is more that the sum of the parts, so a
+    topic might require a complex answer which cannot easily be split into
+    single statements that have value on their own.
   page: page1
   author: bob
 
 page1arg5:
   option: cons
-  summary: ultimate argument
-  description: This is a description which should be a little longer than the
-    argument. Blah blab blah. I don't **know** what to write mmh. This
-    agrument is the longest of all!!!!!!!!!
-  page: page1
-  author: alice
-
-page1arg5:
-  option: cons
-  summary: ultimate argument
-  description: This is a description which should be a little longer than the
-    argument. Blah blab blah. I don't **know** what to write mmh. This
-    agrument is the longest of all!!!!!!!!!
-  page: page1
-  author: alice
-page1arg5:
-  option: cons
-  summary: shortest
-  description: A short **argument**
+  summary: less known
+  description: The traditional format is more familiar to most people
   page: page1
   author: alice
 
 
 page2arg1:
   option: pros
-  summary: another brief arg
-  description: This is a description which should be a little longer than the
-    argument. Blah blab blah. I don't **know** what to write mmh. This
-    agrument is the longest of all!!!!!!!!!
+  summary: lorem
+  description: Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+    sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
+    erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+    ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
   page: page2
   author: bob
 
 page2arg2:
   option: cons
-  summary: ultimate argument!
-  description: This is a description which should be a little longer than the
-    argument. Blah blab blah. I don't **know** what to write mmh. This
-    agrument is the longest of all!!!!!!!!!
+  summary: ipsum
+  description: Lorem ipsum dolor sit amet
   page: page2
   author: alice
