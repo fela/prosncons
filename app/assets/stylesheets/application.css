@@ -35,6 +35,9 @@ textarea {
     border-top: 1px solid #E5E5E5;
     background-color: whitesmoke;
 }
+.footer .container {
+    text-align: center;
+}
 
 tr {
     background: white;
