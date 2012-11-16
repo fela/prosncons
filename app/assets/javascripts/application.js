@@ -15,6 +15,8 @@
 //= require twitter/bootstrap
 //= require_tree .
 
+ProsNCons = {};
+
 function vote(action, id, diff) {
     id = Number(id);
     var url = '/pages/votes/'+id+'/'+action;
@@ -35,4 +37,4 @@ $(document).ready(function(){
     }).mouseout(function(){
         $(this).removeClass('hovered');
     });
-})
+});

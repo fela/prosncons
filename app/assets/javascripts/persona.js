@@ -1,7 +1,8 @@
 // default value
-ProsNCons = {persona:{login_action: '/persona/login',
-                      redirect_on_logout: true
-}};
+var persona = {};
+persona.login_action = '/persona/login';
+persona.reload_on_logout = true;
+
 
 $(document).ready(function(){
     $('#login').click(function(event){
@@ -10,7 +11,7 @@ $(document).ready(function(){
         event.preventDefault();
     });
     $('#login_add').click(function(event){
-        ProsNCons.persona.login_action = '/persona/login_and_add_email';
+        persona.login_action = '/persona/login_and_add_email';
         navigator.id.request();
         event.preventDefault();
     });
@@ -23,7 +24,7 @@ $(document).ready(function(){
         event.preventDefault();
     });
     $('#logout_follow_link').click(function(event){
-        ProsNCons.persona.redirect_on_logout = false;
+        ProsNCons.persona.reload_on_logout = false;
         navigator.id.logout();
     });
 });
@@ -35,9 +36,9 @@ navigator.id.watch({
     onlogin: function(assertion) {
         $.ajax({
             type: 'POST',
-            url: ProsNCons.persona.login_action,
+            url: persona.login_action,
             data: {assertion: assertion, referer: document.URL},
-            success: function(res, status, xhr) { window.location = res; },
+            success: function(res) { window.location = res; },
             error: function(xhr, status, err) { alert("Login failure: " + err); }
         });
 
@@ -46,12 +47,11 @@ navigator.id.watch({
         $.ajax({
             type: 'POST',
             url: '/persona/logout',
-            data: {referer: document.URL},
-            success: function(res, status, xhr) {
-                if (ProsNCons.persona.redirect_on_logout)
-                    window.location = res;
+            success: function() {
+                if (persona.reload_on_logout)
+                    window.location.reload();
                 // reset for next call (might not be needed..)
-                ProsNCons.persona.redirect_on_logout = true;
+                persona.reload_on_logout = true;
             },
             error: function(xhr, status, err) { alert("Logout failure: " + err); }
         });
