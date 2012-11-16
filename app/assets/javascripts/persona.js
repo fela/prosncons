@@ -1,6 +1,6 @@
 var persona = {};
 persona.login_action = '/persona/login';
-persona.reload_on_logout = true;
+persona.loggedInEmail = null;
 
 persona.default_login_callback = function(assertion){
     $.ajax({
@@ -21,9 +21,15 @@ persona.login_callback = persona.default_login_callback;
 persona.logout_callback = persona.default_logout_callback;
 
 navigator.id.watch({
-    loggedInUser: loggedInEmail,
-    onlogin: function(ass) {persona.login_callback(ass)},
-    onlogout: function() {persona.logout_callback()}
+    loggedInUser: persona.loggedInEmail,
+    onlogin: function(ass) {
+        persona.login_callback(ass);
+        persona.login_callback = persona.default_login_callback;
+    },
+    onlogout: function() {
+        persona.logout_callback();
+        persona.logout_callback = persona.default_logout_callback;
+    }
 });
 
 persona.login = function(func){

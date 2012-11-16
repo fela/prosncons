@@ -7,11 +7,15 @@ module ApplicationHelper
 
   # ref for links that will be overwritten by js
   def javascript_link
-    '/error/enable-javascript'
+    '/js'
   end
 
   # the email passed to document.id.watch()
   def persona_email
     session[:email] || session[:new_email]
+  end
+
+  def persona_need_to_log_out
+    session[:new_email] && !session[:email]
   end
 end
