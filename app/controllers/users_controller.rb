@@ -13,7 +13,9 @@ class UsersController < ApplicationController
 
   # GET /users/new
   def new
-    #@user = User.new
+    unless session[:new_email]
+      redirect_to (session[:referer] || root_url)
+    end
   end
 
   # POST /users
