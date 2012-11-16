@@ -66,7 +66,7 @@ class PersonaController < ApplicationController
     session[:new_email] = nil
     flash[:info] = 'Logged out'
 
-    ajax_login_redirect params[:referer]
+    render text: ''
   end
 
 private

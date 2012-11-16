@@ -1,18 +1,51 @@
-// default value
 var persona = {};
 persona.login_action = '/persona/login';
 persona.reload_on_logout = true;
 
+persona.default_login_callback = function(assertion){
+    $.ajax({
+        type: 'POST',
+        url: persona.login_action,
+        data: {assertion: assertion, referer: document.URL},
+        success: function(res) { window.location = res; },
+        error: function(xhr, status, err) { alert("Login failure: " + err); }
+    });
+};
+
+persona.default_logout_callback = function(){
+    $.post('/persona/logout');
+    window.location.reload()
+};
+
+persona.login_callback = persona.default_login_callback;
+persona.logout_callback = persona.default_logout_callback;
+
+navigator.id.watch({
+    loggedInUser: loggedInEmail,
+    onlogin: function(ass) {persona.login_callback(ass)},
+    onlogout: function() {persona.logout_callback()}
+});
+
+persona.login = function(func){
+    persona.login_callback = (func || persona.default_login_callback);
+    navigator.id.request();
+};
+
+persona.logout = function(func){
+    persona.logout_callback = (func || persona.default_logout_callback);
+    navigator.id.logout();
+};
+
+
 
 $(document).ready(function(){
     $('#login').click(function(event){
-        //ProsNCons.persona.login_action = 'persona/login';
-        navigator.id.request();
+        persona.login();
         event.preventDefault();
     });
     $('#login_add').click(function(event){
         persona.login_action = '/persona/login_and_add_email';
-        navigator.id.request();
+        persona.login();
         event.preventDefault();
     });
     /*$('#login_create').click(function(event){
@@ -20,40 +53,12 @@ $(document).ready(function(){
         event.preventDefault();
     });*/
     $('#logout').click(function(event){
-        navigator.id.logout();
+        persona.logout();
         event.preventDefault();
     });
     $('#logout_follow_link').click(function(event){
-        ProsNCons.persona.reload_on_logout = false;
-        navigator.id.logout();
+        persona.logout(function(){$.post('/persona/logout');});
+        // no reload: the link gets followed
     });
 });
 
-var currentUser = 'bob@example.com';
-
-navigator.id.watch({
-    loggedInUser: loggedInEmail,
-    onlogin: function(assertion) {
-        $.ajax({
-            type: 'POST',
-            url: persona.login_action,
-            data: {assertion: assertion, referer: document.URL},
-            success: function(res) { window.location = res; },
-            error: function(xhr, status, err) { alert("Login failure: " + err); }
-        });
-
-    },
-    onlogout: function() {
-        $.ajax({
-            type: 'POST',
-            url: '/persona/logout',
-            success: function() {
-                if (persona.reload_on_logout)
-                    window.location.reload();
-                // reset for next call (might not be needed..)
-                persona.reload_on_logout = true;
-            },
-            error: function(xhr, status, err) { alert("Logout failure: " + err); }
-        });
-    }
-});

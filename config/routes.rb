@@ -3,10 +3,12 @@ Prosncons::Application.routes.draw do
   root :to => 'home#index'
 
   resources :users
-  resource :session
+  #resource :session
 
   post '/persona/login' => 'persona#login'
   post '/persona/logout' => 'persona#logout'
+  post 'persona/login_and_add_email' => 'persona#login_and_add_email'
+  match 'persona/create_account' => 'persona#create_account'
 
   resources :pages
   get 'pages/:page_id/arguments/:option/new' => 'arguments#new'
@@ -18,9 +20,7 @@ Prosncons::Application.routes.draw do
 
 
   # XXX: should be POST
-  match 'persona/create_account' => 'persona#create_account'
 
-  post 'persona/login_and_add_email' => 'persona#login_and_add_email'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

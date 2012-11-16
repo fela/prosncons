@@ -1,9 +1,15 @@
 %h2
-  Hello #{@user.display_name}, this is your profile
-  %a{href:'https://gravatar.com/emails', rel:'tooltip', title:'change you profile picture on Gravatar', class: 'pull-right'}
+  Your Profile page
+  %a{href:'https://gravatar.com/emails',
+     rel:'tooltip', title:'change you profile picture on Gravatar',
+     class: 'pull-right'}
     =image_tag @user.avatar_url(128)
 
-You can use the following email addresses to login:
+Display Name:
+%strong
+  #{@user.display_name}
+%br
+You can use the following email addresses to login (visible only to you):
 - @user.credentials.each do |c|
   %br
   %strong
