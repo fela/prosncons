@@ -97,8 +97,8 @@ private
       ajax_login_redirect params[:referer]
       nil
     else
-      @email = @res['email']
-      flash[:success] = "Successfully logged in with <strong>#@email<string>"
+      @email = CGI::escapeHTML(@res['email'])
+      flash[:success] = "Successfully logged in with <strong>#@email</strong>".html_safe
       @email
     end
   end
