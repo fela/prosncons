@@ -1,4 +1,4 @@
-var persona = {};
+persona = {};
 persona.login_action = '/persona/login';
 persona.loggedInEmail = null;
 
@@ -67,5 +67,8 @@ $(document).ready(function(){
             persona.logout_callback = persona.default_logout_callback;
         }
     });
+
+    if (persona.shouldLogOut)
+        persona.logout(function(){});
 });
 

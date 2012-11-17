@@ -13,7 +13,7 @@ class PersonaController < ApplicationController
     else
       # new user
       # redirect user to page asking if he wants to create an account
-      # al if he wants to link it to an existing one
+      # or if he wants to link it to an existing one
       session[:new_email] = @email
       session[:referer] = params[:referer]
       ajax_login_redirect new_user_url

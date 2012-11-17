@@ -34,23 +34,39 @@ class ActionDispatch::IntegrationTest
   end
 
   private
-  def login(email=users(:alice).primary_email)
-    Capybara.default_wait_time = 20 # persona login could take some time
+  # option :i_will_check : use to not check the email compares on the new page
+  # needed for example if the email isn't registered yet
+  # make sure to do something similar that waits enough for the login
+  # to finish
+  def login(email=users(:alice).primary_email, opt={})
     sleep(0.2)
     page.execute_script("navigator.id.request()")
-                                    #page.driver.browser.switch_to.window(page.driver.browser.window_handles.last)
     main_window, persona_popup = page.driver.browser.window_handles
     within_window(persona_popup) do
+      if find('.form_section')[:id] == 'selectEmail'
+        # emails used previously are being remembered
+        click_on('thisIsNotMe')
+      end
       fill_in('email', :with => email)
-      click_button('next')
+      click_on('next')
+
+      using_wait_time(50) do begin
+        if page.has_content?('One month')
+          click_on('One month')
+        end
+      rescue Selenium::WebDriver::Error::NoSuchWindowError
+        # do nothing if window closes
+      end end
     end
     page.driver.browser.switch_to.window(main_window)
-    within('.navbar') do
-      sleep(8)
-      # wait till the login completed: this could take some time
-      page.has_content?(email)
+    login_check(email) unless opt[:i_will_check]
+  end
+
+  def login_check(email)
+    using_wait_time(20) do
+      within('.navbar') do
+        assert page.has_content?(email)
+      end
     end
-  ensure
-    Capybara.default_wait_time = 5
   end
 end

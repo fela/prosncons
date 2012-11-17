@@ -12,21 +12,23 @@ class PersonaTest < ActionDispatch::IntegrationTest
   end
 
   teardown do
-    #Capybara.current_session.driver.quit
-    sleep(0.2)
+    sleep(0.2) # no clue why it does not work without this :(
     page.execute_script("navigator.id.logout()")
     assert page.has_content?('you are not logged in')
-    click_link('you are not logged in')
-    click_link('Log In')
-    main_window, persona_popup = page.driver.browser.window_handles
-    within_window(persona_popup) do
-      click_link('thisIsNotMe')
-      sleep(1)
-      page.execute_script "window.close();"
-    end
-    page.driver.browser.switch_to.window(main_window)
   end
 
+  # meta test
+  test 'login test helper' do
+    email1 = users(:alice).primary_email
+    email2 = users(:bob).primary_email
+    # normal login
+    visit(root_path)
+    login(email1)
+    # add new login
+    login(email2)
+    # use existing login
+    login(email1)
+  end
 
   test 'normal login' do
     visit(root_path)
@@ -36,8 +38,8 @@ class PersonaTest < ActionDispatch::IntegrationTest
     email = users(:alice).primary_email
     login(email)
     within('.navbar') do
-      assert page.has_content?('logged in')
       assert page.has_content?(email)
+      assert page.has_content?('logged in')
     end
   end
 
@@ -45,12 +47,9 @@ class PersonaTest < ActionDispatch::IntegrationTest
   test 'unused login and then cancel' do
     visit(root_path)
     email = 'neverbeforeusedemail212324@mockmyid.com'
-    login(email)
-    within('h2') do
-      assert page.has_content?('New Profile')
-    end
+    login(email, i_will_check: true)
+    check_new_profile
     visit(root_path)
-    sleep(1)
     within('.navbar') do
       assert page.has_content?('you are not logged in')
     end
@@ -61,10 +60,8 @@ class PersonaTest < ActionDispatch::IntegrationTest
     cred_count = Credential.count
     visit(root_path)
     email = 'neverbeforeusedemail212324@mockmyid.com'
-    login(email)
-    within('h2') do
-      assert page.has_content?('New Profile')
-    end
+    login(email, i_will_check: true)
+    check_new_profile
     click_link('Create new account')
     assert_equal root_path, current_path
     within('.navbar') do
@@ -77,46 +74,37 @@ class PersonaTest < ActionDispatch::IntegrationTest
     assert_equal 1, Credential.find_all_by_email(email).count
   end
 
-  test 'unused login and merge to existing account' do begin
+  test 'unused login and merge to existing account' do
     user_count = User.count
     cred_count = Credential.count
     visit(root_path)
     email = 'neverbeforeusedemail212324@mockmyid.com'
-    login(email)
-    within('h2') do
-      assert page.has_content?('New Profile')
-    end
-    click_link('Add email to existing account')
+    login(email, i_will_check: true)
+    check_new_profile
+    click_on('Add email to existing account')
 
     email2 = users(:alice).primary_email
-    Capybara.default_wait_time = 20 # persona login could take some time
-    sleep(0.2)
-    main_window, persona_popup = page.driver.browser.window_handles
-    within_window(persona_popup) do
-      click_link('Add another email address')
-      fill_in('email', :with => email2)
-      click_button('add')
-    end
-    page.driver.browser.switch_to.window(main_window)
-    within('.navbar') do
-      sleep(8)
-      assert page.has_content?(email2)
-    end
+
+    login(email2)
 
     assert_equal root_path, current_path
 
     assert_equal user_count, User.count
     assert_equal cred_count+1, Credential.count
-    assert !User.find_by_primary_email(email2)
-    assert_equal email, User.find_by_email(email2).primary_email
+    assert !User.find_by_primary_email(email)
+    assert_equal email2, User.find_by_email(email).primary_email
     assert_equal 1, Credential.find_all_by_email(email).count
-  ensure
-    Capybara.default_wait_time = 5
-  end end
+  end
 
 
   private
-
+  def check_new_profile
+    using_wait_time(20) do
+      within('h2') do
+        assert page.has_content?('New Profile')
+      end
+    end
+  end
 
   def display_cookies
     #puts '=== begin of cookies ==='

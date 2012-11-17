@@ -39,7 +39,8 @@ class UserTest < ActiveSupport::TestCase
   test 'avatar_url' do
     u = users(:alice)
     url = u.avatar_url(30)
-    exp = 'http://gravatar.com/avatar/c3fbd1a1111b724ab3f1aa2dc3229a36.png?s=30'
+    puts u.primary_email
+    exp = 'http://gravatar.com/avatar/a13ff4259f302b291465bae4a48087d4.png?s=30'
     assert_equal exp, url
   end
 
