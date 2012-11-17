@@ -13,6 +13,8 @@ gem 'pg'#, group: :production
 # Gems used only for assets and not required
 # in production environments by default.
 #group :assets do
+  gem "therubyracer"
+  gem "less-rails"
   gem 'twitter-bootstrap-rails'
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -27,9 +29,9 @@ gem 'pg'#, group: :production
 group :test do
   gem 'test-unit'
   gem 'timecop'
-  gem 'capybara'
-  gem 'capybara-webkit'
-  gem 'poltergeist'
+  gem 'capybara', '>= 2.0.0'
+  #gem 'capybara-webkit'
+  #gem 'poltergeist'
   gem 'database_cleaner' # needed by capybara
   gem 'launchy'
 end
