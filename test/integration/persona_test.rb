@@ -62,7 +62,7 @@ class PersonaTest < ActionDispatch::IntegrationTest
     email = 'neverbeforeusedemail212324@mockmyid.com'
     login(email, i_will_check: true)
     check_new_profile
-    click_link('Create new account')
+    click_on('Create new account')
     assert_equal root_path, current_path
     within('.navbar') do
       assert page.has_content?(email)
