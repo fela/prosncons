@@ -76,3 +76,7 @@ hr {
 .button_to div {
     display: inline;
 }
+
+.tooltip {
+    font-weight: normal;
+}
