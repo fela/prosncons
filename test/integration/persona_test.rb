@@ -43,6 +43,19 @@ class PersonaTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test 'login with secondary email' do
+    visit(root_path)
+    within('.navbar') do
+      assert page.has_content?('you are not logged in')
+    end
+    email = credentials(:alice2).email
+    login(email)
+    within('.navbar') do
+      assert page.has_content?(email)
+      assert page.has_content?('logged in')
+    end
+  end
+
 
   test 'unused login and then cancel' do
     visit(root_path)
