@@ -1,5 +1,5 @@
 %h2
-  Your Profile page
+  Your profile page
   %a{href:'https://gravatar.com/emails',
      rel:'tooltip', title:'change you profile picture on Gravatar',
      class: 'pull-right'}
@@ -8,6 +8,9 @@
 Display Name:
 %strong
   #{@user.display_name}
+%br
+[#{link_to 'edit profile', edit_user_path(@user)}]
+%br
 %br
 You can use the following email addresses to login (visible only to you):
 - @user.credentials.each do |c|

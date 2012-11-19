@@ -11,14 +11,18 @@ class UsersController < ApplicationController
     raise ActionController::RoutingError.new('Not Found')
   end
 
-  # POST /users
-  #def create
-  #  @user = User.new(params[:user])
-  #  if @user.save
-  #    flash[:success] = 'User was successfully created.'
-  #    redirect_to root_path
-  #  else
-  #    render :new
-  #  end
-  #end
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    @user = User.find(params[:id])
+
+    if @user.update_attributes(params[:user])
+      flash[:success] = 'Your profile was successfully updated'
+      redirect_to @user
+    else
+      render action: "edit"
+    end
+  end
 end

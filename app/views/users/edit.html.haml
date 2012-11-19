@@ -1,0 +1,9 @@
+%h2 Edit your profile
+= simple_form_for(@user) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name, label: 'Display Name', placeholder: @user.display_name
+
+  .form-actions
+    = f.button :submit

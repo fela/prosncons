@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  attr_accessible :name
   validates :primary_email, presence: true, uniqueness: true
   validate :has_primary_credential
 
