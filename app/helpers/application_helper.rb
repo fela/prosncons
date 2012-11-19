@@ -16,6 +16,6 @@ module ApplicationHelper
   end
 
   def persona_need_to_log_out
-    session[:new_email] && !session[:email]
+    session[:new_email] && !session[:email] && !@stay_logged_in
   end
 end

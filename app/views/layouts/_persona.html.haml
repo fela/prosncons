@@ -3,4 +3,5 @@
   - if persona_email
     persona.loggedInEmail = "#{persona_email}";
   - if persona_need_to_log_out
-    persona.shouldLogOut = true;
+    persona.forceLogout = true;
+    persona.loggedInEmail = "null"; // force login which will force logout

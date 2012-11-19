@@ -9,6 +9,7 @@ class PersonaController < ApplicationController
       # normal login
       session[:email] = @email
       session[:id] = @user.id
+      successful_login_message
       ajax_login_redirect params[:referer]
     else
       # new user
@@ -21,6 +22,9 @@ class PersonaController < ApplicationController
   end
 
   def new_user
+    @stay_logged_in = true
+    expires_now
+    puts session[:new_email]
     unless session[:new_email]
       redirect_to (session[:referer] || root_url)
     end
@@ -29,18 +33,19 @@ class PersonaController < ApplicationController
   def create_account
     # XXX: should be POST
     # user choose to create a new account
-    if (user = User.create_account(session[:new_email]))
-      flash[:success] = 'New account has been created'
-      flash[:warn] = "TODO: click here to ...."
+    user = User.create_account(session[:new_email])
+    if user && session[:new_email]
       session[:id] = user.id
       session[:email] = session[:new_email]
       session[:new_email] = nil
       # redirect to original page and remove the url from the session
       referer = session[:referer]
       session[:referer] = nil
+      successful_login_message
       redirect_to referer
     else
-      flash[:error] = 'Some error occurred creating the new account'
+      flash[:error] = 'Some error occurred creating the new account,' +
+          'for example another page got opened while registering'
     end
   end
 
@@ -58,6 +63,7 @@ class PersonaController < ApplicationController
       # redirect to original page and remove the url from the session
       referer = session[:referer]
       session[:referer] = nil
+      successful_login_message
       ajax_login_redirect referer
     else
       # TODO: not really the right thing to do...
@@ -67,17 +73,27 @@ class PersonaController < ApplicationController
   end
 
   def logout
+    flash[:info] = 'Logged out'
+
+    silent_log_out
+  end
+
+  def silent_log_out # no flash message
     session[:email] = nil
     session[:id] = nil
     session[:new_email] = nil
-    flash[:info] = 'Logged out'
 
-    render text: ''
+    render_nothing
   end
 
 private
   def render_nothing
     render text: ''
+  end
+
+  def successful_login_message
+    @email = CGI::escapeHTML(@res['email'])
+    flash[:success] = "Successfully logged in with <strong>#@email</strong>".html_safe
   end
 
   def verify_assertion
@@ -103,8 +119,6 @@ private
       ajax_login_redirect params[:referer]
       nil
     else
-      @email = CGI::escapeHTML(@res['email'])
-      flash[:success] = "Successfully logged in with <strong>#@email</strong>".html_safe
       @email
     end
   end

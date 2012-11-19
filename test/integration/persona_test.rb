@@ -59,10 +59,12 @@ class PersonaTest < ActionDispatch::IntegrationTest
     user_count = User.count
     cred_count = Credential.count
     visit(root_path)
-    email = 'neverbeforeusedemail212324@mockmyid.com'
+    email = 'neverbeforeusedemail2612@mockmyid.com'
     login(email, i_will_check: true)
     check_new_profile
+    sleep(4) # make sure no javascript logout is called
     click_on('Create new account')
+    sleep(4)
     assert_equal root_path, current_path
     within('.navbar') do
       assert page.has_content?(email)
@@ -78,7 +80,7 @@ class PersonaTest < ActionDispatch::IntegrationTest
     user_count = User.count
     cred_count = Credential.count
     visit(root_path)
-    email = 'neverbeforeusedemail212324@mockmyid.com'
+    email = 'neverbeforeusedemail29924@mockmyid.com'
     login(email, i_will_check: true)
     check_new_profile
     click_on('Add email to existing account')
@@ -95,6 +97,23 @@ class PersonaTest < ActionDispatch::IntegrationTest
     assert_equal email2, User.find_by_email(email).primary_email
     assert_equal 1, Credential.find_all_by_email(email).count
   end
+
+  test 'login with new email and then visit other page' do
+    visit(root_path)
+    email = 'neverbeforeusedemail65532ddsfs4@mockmyid.com'
+    login(email, i_will_check: true)
+    check_new_profile
+    visit(root_path)
+    sleep(4) # otherwise the automatic logout hasn't happened yet
+    puts 'now..'
+    visit('/persona/new_user')
+    # should be redirected back
+    within('h1') do
+      assert page.has_content?("Pros'n'Cons webapp")
+    end
+  end
+
+  # TODO: multiple pages open at the same time with activity
 
 
   private

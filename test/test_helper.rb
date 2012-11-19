@@ -39,7 +39,7 @@ class ActionDispatch::IntegrationTest
   # make sure to do something similar that waits enough for the login
   # to finish
   def login(email=users(:alice).primary_email, opt={})
-    sleep(0.2)
+    assert find('.footer')
     page.execute_script("navigator.id.request()")
     main_window, persona_popup = page.driver.browser.window_handles
     within_window(persona_popup) do

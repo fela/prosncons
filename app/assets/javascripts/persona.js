@@ -59,6 +59,11 @@ $(document).ready(function(){
     navigator.id.watch({
         loggedInUser: persona.loggedInEmail,
         onlogin: function(ass) {
+            if (persona.forceLogout) {
+                persona.logout(function(){$.post('/persona/silent_log_out');});
+                persona.forceLogout = false;
+                return;
+            }
             persona.login_callback(ass);
             persona.login_callback = persona.default_login_callback;
         },
@@ -67,8 +72,5 @@ $(document).ready(function(){
             persona.logout_callback = persona.default_logout_callback;
         }
     });
-
-    if (persona.shouldLogOut)
-        persona.logout(function(){});
 });
 
