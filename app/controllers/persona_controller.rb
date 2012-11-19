@@ -3,13 +3,18 @@ require 'net/http'
 class PersonaController < ApplicationController
 
   def login
+    puts 'aaaaaaaaaaaaaaaaaaaa'
     verify_assertion or return
+    puts '------------------------'
     @user = User.find_by_email(@email)
+    puts @user
     if @user
       # normal login
       session[:email] = @email
       session[:id] = @user.id
+      puts 'aaaaaaaaaaaaaaaaaaaa'
       successful_login_message
+      puts 'bbbbbbbbbbbbbbbbbb'
       ajax_login_redirect params[:referer]
     else
       # new user
@@ -119,13 +124,14 @@ private
       ajax_login_redirect params[:referer]
       nil
     else
-      @email
+      @email = @res['email']
     end
   end
 
   # answer to the ajax call
   # that will trigger the javascript to redirect to the given page
   def ajax_login_redirect(url)
+    puts 'render called...!!'
     render text: url
   end
 end
