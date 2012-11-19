@@ -16,7 +16,13 @@ class PersonaController < ApplicationController
       # or if he wants to link it to an existing one
       session[:new_email] = @email
       session[:referer] = params[:referer]
-      ajax_login_redirect new_user_url
+      ajax_login_redirect '/persona/new_user'
+    end
+  end
+
+  def new_user
+    unless session[:new_email]
+      redirect_to (session[:referer] || root_url)
     end
   end
 
@@ -56,7 +62,7 @@ class PersonaController < ApplicationController
     else
       # TODO: not really the right thing to do...
       flash[:warn] = 'TODO, improve this case'
-      ajax_login_redirect new_user_url
+      ajax_login_redirect '/persona/new_user'
     end
   end
 

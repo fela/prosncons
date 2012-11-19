@@ -68,3 +68,11 @@ th {
 hr {
     border-top-color: #BBB;
 }
+
+.button_to {
+    display: inline;
+}
+
+.button_to div {
+    display: inline;
+}

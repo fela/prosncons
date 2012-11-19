@@ -8,14 +8,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    render :invalid_user
-  end
-
-  # GET /users/new
-  def new
-    unless session[:new_email]
-      redirect_to (session[:referer] || root_url)
-    end
+    raise ActionController::RoutingError.new('Not Found')
   end
 
   # POST /users

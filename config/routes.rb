@@ -6,6 +6,7 @@ Prosncons::Application.routes.draw do
   #resource :session
 
   post 'persona/:action', controller: :persona
+  get 'persona/new_user', 'persona#new_user'
 
   resources :pages
   get 'pages/:page_id/arguments/:option/new' => 'arguments#new'
