@@ -1,6 +1,5 @@
 %h2 New Profile
-%a{href: '/persona/create_account', class: 'btn btn-primary'}
-  Create new account
+= button_to 'Create new account', '/persona/create_account', method: :post
 %a#login_add{href: javascript_link, class: 'btn btn-primary'}
   Add email to existing account
 %a#logout_follow_link{href: session[:referer], class: 'btn'}

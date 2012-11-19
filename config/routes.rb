@@ -5,10 +5,7 @@ Prosncons::Application.routes.draw do
   resources :users
   #resource :session
 
-  post '/persona/login' => 'persona#login'
-  post '/persona/logout' => 'persona#logout'
-  post 'persona/login_and_add_email' => 'persona#login_and_add_email'
-  match 'persona/create_account' => 'persona#create_account'
+  post 'persona/:action', controller: :persona
 
   resources :pages
   get 'pages/:page_id/arguments/:option/new' => 'arguments#new'
