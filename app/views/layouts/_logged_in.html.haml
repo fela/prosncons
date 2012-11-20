@@ -4,5 +4,5 @@
     %strong= session[:email]
     %b.caret
   %ul.dropdown-menu
-    /%li= link_to "Go to profile", user_path(session[:user_id])
+    %li= link_to "View Profile", user_path(session[:id])
     %li#logout= link_to "Log Out", '#'
