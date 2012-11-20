@@ -43,6 +43,9 @@ tr {
     background: white;
     cursor: pointer;
 }
+td {
+    padding: 5px;
+}
 
 tr.hovered {
     background: rgba(233, 246, 255, 0.91);
