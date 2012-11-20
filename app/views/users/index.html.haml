@@ -3,10 +3,10 @@
   %tr
     %th.span2 ID
     %th.span3 Real name
-    %th.span3 email
+    /%th.span3 email
   - @users.each do |user|
     %tr{url: user_path(user)}
       %td= user.id
       %td
         %strong= link_to user.display_name, user
-      %td= user.primary_email
+      /%td= user.primary_email
