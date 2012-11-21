@@ -30,3 +30,83 @@ body {
 //
 // Example:
 // @linkColor: #ff0000;
+
+@import url(http://fonts.googleapis.com/css?family=Belgrano);
+@serifFontFamily: Belgrano, Georgia, "Times New Roman", Times, serif;
+
+@baseFontFamily:        @serifFontFamily;
+//@headingsFontFamily:    @sansFontFamily;
+
+input,
+textarea {
+  width: auto;
+}
+
+.votes {
+  font-family: @sansFontFamily;
+  font-size: 2em;
+  font-weight: bold;
+  color: #1d5881;
+  text-align: center;
+  margin-top: 0.5em;
+}
+
+.votes a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.footer {
+  padding: 70px;
+  margin-top: 70px;
+  border-top: 1px solid #E5E5E5;
+  background-color: whitesmoke;
+}
+.footer .container {
+  text-align: center;
+}
+
+tr {
+  background: white;
+  cursor: pointer;
+}
+td {
+  padding: 5px;
+}
+
+tr.hovered {
+  background: rgba(233, 246, 255, 0.91);
+}
+
+th {
+  background: white;
+  cursor: auto;
+}
+
+.page-content {
+  padding: 20px;
+  background: whitesmoke;
+  border-radius: 5px;
+}
+
+.signature {
+  font-size: smaller;
+  color: gray;
+  text-align: right;
+}
+
+hr {
+  border-top-color: #BBB;
+}
+
+.button_to {
+  display: inline;
+}
+
+.button_to div {
+  display: inline;
+}
+
+.tooltip {
+  font-weight: normal;
+}
