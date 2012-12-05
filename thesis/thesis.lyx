@@ -1,0 +1,1237 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass book
+\use_default_options true
+\begin_modules
+theorems-ams
+theorems-ams-extended
+theorems-sec
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 12
+\spacing single
+\use_hyperref true
+\pdf_title "Statistical Language Identification of Plain Text"
+\pdf_author "Fela Winkelmolen"
+\pdf_subject "natural language processing"
+\pdf_keywords "language identification, natural language processing, nlp, n-grams, ngrams, statistics, naive bayes"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+
+\size larger
+PROVA FINALE
+\size giant
+
+\begin_inset VSpace 0.5cm
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Crowdsourcing pros and cons 
+\begin_inset Newline newline
+\end_inset
+
+on controversial issues 
+\size default
+
+\begin_inset VSpace 0.5cm
+\end_inset
+
+
+\end_layout
+
+\begin_layout Author
+
+\emph on
+candidato
+\emph default
+
+\begin_inset Newline newline
+\end_inset
+
+Fela Winkelmolen
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\emph on
+relatore
+\emph default
+
+\begin_inset Newline newline
+\end_inset
+
+Marina Ribaudo
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../../../../Documents/Uni/prova_finale/thesis/logo.eps
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\size larger
+UNIVERSITÀ DEGLI STUDI DI GENOVA
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Date
+Marzo 2013
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Ranking by vote
+\end_layout
+
+\begin_layout Section
+Bayesian average
+\end_layout
+
+\begin_layout Standard
+The objective when ranking elements is to show the most relevant and interesting
+ information at the top.
+ This is done by using the votes as an indication of how interesting the
+ information was for past users, and assuming that what holds for past users
+ is likely to hold for future users
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+When different users have very different opinions this might not hold, an
+ example is on controversial topic, where polarization could make opinions
+ diverge widely.
+ Although this is exactly the setting of this thesis, the main component
+ of this polarization is removed by raking the claims of the two main positions
+ separately.
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+The simplest and most widespread ranking schemes suffer from well known
+ weaknesses (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhang11"
+
+\end_inset
+
+).
+ Zhang et al.
+ propose two axioms that should reasonably be respected by a good ranking
+ algorithm: first, up and downvotes should respectively (strictly) increase
+ and (strictly) decrease the score, and second, if a vote of the same type
+ gets added its weight should be strictly smaller than the previous vote.
+ They find three ranking algorithm consistent with these axioms, their most
+ general result uses what they call Dirichlet prior smoothing.
+ Let 
+\begin_inset Formula $n_{\uparrow}$
+\end_inset
+
+and 
+\begin_inset Formula $n_{\downarrow}$
+\end_inset
+
+ be the number of up and down-votes, they will be ranked by the following
+ score
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{n_{\uparrow}+\mu p_{\uparrow}}{n_{\uparrow}+n_{\downarrow}+\mu}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where 
+\begin_inset Formula $p_{\uparrow}\epsilon(0,1)$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu$
+\end_inset
+
+ are fixed parameters that will determine how the ranking behaves in the
+ case of few available votes.
+ Intuitively, as the total number of votes increases, the score assigned
+ by the algorithm will tend towards the ratio 
+\begin_inset Formula $positive\, votes/total\, votes$
+\end_inset
+
+, if there are few votes it will tend towards the fixed "default" score
+ 
+\begin_inset Formula $p_{\uparrow}$
+\end_inset
+
+; the higher 
+\begin_inset Formula $\mu$
+\end_inset
+
+ the higher the weight of 
+\begin_inset Formula $p_{\uparrow}$
+\end_inset
+
+.
+ To better understand this, the score could be rewritten as the weighted
+ average between 
+\begin_inset Formula $p=positive\, votes/total\, votes$
+\end_inset
+
+ and the user defined 
+\begin_inset Formula $p_{\uparrow}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{w_{1}p+w_{2}p_{\uparrow}}{w_{1}+w_{2}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the weight 
+\begin_inset Formula $w_{1}$
+\end_inset
+
+ is equal to the number of total votes 
+\begin_inset Formula $n_{\uparrow}+n_{\downarrow}$
+\end_inset
+
+, and 
+\begin_inset Formula $w_{2}$
+\end_inset
+
+ is equal to 
+\begin_inset Formula $\mu$
+\end_inset
+
+, the weight given to the prior information.
+\end_layout
+
+\begin_layout Standard
+Here is an example of the result on random imaginary votes, the first column
+ shows the resulting score, followed by number of upvotes and the number
+ of downvotes:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+	97	+119	-3
+\end_layout
+
+\begin_layout Plain Layout
+
+	88	+12	-1 
+\end_layout
+
+\begin_layout Plain Layout
+
+	85	+85	-14 
+\end_layout
+
+\begin_layout Plain Layout
+
+	82	+7	-1 
+\end_layout
+
+\begin_layout Plain Layout
+
+	80	+2	-0 
+\end_layout
+
+\begin_layout Plain Layout
+
+	68	+11	-5 
+\end_layout
+
+\begin_layout Plain Layout
+
+	67	+0	-0 
+\end_layout
+
+\begin_layout Plain Layout
+
+	57	+50	-39 
+\end_layout
+
+\begin_layout Plain Layout
+
+	48	+13	-15 
+\end_layout
+
+\begin_layout Plain Layout
+
+	38	+1	-4 
+\end_layout
+
+\begin_layout Plain Layout
+
+	23	+7	-29 
+\end_layout
+
+\begin_layout Plain Layout
+
+	10	+0	-18 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+There is a generalization of this algorithm for the case where the votes
+ can assume more than two values, this version currently in use by a number
+ of websites.
+ IMDB, for example, uses it for its top 250 list and calls it true bayesian
+ estimate.
+ It has also been variously referred to online as bayesian average and bayesian
+ ranking, but without ever giving much explanation.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Miller12"
+
+\end_inset
+
+, although without giving the above formula, sketches the basic reasoning
+ from which the result can be derived.
+\end_layout
+
+\begin_layout Standard
+The model rests on the assumption that there is a certain population of
+ potential voting users, and that we would like to estimate the percentage
+ 
+\begin_inset Formula $q$
+\end_inset
+
+ of them that, if given the chance, would vote positively.
+ A detailed derivation of the final formula is given in appendix 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "chap:Appendix-A"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+I will use bayesian average to denote the score calculated this way, and
+ bayesian ranking to denote the ranking process that uses that score.
+ 
+\end_layout
+
+\begin_layout Section
+Limitations and assumptions
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+"All models are wrong, but some are useful"
+\emph default
+ -- George E.
+ P.
+ Box
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Every model is just an approximation of reality, but it is hoped to capture
+ the main interactions that are of interest.
+ Very often approximations or assumptions are made without giving them much
+ thought.
+ I believe that a honest analyses should give them some space, to be able
+ to better assess how well and under which condition a model might is warranted.
+ This is specially important in the case where where there are no obvious
+ benchmarks to assess quality.
+ I will also note that assuming that the result of a benchmark will correlate
+ to usefulness in real life is in itself a model.
+\end_layout
+
+\begin_layout Subsection
+Justification of the model
+\end_layout
+
+\begin_layout Standard
+The probabilistic setting assumes there is a population of voters from which
+ a number of individuals selected at random cast their vote.
+ To start to understand the possible weaknesses of the model it is worth
+ asking how much this is an accurate description of what happens in practice.
+\end_layout
+
+\begin_layout Standard
+There are at least two ways in which the independence assumption might fail.
+ First, the users that visit the webpage might not really be randomly chosen
+ from the population of interest, for a number of reasons, for example if
+ somebody likes a comment very much he might refer other people to it, which
+ might have similar opinions.
+ Second, users might be influenced by the current score
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+The effect of peer pressure on judgment, also known as Bandwagon effect,
+ has been extensively documented, see for example 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Asch51"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Another implicit assumption which subtly breaks, is that the total number
+ of votes has been assumed as being given, where in fact it is unlikely
+ to be totally independent of 
+\begin_inset Formula $q$
+\end_inset
+
+.
+ The score will influence the position that an element will have on the
+ page, which in turn influences the number of votes.
+\end_layout
+
+\begin_layout Standard
+Notwithstanding all these assumptions, most of which are unlikely to have
+ a big effect overall, if the only information available is the number of
+ upvotes and downvotes, estimating 
+\begin_inset Formula $q$
+\end_inset
+
+ is the best that can be done, and the bayesian approach yield optimal results
+ 
+\emph on
+if
+\emph default
+ the prior and loss function are chosen correctly.
+\end_layout
+
+\begin_layout Subsection
+Prior
+\end_layout
+
+\begin_layout Standard
+When applying bayesian inference a few additional assumptions have been
+ made that merit further consideration.
+\end_layout
+
+\begin_layout Standard
+When calculating the posterior probability the prior has been assumed to
+ be known and be equal to the beta distribution, without giving much justificati
+on other than algebraical convenience.
+ The beta distribution does however have a number of desirable properties.
+ It is worth noting that the assumption doesn't force a single prior, but
+ rather allows for a family of distribution functions, by varying 
+\begin_inset Formula $p\uparrow$
+\end_inset
+
+ and 
+\begin_inset Formula $\mu$
+\end_inset
+
+.
+ 
+\begin_inset Formula $p_{\uparrow}$
+\end_inset
+
+ is equal to the mean of the distribution, and will be the "default" value
+ in the case when no information is available, the obvious way to chose
+ it is to set it equal to the mean of all historical votes in the application.
+ 
+\begin_inset Formula $\mu$
+\end_inset
+
+ is inversely proportional to the variance, and indicates how much the score
+ tent to vary in historical data.
+ The higher 
+\begin_inset Formula $\mu$
+\end_inset
+
+ the more votes will be required before the score will differ significantly
+ from 
+\begin_inset Formula $p_{\uparrow}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\size tiny
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+
+\size tiny
+\begin_inset Graphics
+	filename hist.eps
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\size tiny
+\begin_inset Caption
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:hist"
+
+\end_inset
+
+
+\size small
+The graph shows, in red, a number of random films grouped by their Rotten
+ Tomatoes score, which is equal to the percentage of positive user ratings.
+ The green line shows an ideal distribution, assuming a beta distributed
+ prior.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Too see how realistic such a prior is, I analyzed the distribution in a
+ real examples, to do this I chose the the Rotten Tomatoes user scores.
+ Rotten Tomatoes is a website containing information and reviews about movies;
+ the users can score the movies and the final score will be equal to the
+ percentage of positive votes.
+ Given the large number of votes, from many hundreds to many thousands in
+ the case of the movies I've analyzed, this percentage can be assumed a
+ good approximation of 
+\begin_inset Formula $q$
+\end_inset
+
+.
+ The films analyzed have been collected from available lists such as movies
+ currently playing in the theaters and recent DVD releases.
+ Lists such as best and worst movies have not been used as obviously biased
+ for our use.
+ The API doesn't allow to directly access the number of user votes, so the
+ number of critics reviews has been used to exclude obscure movies which
+ might not have enough votes to make the data reliable.
+ This might add a slight bias, however the fact that the distribution is
+ still approximately beta distributed is an indication of the good properties
+ of this distribution.
+ The result can be seen in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:hist"
+
+\end_inset
+
+, the overlayed green line represents a beta distribution with parameters
+ set to match the data.
+\end_layout
+
+\begin_layout Subsection
+Loss function
+\end_layout
+
+\begin_layout Standard
+As the prior, the loss was chosen mainly for its convenient algebraic properties.
+ The loss function is the cost of estimating that an object has a percentage
+ of approval equal to 
+\begin_inset Formula $q$
+\end_inset
+
+ where, if more information had been available, we would discover that the
+ real percentage is 
+\begin_inset Formula $\tilde{q}$
+\end_inset
+
+.
+ In our case this cost is assumed to be 
+\begin_inset Formula $(q-\tilde{q})^{2}$
+\end_inset
+
+, which penalizes outliers; this is to say that having an error of 
+\begin_inset Formula $2\Delta$
+\end_inset
+
+ is assumed as bad as having 4 errors of magnitude 
+\begin_inset Formula $\Delta$
+\end_inset
+
+.
+ Another option would have been the absolute error.
+ Given that there is no strong reason to prefer either, the more tractable
+ square error has been chosen.
+\end_layout
+
+\begin_layout Standard
+A case could also be made for asymmetric loss functions, for example 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Miller12"
+
+\end_inset
+
+ proposes a loss function that tends to give greater cost to over-ranking
+ as opposed to under-ranking, with the result that in the case of uncertainty
+ the score will be lower.
+ A similar effect, without the additional computational cost, could be obtained
+ by setting 
+\begin_inset Formula $p_{\uparrow}$
+\end_inset
+
+ to a lower value in the prior distribution.
+ There is however no conclusive justification for being conservative in
+ sorting comments, and having uncertain scores come quickly to the top might
+ help counter the "fastest gun in the west" problem (see below 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Fastest-gun"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Subsection
+Using additional information
+\end_layout
+
+\begin_layout Standard
+The above model takes into account only the votes.
+ There might be other information that could be useful for ranking.
+ For example which authors voted and the number of people who have viewed
+ an element without voting on it.
+ How to best use views is analyzed in the next section, while reputation
+ systems which look into who voted are described in the next chapter.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Fastest-gun"
+
+\end_inset
+
+Fastest gun in the west problem
+\end_layout
+
+\begin_layout Standard
+A know problem often arising when ranked comments by votes is that the oldest
+ comments tend to have a much higher chance making it to the top, purely
+ as a consequence of being there first.
+ This is particularly true in the case of ranking by number of votes, or
+ by the difference of upvotes and downvotes.
+ Newer comments will start at the bottom and thus, other things being equal,
+ will be much less likely to collect votes, making their difference in standing
+ relative to the top only bigger as time passes.
+\end_layout
+
+\begin_layout Standard
+This shows ranking in a different perspective, because it is not just important
+ to show the most relevant information first, but also show the most relevant
+ information to future users.
+ There could be cases where it is not particularly likely that an object
+ is relevant, but it is still advantageous to make it visible to attract
+ votes and be able to show more accurate information in the future.
+\end_layout
+
+\begin_layout Standard
+Any ranking that estimates the proportion of positive votes has the following
+ property: given a large enough number of viewers a comment will eventually
+ reach its real score.
+ However the number of viewers, specially for new comment, is finite, furthermor
+e at any given time there might be a big number of of recent comment that
+ do not yet have much votes.
+ This has been a reason for not using score algorithms that tend to underevaluat
+e the score in case of high uncertainty.
+\end_layout
+
+\begin_layout Section
+Number of views
+\end_layout
+
+\begin_layout Standard
+An interesting piece of information that hasn't been used is the number
+ of users who have seen an object but did not find it interesting enough
+ to vote on it.
+ So the current algorithm would give the same score to an item viewed by
+ 100 people all of which voted it up, and one viewed by 1000 people only
+ 100 of which voted it up.
+ The next section deals with estimating the number of views, but assuming
+ they are known, how can they be incorporated into the algorithm?
+\end_layout
+
+\begin_layout Standard
+Starting from the obvious consideration that a view is better than a downvote
+ and worse than an upvote, the easiest way to generalize the bayesian average
+ is to suppose a view equals to 
+\begin_inset Formula $v\epsilon[0,1]$
+\end_inset
+
+ upvotes and 
+\begin_inset Formula $1-v$
+\end_inset
+
+ downvotes.
+ This could be formally justified by assuming that if forced to vote the
+ fraction of non voters that would cast a positive vote is equal to 
+\begin_inset Formula $v$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Estimation of number of views
+\end_layout
+
+\begin_layout Standard
+Obviously the number of page views alone is not a good measure, when a page
+ is loaded only a fraction of the content of a page is really viewed 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Nielsen97"
+
+\end_inset
+
+.
+ Furthermore not everybody is as likely to vote on content they view.
+\end_layout
+
+\begin_layout Standard
+Therefore, on a given page, only users that voted on at least one item get
+ counted as having viewed its content, and will get counted only once.
+ This solves the statistical noise that would otherwise be caused by different
+ people behaving differently.
+ Elements further down are less likely to be viewed, so their view count
+ should not be increased by as much.
+ To be able to do this the number of views can assume non discreet values,
+ for example 
+\begin_inset Formula $0.5$
+\end_inset
+
+ views is a valid number and equals to 50% chance of a view.
+\end_layout
+
+\begin_layout Standard
+It is thus needed to have a a function that maps page position to probability
+ of being viewed.
+ This function can, aside from a multiplication factor, be approximated
+ by the probability of a attracting a vote given the page position.
+ This probability can be estimated by using the historical data in the whole
+ application.
+ Until this data is available a rough estimate will have to do.
+ Lets suppose the probability of obtaining a vote at position 
+\begin_inset Formula $i$
+\end_inset
+
+ has been calculated and is equal to
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f(i)=\frac{votes}{pageviews}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+This can be normalized by setting the maximum value equal to 
+\begin_inset Formula $1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\tilde{f}(i)=\frac{f(i)}{\underset{i}{max}\, f(i)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+At this point if elements in position 
+\begin_inset Formula $i_{1},i_{2},...,i_{n}$
+\end_inset
+
+ get voted by a user, the views count of element at position 
+\begin_inset Formula $i$
+\end_inset
+
+ will be incremented by the value assumed by the above function, scaled
+ such that the less visible item that has been voted on equals 
+\begin_inset Formula $1$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{\widetilde{f}(i)}{\underset{j=i_{1},i_{2},...,i_{n}}{min}\,\widetilde{f}(j)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A more complex algorithm to estimate views could also incorporate cursor
+ movement, which has been shown to strongly correlate with eye movement
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Huang11"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Normalization
+\end_layout
+
+\begin_layout Standard
+The bayesian average is normalized to the interval 
+\begin_inset Formula $[0,10]$
+\end_inset
+
+ before being displayed to the user with one digit after the decimal point.
+ Having one digit after the decimal point makes sure the user understand
+ that the score isn't a simple sum of the up and downvotes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "bibliography"
+options "plain"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+\start_of_appendix
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Appendix-A"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Here follows the proof that the Dirichlet Prior proposed by Zhang et al.
+ (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhang11"
+
+\end_inset
+
+) can be obtained by bayesian inference, under the assumption of a prior
+ following the beta distribution and a minimum square error loss function.
+ A formalization of the voting problem that uses bayesian reasoning has
+ been sketched in a 2012 online article by Miller (
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Miller12"
+
+\end_inset
+
+).
+ Similar results have been obtained in the literature under the name additive
+ smoothing.
+\end_layout
+
+\begin_layout Standard
+Let 
+\begin_inset Formula $q$
+\end_inset
+
+ denote the proportion of the population that would give a positive vote
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+Here it has been assumed the population is equal to the users that would
+ vote, which means we leave out the users that would vote neither up nor
+ down.
+\end_layout
+
+\end_inset
+
+, i.e.
+ the value we want to estimate.
+ Let the prior probability of 
+\begin_inset Formula $q$
+\end_inset
+
+ be known and be equal to the beta-distribution in the parameters 
+\begin_inset Formula $\alpha$
+\end_inset
+
+ and 
+\begin_inset Formula $\beta$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+p(q)=Beta(\mbox{\alpha},\beta)=\frac{q^{\alpha-1}(1-q)^{\beta-1}}{B(\alpha,\beta)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+where the normalization factor 
+\begin_inset Formula $B$
+\end_inset
+
+ denotes the beta function.
+\end_layout
+
+\begin_layout Standard
+Every vote is assumed to come from a randomly selected user, therefore every
+ vote will have 
+\begin_inset Formula $q$
+\end_inset
+
+ probability of being positive and 
+\begin_inset Formula $1-q$
+\end_inset
+
+ probability of being negative.
+ The probability of having 
+\begin_inset Formula $n_{\uparrow}$
+\end_inset
+
+ positive votes and 
+\begin_inset Formula $n_{\downarrow}$
+\end_inset
+
+ negative votes after 
+\begin_inset Formula $n=n_{\uparrow}+n_{\downarrow}$
+\end_inset
+
+independent trials is given by the probability of a binomial experiment
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+p(n_{\uparrow},n_{\downarrow}|q)=\binom{n_{\uparrow}+n_{\downarrow}}{n_{\uparrow}}q^{n_{\uparrow}}(1-q)^{n_{\downarrow}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The posterior probability of 
+\begin_inset Formula $q$
+\end_inset
+
+ can be calculated by Bayes' theorem
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+p(q|n_{\uparrow},n_{\downarrow})=\frac{p(n_{\uparrow},n_{\downarrow}|q)p(q)}{\int p(n_{\uparrow},n_{\downarrow}|q)p(q)dq}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The specific prior distribution has been chosen because it is the conjugate
+ prior of a binomial experiment, meaning that the posterior probability
+ of Bayes' theorem can be written in term of elementary functions, condition
+ which does not hold in general.
+ More specifically, the posterior probability in the case of beta-distributed
+ prior is known to be another beta-distribution, in the specific case
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+p(q|n_{\uparrow},n_{\downarrow})=Beta(\mbox{\alpha}+n_{\uparrow},\beta+n_{\downarrow})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+At this point the usual approach is to choose 
+\begin_inset Formula $q$
+\end_inset
+
+ by minimizing a loss function, in our case we choose to minimize the mean
+ square error (MSE), which can be shown to be equal to finding the expected
+ value:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\underset{{\scriptstyle y}}{min}\,\mathrm{MSE}[x]=\underset{{\scriptstyle y}}{min}\intop_{0}^{1}p(x)(x-y)^{2}dx
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+=\underset{{\scriptstyle y}}{min}\intop_{0}^{1}p(x)x^{2}dx+y^{2}\intop_{0}^{1}p(x)dx+2y\intop_{0}^{1}p(x)xdx
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+=\underset{{\scriptstyle y}}{min(}y+2y\mathrm{E}[x])=\mathrm{E}[x]
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+in the case of our distribution 
+\begin_inset Formula $Beta(\mbox{\alpha}+n_{\uparrow},\beta+n_{\downarrow})$
+\end_inset
+
+ the expected value is equal to
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{n_{\uparrow}+\alpha}{n_{\uparrow}+n_{\downarrow}+\alpha+\beta}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+from which it will suffice to replace 
+\begin_inset Formula $\mu=\mbox{\alpha}+\beta$
+\end_inset
+
+ and 
+\begin_inset Formula $p_{\uparrow}=\alpha/(\alpha+\beta)$
+\end_inset
+
+ to obtain the formula used by Zhang et al.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{n_{\uparrow}+p_{\uparrow}\mu}{n_{\uparrow}+n_{\downarrow}+\mu}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
