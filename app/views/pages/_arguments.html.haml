@@ -5,12 +5,7 @@
   - @page.arguments_for(option).each do |a|
     %hr
     .row
-      .span1.votes
-        %a{onclick: "vote('up', #{a.id}, 1)"}
-          = glyph('chevron-up')
-        %div{id: "votes#{a.id}"}= a.score
-        %a{onclick: "vote('down', #{a.id}, 1)"}
-          = glyph('chevron-down')
+      = render partial: 'votes', locals: {a: a}
       .span4
         %h4
           = a.summary
