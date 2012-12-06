@@ -13,6 +13,7 @@ class VotesController < ApplicationController
       v.votable = argument
       v.save
     end
-    render text: argument.score
+    s = "%.1f" % (argument.score * 10)
+    render text: s
   end
 end
