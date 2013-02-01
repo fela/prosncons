@@ -43,21 +43,30 @@ class ActionDispatch::IntegrationTest
     page.execute_script("navigator.id.request()")
     main_window, persona_popup = page.driver.browser.window_handles
     within_window(persona_popup) do
-      if find('.form_section')[:id] == 'selectEmail'
-        # emails used previously are being remembered
-        click_on('thisIsNotMe')
+      using_wait_time(2) do
+        if page.has_selector?('#selectEmail')#[:id] == 'selectEmail'
+          # emails used previously are being remembered
+          puts 'clicking...'
+          click_on('thisIsNotMe')
+          puts 'clicked'
+        end
       end
-      fill_in('email', :with => email)
+      sleep 1
+      fill_in('authentication_email', :with => email)
       click_on('next')
 
-      using_wait_time(50) do begin
+      puts 'aaa'
+      using_wait_time(15) do begin
         if page.has_content?('One month')
           click_on('One month')
         end
-      rescue Selenium::WebDriver::Error::NoSuchWindowError
+      #rescue Selenium::WebDriver::Error::NoSuchWindowError
+      rescue Selenium::WebDriver::Error::UnknownError => e
+        p 'unknown error catched'
         # do nothing if window closes
       end end
     end
+    puts 'okk'
     page.driver.browser.switch_to.window(main_window)
     login_check(email) unless opt[:i_will_check]
   end
