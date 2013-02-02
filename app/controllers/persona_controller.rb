@@ -46,7 +46,7 @@ class PersonaController < ApplicationController
       # redirect to original page and remove the url from the session
       referer = session[:referer]
       session[:referer] = nil
-      successful_login_message
+      successful_login_message(session[:email])
       redirect_to referer
     else
       flash[:error] = 'Some error occurred creating the new account,' +
@@ -96,8 +96,9 @@ private
     render text: ''
   end
 
-  def successful_login_message
-    @email = CGI::escapeHTML(@res['email'])
+  def successful_login_message(email=nil)
+    @email = email || @email
+    @email = CGI::escapeHTML(@email)
     flash[:success] = "Successfully logged in with <strong>#@email</strong>".html_safe
   end
 
