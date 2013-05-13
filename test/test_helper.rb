@@ -67,19 +67,24 @@ class ActionDispatch::IntegrationTest
       click_on('next')
 
       puts 'aaa'
-      using_wait_time(15) do begin
+      unless_window_closes do
         if page.has_content?('One month')
           click_on('One month')
         end
-      #rescue Selenium::WebDriver::Error::NoSuchWindowError
-      rescue Selenium::WebDriver::Error::UnknownError => e
-        p 'unknown error catched'
-        # do nothing if window closes
-      end end
+      end
     end
     puts 'okk'
     page.driver.browser.switch_to.window(main_window)
     login_check(email) unless opt[:i_will_check]
+  end
+
+  def unless_window_closes
+    using_wait_time(15) do begin
+      yield
+    rescue Selenium::WebDriver::Error::NoSuchWindowError
+    #rescue Selenium::WebDriver::Error::UnknownError
+      puts'puts window closed'
+    end end
   end
 
   def login_check(email)
