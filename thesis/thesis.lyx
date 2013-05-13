@@ -81,7 +81,7 @@ theorems-sec
 \begin_layout Title
 
 \size larger
-PROVA FINALE
+TESI DI LAUREA
 \size giant
 
 \begin_inset VSpace 0.5cm
@@ -91,11 +91,8 @@ PROVA FINALE
 \begin_inset Newline newline
 \end_inset
 
-Pros and cons on controvertial issues 
-\begin_inset Newline newline
-\end_inset
-
-through crowdsourcing 
+A crowdsourcing platform to collect and rank pros and cons on controversial
+ issues 
 \size default
 
 \begin_inset VSpace 0.5cm
@@ -194,6 +191,463 @@ LatexCommand tableofcontents
 \end_layout
 
 \begin_layout Chapter
+Introduction
+\end_layout
+
+\begin_layout Section
+Background and motivation
+\end_layout
+
+\begin_layout Standard
+Technologies such as wikis, forums, blogs and question and answer platforms
+ are widely used to help internet users to collaboratively collect information
+ and make the result available on the internet.
+ Different users might have different opinions about what the most relevant
+ information is, so there are many ways in which to determine the end result.
+\end_layout
+
+\begin_layout Standard
+Forums and blogs chronologically display everything that gets written, the
+ main differences between the two is that blogs do not have threads and
+ are written by a single person or a small group of people and are therefore
+ generally less inclusive.
+ Wikis either require the users to reach a consensus about what to display
+ and how to display it or there might be some hierarchy of administrators
+ that determines who has the latest word.
+ 
+\end_layout
+
+\begin_layout Standard
+In question and answer applications votes determine what answers get displayed
+ first.
+ Voting works best when it is relatively easy to agree on what a good answer
+ is.
+ On controvertial issues where opinions are polarized users will often vote
+ based on political opinion rather then relevance and quality.
+ This is the reason why for example the StackExchange questions and answers
+ platform, to maintain the quality of its content, bans questions that are
+ prone to strong opinions.
+ This leaves out many questions, such as those in the form 'What are the
+ pros and cons of ...'.
+ In this thesis I will describe and implement a web applications that tries
+ to deal exactly with this kind of questions.
+\end_layout
+
+\begin_layout Standard
+The main tecnique I use to counter the effect of polarized votes is to rank
+ pros and cons indipendently.
+ This way there will be no competition between the two factions.
+ The voting merely determines the internal rankings of the pros, and the
+ internal ranking of the cons.
+\end_layout
+
+\begin_layout Section
+Building an online community
+\end_layout
+
+\begin_layout Standard
+The content and voting behaviour will depend on the community that forms
+ itself arount the website.
+ As Aaron Swarz notes when discussing wikipedia and bringing ideas of the
+ open enciclopedia to other contexts, a community is a combination of technology
+, rules and people.
+ Each component influences the other: different people will want different
+ rules and guidelines, while different rules and conventions will attract
+ different people.
+ Technology can keep people away or atract them, and can help enforce some
+ of the rules.
+\end_layout
+
+\begin_layout Standard
+While this work concentrates on the technological aspects, it is important
+ to bear in mind that the technology will have strong bidirectional ties
+ to the community that uses it and whith the way this community behaves.
+\end_layout
+
+\begin_layout Section
+Similar web applications
+\end_layout
+
+\begin_layout Standard
+To my knowledge there is no application with the exact same goal and with
+ the same approach, but there are many that share it at least partially
+ and have interesting properties woth looking at.
+\end_layout
+
+\begin_layout Subsection
+Procon.org
+\end_layout
+
+\begin_layout Standard
+This is a website with the goal of collecting pros and cons on controversial
+ issues.
+ This is, on the surface, very similar to what this work aims at.
+ A deeper look, however, will show important differences.
+ The most important one is the role of the community.
+ The main content of the procon.org website is collected by a selected group
+ of paid editors.
+ Nobody ouside of this group has any effective influence on the content
+ and on how it is displayed.
+ The role of the internet users is relegated to the comments section, which
+ are a secondary feature of the website.
+ While the comments are subdivided in pros and cons and provide a simple
+ voting mechanism, there are no rules nor guidelines to what kind of comments
+ are allowed and based on what they should be up or downvoted.
+\end_layout
+
+\begin_layout Standard
+The resulting comments are instructive of how the technology (the voting
+ mechanism), and the community rules influence the content.
+ On most comment pages the votes are heavily biased toward one side of the
+ issue, for example the commenters are videly favorable to medical use of
+ marijuana, so much that the lowest rated pro comment has a higher rating
+ than the highest rated con comment.
+ Other topics, while less drastic, show similar trends.
+ The ratings mostly indicates if the view of the commenter is viewed favourably,
+ rather than indicating if it raises any interesting and important point
+ useful to evaluate the issue.
+ If the comments where mixed together, as opposed to being subdivided in
+ pros and cons one would have to look very much down the page to find any
+ reasons for the minority opinion.
+ 
+\end_layout
+
+\begin_layout Standard
+Additionaly, as the comments do not follow rules there is a lot of duplicate
+ comments, very subjective opinions, rethorical answers without much substance,
+ and personal experiences.
+ In the specifica case it is probably not meant to be otherwise, but if
+ users are to create the main content, rules about the kind of content allowed
+ are needed.
+\end_layout
+
+\begin_layout Subsection
+StackExchange
+\end_layout
+
+\begin_layout Standard
+There are a vast number of question and answer platforms, I will concentrate
+ on the StackExchange network as it is one of the most successful ones,
+ has interesting properties, and strongly influences my work.
+ A general property of question and answer websites is that they allow everybody
+ to answer and to vote to decide the best questions, which will be displayed
+ first.
+ While many websites allow a great variety of quesitons to be asked, Stack
+ Exchange is composed of multiple websites, each focused on a single topic,
+ with fairly restricted rules about the questions and answers that are allowed.
+ This, coupled with the reputation system, has the effect of creating topic
+ centered communities.
+\end_layout
+
+\begin_layout Subsection
+Wikipedia
+\end_layout
+
+\begin_layout Standard
+On wikipedia many people successfully cooperate to write about a wide range
+ of topics, including controversial ones.
+ It is an example of a community build by the combination of people, rules
+ and technology.
+ On wikipedia community guidelines and consensus have a stronger degree
+ of importance.
+\end_layout
+
+\begin_layout Standard
+As wikipedia it will be possible to edit, more restricted (common users
+ can contribute in other ways).
+\end_layout
+
+\begin_layout Chapter
+Authentication with multiple email addresses
+\end_layout
+
+\begin_layout Section
+Mozilla Persona
+\end_layout
+
+\begin_layout Standard
+User registration and authentication is done through Mozilla Persona
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+https://developer.mozilla.org/en-US/docs/Persona
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
+ Mozilla Persona allows the user to log in using any existing email address,
+ without the need of sharing a password with the web application 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Hanson11"
+
+\end_inset
+
+.
+ Tipically, the user will be required to choose a password that is shared
+ only with 
+\family typewriter
+persona.org
+\family default
+ and can be used for an unlimited number of websites that support the protocol,
+ without incurring in the security risks normally associated with password
+ reuse.
+ If the email provider supports the identity provider (IDP) portion of the
+ protocol the password is not needed and the user authenticates directly
+ with its provider, similarly to what happens with OpenID and OAuth.
+ In the worst case, if the user has never used Persona before, the user
+ interaction will be analogous to standard email registration, with the
+ only drawback that it happens in a popup owned by a third party domain
+ (
+\family typewriter
+persona.org
+\family default
+).
+\end_layout
+
+\begin_layout Section
+Linking together multiple email addresses
+\end_layout
+
+\begin_layout Standard
+Many internet users own and manage more than one email address 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Gross07"
+
+\end_inset
+
+, therefore a user might not remember which one was used during registration.
+ To overcome this inconvenience a user that logs in with a new email address
+ will be prompted with two choices.
+ He can either create a new account or link the new email address to an
+ existing account.
+ If more addresses are linked to an account any of them can be used to sign
+ in.
+\end_layout
+
+\begin_layout Standard
+Offering the ability to link different email addresses should be done with
+ care as it can introduce a number of security vulnerabilities:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:attack-surface"
+
+\end_inset
+
+it increases the 
+\series bold
+attack surface
+\series default
+: with multiple email addresses linked to an account the attacker needs
+ to compromise just one to gain unauthorized access to the user account;
+ if the ability to login with multiple email addresses is to be retained
+ this cannot be totally countered, but three kind of measures can be taken
+ to help minimize the damage: first, making sure not all kind of actions
+ are available through all email addresses, thus limiting the damage; second,
+ improving detection; and third, in case of detection, making recovery easy
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:add-email"
+
+\end_inset
+
+if an email address is temporarily compromized, the attacker might be able
+ to 
+\series bold
+add a new email address
+\series default
+ to be able to access the account even after control of the original email
+ address is lost, this relies on the author not noticing the added address
+ or somohow being unable to remove it
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset CommandInset label
+LatexCommand label
+name "enu:remove-email"
+
+\end_inset
+
+if in the above scenario the attacker has the ability to also 
+\series bold
+remove the original email
+\series default
+ address he will gain full control of the account and the original owner
+ will have lost it completely
+\end_layout
+
+\begin_layout Standard
+The feasability of these attacks depends on the exact circumstances in which
+ email addresses can be removed and added.
+ A combination of some of the following measures could be used to minimize
+ the security risk, while keeping the application usable.
+\end_layout
+
+\begin_layout Subsection
+Removal of addresses
+\end_layout
+
+\begin_layout Standard
+If it is discovered that an attacker has added an email address (as in scenario
+ 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:add-email"
+
+\end_inset
+
+) it is important to be able to remove that address.
+ Removing old adresses can also be used to avoid an unecessary number of
+ addresses to be linked to an account.
+ However, giving users the possibility to remove email addresses makes it
+ possible for attackers to remove legitimate ones, as in scenario 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:remove-email"
+
+\end_inset
+
+.
+ It is thus clear that email removal alone is not enough to protect from
+ the outlined security risks.
+\end_layout
+
+\begin_layout Subsection
+Delayed actions
+\end_layout
+
+\begin_layout Standard
+Security sensitive actions such as removing and/or adding email addresses
+ can be delayed, for example by a fixed number of days.
+ In the meantime, after every login, the user will be shown a notice informing
+ him he can cancel the action.
+ 
+\end_layout
+
+\begin_layout Standard
+Delayed 
+\emph on
+removal
+\emph default
+, while helping to avoid the removal of legitimate addresses, would slow
+ down actions to counter scenario 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "enu:add-email"
+
+\end_inset
+
+ (illegitimate email addresses added by an attacker).
+ This latter scenario can be countered by also delaying the addition of
+ a new email address, which however would have usability drawbacks.
+ So again delayed actions alone might not provide a satisfying solution.
+\end_layout
+
+\begin_layout Subsection
+Email confirmation
+\end_layout
+
+\begin_layout Standard
+Email confirmation from every email address for certain actions makes it
+ harder for the attacker to take those actions.
+ Unfortunately it also can block the user from accomplishing legitimate
+ tasks in the case of compromised email addresses.
+ Email confirmation from some of the email address is required to change
+ the password of mozilla persona.
+\end_layout
+
+\begin_layout Subsection
+Primary email
+\end_layout
+
+\begin_layout Standard
+To prevent the kind of escalation described, sensitive actions can be restricted
+ to a single primary email address.
+ This way, for the given actions the security provided will be equal to
+ the case of a single email address.
+ Other email addresses can still be used to login, until the user wants
+ to perform one of the restricted actions, which will require him to use
+ its primary email address.
+ 
+\end_layout
+
+\begin_layout Standard
+One drawback is that if the control of the primary email is lost, control
+ of the whole account is also lost.
+ This is the same as what happens with single email sign in, and it is the
+ users burden to choose an email provider with good recovery options.
+\end_layout
+
+\begin_layout Standard
+There can be various choises regarding which actions will require a primary
+ address.
+ A liberal approach would be to only restrict the actions of adding and
+ removing other email addresses.
+ It would still be possible for an attacker to partly compromize an account
+ by compromizing one of its secondary email addresses, but as soon as the
+ breach is discovered, the affected email address can be removed.
+\end_layout
+
+\begin_layout Standard
+The most conservative approach, on the other hand, would be to not allow
+ any actions other than displaying to primary email address which the user
+ should use to be able to actively use the account.
+ While more secure, it requires an additional action on the users part when
+ he logs in with a secondary email address.
+ This means that other email addresses serve the sole purpose of reminding
+ the user which was his primary address in the case he forgets it.
+\end_layout
+
+\begin_layout Standard
+To add dependency of primary email, some way to recover by secondary email
+ addresses could be available...
+\end_layout
+
+\begin_layout Subsection
+Proposed solution
+\end_layout
+
+\begin_layout Standard
+The proposed solution is to require primary email addresses.
+ Furthermore, delayed addresses are provided.
+\end_layout
+
+\begin_layout Standard
+Email confirmation is used my mozilla persona, so implicitely if the user
+ wants to change the password.
+\end_layout
+
+\begin_layout Standard
+[Note on possible usability corner case: when linking email addresses on
+ new address login, care should be taken it is really the users intention
+ to link the addresses]
+\end_layout
+
+\begin_layout Standard
+The two most important use cases are that of a user logging in for the first
+ time, and one logging in with the correct email address.
+\end_layout
+
+\begin_layout Chapter
 Ranking by vote
 \end_layout
 
@@ -236,8 +690,15 @@ key "Zhang11"
 
 ).
  Zhang et al.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhang11"
+
+\end_inset
+
  propose two axioms that should reasonably be respected by a good ranking
- algorithm: first, up and downvotes should respectively (strictly) increase
+ algorithms: first, up and downvotes should respectively (strictly) increase
  and (strictly) decrease the score, and second, if a vote of the same type
  gets added its weight should be strictly smaller than the previous vote.
  They find three ranking algorithm consistent with these axioms, their most
@@ -463,7 +924,7 @@ I will use bayesian average to denote the score calculated this way, and
 Limitations and assumptions
 \end_layout
 
-\begin_layout Standard
+\begin_layout Quote
 
 \emph on
 "All models are wrong, but some are useful"
@@ -483,7 +944,7 @@ Every model is just an approximation of reality, but it is hoped to capture
  Very often approximations or assumptions are made without giving them much
  thought.
  I believe that a honest analyses should give them some space, to be able
- to better assess how well and under which condition a model might is warranted.
+ to better assess how well and under which condition a model might be warranted.
  This is specially important in the case where where there are no obvious
  benchmarks to assess quality.
  I will also note that assuming that the result of a benchmark will correlate
@@ -569,7 +1030,7 @@ When calculating the posterior probability the prior has been assumed to
  be known and be equal to the beta distribution, without giving much justificati
 on other than algebraical convenience.
  The beta distribution does however have a number of desirable properties.
- It is worth noting that the assumption doesn't force a single prior, but
+ It is worth noting that the assumption does not force a single prior, but
  rather allows for a family of distribution functions, by varying 
 \begin_inset Formula $p\uparrow$
 \end_inset
@@ -656,13 +1117,13 @@ The graph shows, in red, a number of random films grouped by their Rotten
 
 \begin_layout Standard
 Too see how realistic such a prior is, I analyzed the distribution in a
- real examples, to do this I chose the the Rotten Tomatoes user scores.
+ real example, to do this I chose the Rotten Tomatoes user scores.
  Rotten Tomatoes is a website containing information and reviews about movies;
  the users can score the movies and the final score will be equal to the
  percentage of positive votes.
  Given the large number of votes, from many hundreds to many thousands in
- the case of the movies I've analyzed, this percentage can be assumed a
- good approximation of 
+ the case of the movies I have analyzed, this percentage can be assumed
+ a good approximation of 
 \begin_inset Formula $q$
 \end_inset
 
@@ -671,8 +1132,8 @@ Too see how realistic such a prior is, I analyzed the distribution in a
  currently playing in the theaters and recent DVD releases.
  Lists such as best and worst movies have not been used as obviously biased
  for our use.
- The API doesn't allow to directly access the number of user votes, so the
- number of critics reviews has been used to exclude obscure movies which
+ The API does not allow to directly access the number of user votes, so
+ the number of critics reviews has been used to exclude obscure movies which
  might not have enough votes to make the data reliable.
  This might add a slight bias, however the fact that the distribution is
  still approximately beta distributed is an indication of the good properties
@@ -776,9 +1237,9 @@ Fastest gun in the west problem
 \end_layout
 
 \begin_layout Standard
-A know problem often arising when ranked comments by votes is that the oldest
- comments tend to have a much higher chance making it to the top, purely
- as a consequence of being there first.
+A know problem often arising when ranking comments by votes is that the
+ oldest comments tend to have a much higher chance making it to the top,
+ purely as a consequence of being there first.
  This is particularly true in the case of ranking by number of votes, or
  by the difference of upvotes and downvotes.
  Newer comments will start at the bottom and thus, other things being equal,
@@ -811,7 +1272,7 @@ Number of views
 \end_layout
 
 \begin_layout Standard
-An interesting piece of information that hasn't been used is the number
+An interesting piece of information that has not been used is the number
  of users who have seen an object but did not find it interesting enough
  to vote on it.
  So the current algorithm would give the same score to an item viewed by
@@ -939,7 +1400,7 @@ At this point if elements in position
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\frac{\widetilde{f}(i)}{\underset{j=i_{1},i_{2},...,i_{n}}{min}\,\widetilde{f}(j)}
+min(\frac{\widetilde{f}(i)}{\underset{j=i_{1},i_{2},...,i_{n}}{min}\,\widetilde{f}(j)},1)
 \]
 
 \end_inset
@@ -969,8 +1430,44 @@ The bayesian average is normalized to the interval
 \end_inset
 
  before being displayed to the user with one digit after the decimal point.
- Having one digit after the decimal point makes sure the user understand
- that the score isn't a simple sum of the up and downvotes.
+ Having one digit after the decimal point makes sure the user understands
+ that the score is not a simple sum of the up and downvotes.
+\end_layout
+
+\begin_layout Chapter
+Reputation
+\end_layout
+
+\begin_layout Standard
+There are many kind of reputation systems and different reasons why to use
+ one.
+ A frequent reason to create a reputation system is to better recognize
+ good content and trustworthy scores, with the ultimate goal of ranking
+ the content, an example of this is PageRank.
+ Another reason is to encourage users to contribute and to vote (karma).
+ This is one of the main reasons why I have used a reputation system, together
+ with requiring a minimum reputation for certain actions.
+ This is a simple but effective way to conter unsofisticated sybil attacks.
+\end_layout
+
+\begin_layout Section
+Sybil attack
+\end_layout
+
+\begin_layout Section
+Anonimous users
+\end_layout
+
+\begin_layout Standard
+To encourage participation of anonimous users and to be able to provide
+ "some" ranking even if no other users provided any vote, two tools are
+ used: first anonimous users and 0-reputation users have a vote that is
+ an order of magnitude less strong that that of registered users, second
+ there is a maximum number of votes allowed by anonimous users per item,
+ this way if there are even very few votes by normal users at most anonimous
+ users can be deciding in tie breaking.
+ If there are no votes, the risk of sybil attacks is warranted by the possibilit
+y of providing some ranking and allowing anonimous users to participate.
 \end_layout
 
 \begin_layout Standard
@@ -986,6 +1483,74 @@ options "plain"
 
 \begin_layout Chapter
 \start_of_appendix
+FAQ
+\end_layout
+
+\begin_layout Standard
+This chapter reports the Frequently Asked Questions that are showed in the
+ website to guide the users answers
+\end_layout
+
+\begin_layout Subsection*
+What kind of questions are allowed?
+\end_layout
+
+\begin_layout Standard
+Questions should offer a choice between two options and should be asking
+ reasons to choose one rather than the other.
+ When there are more than two options to compare, two of them have to be
+ chosen.
+ More than one question could be created comparing different options.
+\end_layout
+
+\begin_layout Subsection*
+What kind of answers are allowed?
+\end_layout
+
+\begin_layout Standard
+Each answer should contain a reason to prefer one of the two options.
+ Each answer should contain only one reason and a single user can give more
+ answers if he wants to suggest more arguments in favour of a given choice.
+\end_layout
+
+\begin_layout Subsection*
+Are duplicate questions allowed?
+\end_layout
+
+\begin_layout Standard
+It is preferrable to edit the original question.
+\end_layout
+
+\begin_layout Subsection*
+Isn't it unfair to give pros and cons always the same weight?
+\end_layout
+
+\begin_layout Standard
+It is not the aim of this website to directly decide if pros or cons deserve
+ more weight.
+ It should therefore be the users burden to carefully analize the poinst
+ and decide if maybe one side of the issue, on closer analysis doens't have
+ many convincing arguments, or if one argument is so important that it overshado
+ws all those on for the opposing view.
+ Looking for arguments on both side is a good habit, and doesn't mean the
+ conclusion cannot be heavily leaning to one side.
+\end_layout
+
+\begin_layout Subsection*
+Is there a risk for people willfully voting for bad arguments arguing for
+ the view they don't agree on?
+\end_layout
+
+\begin_layout Standard
+While it would be possible to do this, if people really thing their view
+ is better when all is said and done, then it is only in their best interest
+ to give any interested person the correct information, so that he can claim
+ the truth.
+ A single user does not have.
+ 
+\end_layout
+
+\begin_layout Chapter
 \begin_inset CommandInset label
 LatexCommand label
 name "chap:Appendix-A"
@@ -1172,7 +1737,7 @@ At this point the usual approach is to choose
 \begin_layout Standard
 \begin_inset Formula 
 \[
-=\underset{{\scriptstyle y}}{min}\intop_{0}^{1}p(x)x^{2}dx+y^{2}\intop_{0}^{1}p(x)dx+2y\intop_{0}^{1}p(x)xdx
+=\underset{{\scriptstyle y}}{min}\intop_{0}^{1}p(x)x^{2}dx+y^{2}\intop_{0}^{1}p(x)dx-2y\intop_{0}^{1}p(x)xdx
 \]
 
 \end_inset
@@ -1183,7 +1748,7 @@ At this point the usual approach is to choose
 \begin_layout Standard
 \begin_inset Formula 
 \[
-=\underset{{\scriptstyle y}}{min(}y+2y\mathrm{E}[x])=\mathrm{E}[x]
+=\underset{{\scriptstyle y}}{min(}y-2y\mathrm{E}[x])=\mathrm{E}[x]
 \]
 
 \end_inset

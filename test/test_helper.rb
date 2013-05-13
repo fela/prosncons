@@ -4,6 +4,17 @@ require 'rails/test_help'
 require 'capybara/rails'
 
 
+Capybara.register_driver :selenium do |app|
+  profile = Selenium::WebDriver::Firefox::Profile.new
+  if `iwconfig wlan2` =~ /GenuaWifi/
+    profile["network.proxy.type"] = 1 # manual proxy config
+    profile["network.proxy.http"] = "genuawifi.unige.it"
+    profile["network.proxy.http_port"] = 80
+  end
+
+  Capybara::Selenium::Driver.new(app, :profile => profile)
+end
+
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
   #

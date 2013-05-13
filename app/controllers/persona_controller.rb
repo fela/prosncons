@@ -107,7 +107,11 @@ private
     audience = request.host
     #puts "Assertion: #{assertion}"
     #puts "Audience: #{audience}"
-    http = Net::HTTP.new('verifier.login.persona.org', 443)
+
+    use_proxy = `iwconfig wlan2` =~ /GenuaWifi/
+    proxy, port = use_proxy ? ['wifiproxy.unige.it', 80] : [nil, nil]
+    http = Net::HTTP.new('verifier.login.persona.org', 443, proxy, port)
+
     http.use_ssl = true
     headers = {
         'Content-Type' => 'application/x-www-form-urlencoded',

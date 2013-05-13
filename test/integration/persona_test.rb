@@ -4,10 +4,10 @@ class PersonaTest < ActionDispatch::IntegrationTest
   def self.startup
     Capybara.default_driver = :selenium
     Capybara.default_wait_time = 5
-    unless `iwconfig wlan2 | grep GenuaWifi`.empty? do
-      b = Capybara.current_session.driver.browser
-      b.set_proxy host: 'wifiproxy.unige.it', port: '80'
-    end
+    #if `iwconfig wlan2` =~ /GenuaWifi/
+    #  b = Capybara.current_session.driver.browser
+    #  b.set_proxy host: 'wifiproxy.unige.it', port: '80'
+    #end
 
     # problem with other drivers:
     # poltergeist doesn't provide proper multi-window

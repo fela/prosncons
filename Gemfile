@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.11'
+gem 'rails', '3.2.13'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -29,7 +29,9 @@ gem 'pg'#, group: :production
 group :test do
   gem 'test-unit'
   gem 'timecop'
-  gem 'capybara', '>= 2.0.0'
+  gem 'capybara'
+  #gem 'selenium-webdriver'
+  gem "selenium-webdriver", "~> 2.32.1"
   #gem 'capybara-webkit'
   #gem 'poltergeist'
   gem 'database_cleaner' # needed by capybara
