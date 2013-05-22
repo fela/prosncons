@@ -3,27 +3,31 @@ require 'net/http'
 class PersonaController < ApplicationController
 
   def login
-    puts 'aaaaaaaaaaaaaaaaaaaa'
+    # TODO: handle invalid assertion + add to log
     verify_assertion or return
-    puts '------------------------'
     @user = User.find_by_email(@email)
-    puts @user
+
     if @user
-      # normal login
-      session[:email] = @email
-      session[:id] = @user.id
-      puts 'aaaaaaaaaaaaaaaaaaaa'
       successful_login_message
-      puts 'bbbbbbbbbbbbbbbbbb'
-      ajax_login_redirect params[:referer]
     else
+      # new user
+      new_login_message
+      @user = User.create_account(@email)
+    end
+
+    #if @user
+      # normal login
+    session[:email] = @email
+    session[:id] = @user.id
+    ajax_login_redirect params[:referer]
+    #else
       # new user
       # redirect user to page asking if he wants to create an account
       # or if he wants to link it to an existing one
-      session[:new_email] = @email
-      session[:referer] = params[:referer]
-      ajax_login_redirect '/persona/new_user'
-    end
+    #  session[:new_email] = @email
+    #  session[:referer] = params[:referer]
+    #  ajax_login_redirect '/persona/new_user'
+    #end
   end
 
   def new_user
@@ -38,16 +42,10 @@ class PersonaController < ApplicationController
   def create_account
     # XXX: should be POST
     # user choose to create a new account
-    user = User.create_account(session[:new_email])
-    if user && session[:new_email]
+    user = User.create_account(@email)
+    if user
       session[:id] = user.id
-      session[:email] = session[:new_email]
-      session[:new_email] = nil
-      # redirect to original page and remove the url from the session
-      referer = session[:referer]
-      session[:referer] = nil
-      successful_login_message(session[:email])
-      redirect_to referer
+      session[:email]
     else
       flash[:error] = 'Some error occurred creating the new account,' +
           'for example another page got opened while registering'
@@ -98,8 +96,14 @@ private
 
   def successful_login_message(email=nil)
     @email = email || @email
-    @email = CGI::escapeHTML(@email)
-    flash[:success] = "Successfully logged in with <strong>#@email</strong>".html_safe
+    email = CGI::escapeHTML(@email)
+    flash[:success] = "Successfully logged in with <strong>#{email}</strong>".html_safe
+  end
+
+  def new_login_message
+    email = CGI::escapeHTML(@email)
+    flash[:success] = ("A new account has been created for <strong>#{email}</strong>. " +
+        "If you already have an account add #{email} to you existing account (TODO: link).").html_safe
   end
 
   def verify_assertion
@@ -136,7 +140,6 @@ private
   # answer to the ajax call
   # that will trigger the javascript to redirect to the given page
   def ajax_login_redirect(url)
-    puts 'render called...!!'
     render text: url
   end
 end

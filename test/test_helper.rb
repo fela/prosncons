@@ -5,11 +5,14 @@ require 'capybara/rails'
 
 
 Capybara.register_driver :selenium do |app|
+  puts 'registering selenium driver'
   profile = Selenium::WebDriver::Firefox::Profile.new
   if `iwconfig wlan2` =~ /GenuaWifi/
-    profile["network.proxy.type"] = 1 # manual proxy config
-    profile["network.proxy.http"] = "genuawifi.unige.it"
-    profile["network.proxy.http_port"] = 80
+    puts 'setting proxy'
+    profile.proxy = Selenium::WebDriver::Proxy.new(
+      :http => 'wifiproxy.unige.it:80',
+      :ssl => 'wifiproxy.unige.it:80',
+      :no_proxy => 'localhost,127.0.0.1')
   end
 
   Capybara::Selenium::Driver.new(app, :profile => profile)
@@ -66,14 +69,12 @@ class ActionDispatch::IntegrationTest
       fill_in('authentication_email', :with => email)
       click_on('next')
 
-      puts 'aaa'
       unless_window_closes do
         if page.has_content?('One month')
           click_on('One month')
         end
       end
     end
-    puts 'okk'
     page.driver.browser.switch_to.window(main_window)
     login_check(email) unless opt[:i_will_check]
   end
@@ -83,7 +84,7 @@ class ActionDispatch::IntegrationTest
       yield
     rescue Selenium::WebDriver::Error::NoSuchWindowError
     #rescue Selenium::WebDriver::Error::UnknownError
-      puts'puts window closed'
+      puts 'window closed (NoSuchWindowError)'
     end end
   end
 

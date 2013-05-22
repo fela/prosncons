@@ -1,5 +1,12 @@
 SHORT TERM
+* secondary login scenario
+* unlink secondary email address
 
 MEDIUM TERM
+* add secondary email addresses
+  - manually
+  - automatically: click on if you already have an account click here to add
+    secondary@email.com to an existing account.
+* test login corner cases
 
 LONG TERM

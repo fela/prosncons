@@ -48,88 +48,64 @@ class PersonaTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test 'login with secondary email' do
+  # test case for automatic user creation first encounter of an email address
+  test 'unused login' do
+    user_count = User.count
+    cred_count = Credential.count
     visit(root_path)
     within('.navbar') do
       assert page.has_content?('you are not logged in')
     end
-    email = credentials(:alice2).email
+    email = 'neverbeforeusedemail212324@mockmyid.com'
     login(email)
     within('.navbar') do
       assert page.has_content?(email)
       assert page.has_content?('logged in')
     end
-  end
-
-
-  test 'unused login and then cancel' do
-    visit(root_path)
-    email = 'neverbeforeusedemail212324@mockmyid.com'
-    login(email, i_will_check: true)
-    check_new_profile
-    visit(root_path)
-    within('.navbar') do
-      assert page.has_content?('you are not logged in')
-    end
-  end
-
-  test 'unused login and create new profile' do
-    user_count = User.count
-    cred_count = Credential.count
-    visit(root_path)
-    email = 'neverbeforeusedemail2612@mockmyid.com'
-    login(email, i_will_check: true)
-    check_new_profile
-    sleep(4) # make sure no javascript logout is called
-    click_on('Create new account')
-    sleep(4)
-    assert_equal root_path, current_path
-    within('.navbar') do
+    within('.alert-success') do
       assert page.has_content?(email)
+      assert page.has_content?('new account')
     end
-
     assert_equal user_count+1, User.count
     assert_equal cred_count+1, Credential.count
     assert User.find_by_primary_email(email)
     assert_equal 1, Credential.find_all_by_email(email).count
   end
 
-  test 'unused login and merge to existing account' do
-    user_count = User.count
-    cred_count = Credential.count
-    visit(root_path)
-    email = 'neverbeforeusedemail29924@mockmyid.com'
-    login(email, i_will_check: true)
-    check_new_profile
-    click_on('Add email to existing account')
+  #test 'login with secondary email' do
+  #  visit(root_path)
+  #  within('.navbar') do
+  #    assert page.has_content?('you are not logged in')
+  #  end
+  #  email = credentials(:alice2).email
+  #  login(email)
+  #  within('.navbar') do
+  #    assert page.has_content?(email)
+  #    assert page.has_content?('logged in')
+  #  end
+  #end
 
-    email2 = users(:alice).primary_email
-
-    login(email2)
-
-    assert_equal root_path, current_path
-
-    assert_equal user_count, User.count
-    assert_equal cred_count+1, Credential.count
-    assert !User.find_by_primary_email(email)
-    assert_equal email2, User.find_by_email(email).primary_email
-    assert_equal 1, Credential.find_all_by_email(email).count
-  end
-
-  test 'login with new email and then visit other page' do
-    visit(root_path)
-    email = 'neverbeforeusedemail65532ddsfs4@mockmyid.com'
-    login(email, i_will_check: true)
-    check_new_profile
-    visit(root_path)
-    sleep(4) # otherwise the automatic logout hasn't happened yet
-    puts 'now..'
-    visit('/persona/new_user')
-    # should be redirected back
-    within('h1') do
-      assert page.has_content?("Pros'n'Cons webapp")
-    end
-  end
+  #test 'unused login and merge to existing account' do
+  #  user_count = User.count
+  #  cred_count = Credential.count
+  #  visit(root_path)
+  #  email = 'neverbeforeusedemail29924@mockmyid.com'
+  #  login(email, i_will_check: true)
+  #  check_new_profile
+  #  click_on('Add email to existing account')
+  #
+  #  email2 = users(:alice).primary_email
+  #
+  #  login(email2)
+  #
+  #  assert_equal root_path, current_path
+  #
+  #  assert_equal user_count, User.count
+  #  assert_equal cred_count+1, Credential.count
+  #  assert !User.find_by_primary_email(email)
+  #  assert_equal email2, User.find_by_email(email).primary_email
+  #  assert_equal 1, Credential.find_all_by_email(email).count
+  #end
 
   # TODO: multiple pages open at the same time with activity
 
