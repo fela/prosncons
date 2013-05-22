@@ -1,7 +1,3 @@
 / called at the end of the page load to load custom persona javascript
 %script
-  - if persona_email
-    persona.loggedInEmail = "#{persona_email}";
-  - if persona_need_to_log_out
-    persona.forceLogout = true;
-    persona.loggedInEmail = "null"; // force login which will force logout
+  persona.loggedInEmail = #{persona_email_js};

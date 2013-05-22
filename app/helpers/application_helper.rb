@@ -11,11 +11,8 @@ module ApplicationHelper
   end
 
   # the email passed to document.id.watch()
-  def persona_email
-    session[:email] || session[:new_email]
-  end
-
-  def persona_need_to_log_out
-    session[:new_email] && !session[:email] && !@stay_logged_in
+  def persona_email_js
+    # (' "email@doamin.con" ' or 'null') as a string
+    session[:email] ? '"'.html_safe + session[:email] + '"'.html_safe : 'null'
   end
 end
