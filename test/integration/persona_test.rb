@@ -33,6 +33,7 @@ class PersonaTest < ActionDispatch::IntegrationTest
     login(email2)
     # use existing login
     login(email1)
+    logout
   end
 
   test 'normal login' do
@@ -46,6 +47,7 @@ class PersonaTest < ActionDispatch::IntegrationTest
       assert page.has_content?(email)
       assert page.has_content?('logged in')
     end
+    logout
   end
 
   # test case for automatic user creation first encounter of an email address
@@ -70,6 +72,7 @@ class PersonaTest < ActionDispatch::IntegrationTest
     assert_equal cred_count+1, Credential.count
     assert User.find_by_primary_email(email)
     assert_equal 1, Credential.find_all_by_email(email).count
+    logout
   end
 
   #test 'login with secondary email' do

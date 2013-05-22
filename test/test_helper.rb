@@ -79,6 +79,19 @@ class ActionDispatch::IntegrationTest
     login_check(email) unless opt[:i_will_check]
   end
 
+  def logout
+    within('.navbar') do
+      click_on 'logged in as'
+      click_on 'Log Out'
+    end
+    within('.navbar') do
+      assert page.has_content?('you are not logged in')
+    end
+    within('.alert-info') do
+      assert page.has_content?('Logged out')
+    end
+  end
+
   def unless_window_closes
     using_wait_time(15) do begin
       yield
