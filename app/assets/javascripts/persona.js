@@ -43,17 +43,9 @@ $(document).ready(function(){
         persona.login();
         event.preventDefault();
     });
-    /*$('#login_create').click(function(event){
-        ProsNCons.persona.login_action = 'persona/create_account';
-        event.preventDefault();
-    });*/
     $('#logout').click(function(event){
         persona.logout();
         event.preventDefault();
-    });
-    $('#logout_follow_link').click(function(event){
-        persona.logout(function(){$.post('/persona/logout');});
-        // no reload: the link gets followed
     });
 
     navigator.id.watch({
