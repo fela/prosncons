@@ -4,5 +4,7 @@ class ApplicationController < ActionController::Base
 
   def authorization_init
     @logged_in_user = session[:id] && User.find(session[:id])
+  rescue ActiveRecord::RecordNotFound
+    session[:id] = session[:email] = @logged_in_user = nil
   end
 end

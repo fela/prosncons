@@ -7,8 +7,9 @@ class Argument < ActiveRecord::Base
   validates_presence_of :summary, :description, :option, :page
   belongs_to :page
   has_many :votes, as: :votable
-  belongs_to :author, class_name: User
+  belongs_to :user
 
+  alias :author :user
 
   def score
     up = n_upvotes

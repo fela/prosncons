@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(:version => 20121107112311) do
     t.string   "summary"
     t.text     "description"
     t.integer  "page_id"
-    t.integer  "author_id"
+    t.integer  "user_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(:version => 20121107112311) do
     t.text     "content"
     t.string   "option1",    :default => "pros"
     t.string   "option2",    :default => "cons"
-    t.integer  "author_id"
+    t.integer  "user_id"
     t.datetime "created_at",                     :null => false
     t.datetime "updated_at",                     :null => false
   end

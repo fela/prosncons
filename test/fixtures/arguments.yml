@@ -7,7 +7,7 @@ page1arg1:
     claims. There is therefore more control regarding which pieces of
     information get voted up or down.
   page: page1
-  author: bob
+  user: bob
 
 page1arg2:
   option: pros
@@ -19,7 +19,7 @@ page1arg2:
     is likely reduced, and it will be only the **relative** ordering inside
     the lists that will matter.
   page: page1
-  author: alice
+  user: alice
 
 page1arg3:
   option: cons
@@ -27,7 +27,7 @@ page1arg3:
   description: It is more complex than the simple Q&A format, this might
     make it less intuitive to new users.
   page: page1
-  author: bob
+  user: bob
 
 page1arg4:
   option: cons
@@ -36,14 +36,14 @@ page1arg4:
     topic might require a complex answer which cannot easily be split into
     single statements that have value on their own.
   page: page1
-  author: bob
+  user: bob
 
 page1arg5:
   option: cons
   summary: less known
   description: The traditional format is more familiar to most people
   page: page1
-  author: alice
+  user: alice
 
 
 page2arg1:
@@ -54,11 +54,11 @@ page2arg1:
     erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
     ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
   page: page2
-  author: bob
+  user: bob
 
 page2arg2:
   option: cons
   summary: ipsum
   description: Lorem ipsum dolor sit amet
   page: page2
-  author: alice
+  user: alice

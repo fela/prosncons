@@ -7,9 +7,9 @@ page1:
     application as opposed to more traditional Q&A websites
     as [Yahoo Answers](http://answers.yahoo.com/) and
     the [StackExchange](http://stackexchange.com) network?
-  author: alice
+  user: alice
 
 page2:
   title: Some other page
   content: Some interesting question..
-  author: alice
+  user: alice

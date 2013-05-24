@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
   serialize :urls # array of strings
   has_many :credentials
   has_many :pages
+  has_many :votes
+  has_many :arguments
 
   def display_name
     name or "user#{id}"
@@ -36,11 +38,27 @@ class User < ActiveRecord::Base
     c && c.user
   end
 
+  # does not add the email and returns false if the email had an account has
+  # already been used
+  # TODO: write tests
   def add_email(email)
+    email = email.downcase
+    cred = Credential.find_by_email(email)
+    if cred
+      return false if cred.user.used?
+      cred.user.destroy
+      cred.destroy
+    end
     Credential.create! do |c|
       c.email = email
       c.user = self
     end
+    true
+  end
+
+  # TODO: write tests
+  def used?
+    !votes.empty? || !pages.empty? || !arguments.empty?
   end
 
   def avatar_url(size=24)

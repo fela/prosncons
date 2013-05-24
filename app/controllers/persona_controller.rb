@@ -16,6 +16,27 @@ class PersonaController < ApplicationController
 
     session[:email] = @email
     session[:id] = @user.id
+    # TODO: it is always the referer: use js reload instead
+    ajax_login_redirect params[:referer]
+  end
+
+  def login_and_add_email
+    old_email = session[:email]
+    verify_assertion or return
+    @user = User.find_by_email(@email)
+    if @user
+      # existing primary login
+      successful_login_message
+      #TODO remove old user and check for activity
+      @user.add_email(old_email)
+    else
+      new_login_message
+      @user = User.create_account(@email)
+    end
+
+    session[:email] = @email
+    session[:id] = @user.id
+    # TODO: it is always the referer: use js reload instead
     ajax_login_redirect params[:referer]
   end
 
@@ -66,7 +87,9 @@ private
   def new_login_message
     email = CGI::escapeHTML(@email)
     flash[:success] = ("A new account has been created for <strong>#{email}</strong>. " +
-        "If you already have an account add #{email} to you existing account (TODO: link).").html_safe
+        "If you already have an account with a different email address you can " +
+        "<a id='login_add' href='/js'>add #{email} " +
+        "to your existing account.</a>").html_safe
   end
 
   def verify_assertion

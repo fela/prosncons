@@ -5,7 +5,7 @@ class CreateArguments < ActiveRecord::Migration
       t.string :summary
       t.text :description
       t.references :page
-      t.references :author
+      t.references :user
 
       t.timestamps
     end

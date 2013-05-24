@@ -88,27 +88,27 @@ class PersonaTest < ActionDispatch::IntegrationTest
   #  end
   #end
 
-  #test 'unused login and merge to existing account' do
-  #  user_count = User.count
-  #  cred_count = Credential.count
-  #  visit(root_path)
-  #  email = 'neverbeforeusedemail29924@mockmyid.com'
-  #  login(email, i_will_check: true)
-  #  check_new_profile
-  #  click_on('Add email to existing account')
-  #
-  #  email2 = users(:alice).primary_email
-  #
-  #  login(email2)
-  #
-  #  assert_equal root_path, current_path
-  #
-  #  assert_equal user_count, User.count
-  #  assert_equal cred_count+1, Credential.count
-  #  assert !User.find_by_primary_email(email)
-  #  assert_equal email2, User.find_by_email(email).primary_email
-  #  assert_equal 1, Credential.find_all_by_email(email).count
-  #end
+  test 'unused login and merge to existing account' do
+    user_count = User.count
+    cred_count = Credential.count
+    visit(root_path)
+    email = 'neverbeforeusedemail29924@mockmyid.com'
+    login(email)
+    click_on('login_add')
+
+    user = users(:alice)
+    email2 = user.primary_email
+    login(email2)
+
+    assert_equal root_path, current_path
+
+    assert_equal user_count, User.count
+    assert_equal cred_count+1, Credential.count
+    assert !User.find_by_primary_email(email)
+    assert_equal email2, User.find_by_email(email).primary_email
+    assert_equal 1, Credential.find_all_by_email(email).count
+    assert_equal user, Credential.find_by_email(email).user
+  end
 
   # TODO: multiple pages open at the same time with activity
 
