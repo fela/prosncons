@@ -60,9 +60,7 @@ class ActionDispatch::IntegrationTest
       using_wait_time(2) do
         if page.has_selector?('#selectEmail')#[:id] == 'selectEmail'
           # emails used previously are being remembered
-          puts 'clicking...'
           click_on('thisIsNotMe')
-          puts 'clicked'
         end
       end
       sleep 1

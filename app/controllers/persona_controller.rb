@@ -3,66 +3,31 @@ require 'net/http'
 class PersonaController < ApplicationController
 
   def login
-    # TODO: handle invalid assertion + add to log
-    verify_assertion or return
-    @user = User.find_by_email(@email)
-
-    if @user
-      successful_login_message
-    else
-      new_login_message
-      @user = User.create_account(@email)
-    end
-
-    session[:email] = @email
-    session[:id] = @user.id
-    # TODO: it is always the referer: use js reload instead
-    ajax_login_redirect params[:referer]
+    handle_login
   end
 
   def login_and_add_email
+    handle_login true
+  end
+
+  def handle_login link_old_address=false
     old_email = session[:email]
     verify_assertion or return
     @user = User.find_by_email(@email)
     if @user
       # existing primary login
       successful_login_message
-      #TODO remove old user and check for activity
-      @user.add_email(old_email)
+      @user.add_email(old_email) if link_old_address
     else
+      # first use: create account
       new_login_message
       @user = User.create_account(@email)
     end
 
     session[:email] = @email
     session[:id] = @user.id
-    # TODO: it is always the referer: use js reload instead
-    ajax_login_redirect params[:referer]
+    render_nothing
   end
-
-  # TODO: remove/refactor
-  #def login_and_add_email
-    # the user logged into a new account and wants to add the
-    # email address used in the previous step (session[:new_email]) to it
-    #verify_assertion or return
-    #user = User.find_by_email(@email)
-    #if user
-    #  user.add_email(session[:new_email])
-    #  # update session info: logged in
-    #  session[:id] = user.id
-    #  session[:email] = @email
-    #  session[:new_email] = nil
-    #  # redirect to original page and remove the url from the session
-    #  referer = session[:referer]
-    #  session[:referer] = nil
-    #  successful_login_message
-    #  ajax_login_redirect referer
-    #else
-    #  # TODO: not really the right thing to do...
-    #  flash[:warn] = 'TODO, improve this case'
-    #  ajax_login_redirect '/persona/new_user'
-    #end
-  #end
 
   def logout
     flash[:info] = 'Logged out'

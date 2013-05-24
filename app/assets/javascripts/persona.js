@@ -7,7 +7,7 @@ persona.default_login_callback = function(assertion){
         type: 'POST',
         url: persona.login_action,
         data: {assertion: assertion, referer: document.URL},
-        success: function(res) { window.location = res; },
+        success: function() { window.location.reload(); },
         error: function(xhr, status, err) { alert("Login failure: " + err); }
     });
 };
