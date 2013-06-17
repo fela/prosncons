@@ -75,18 +75,29 @@ class PersonaTest < ActionDispatch::IntegrationTest
     logout
   end
 
-  #test 'login with secondary email' do
-  #  visit(root_path)
-  #  within('.navbar') do
-  #    assert page.has_content?('you are not logged in')
-  #  end
-  #  email = credentials(:alice2).email
-  #  login(email)
-  #  within('.navbar') do
-  #    assert page.has_content?(email)
-  #    assert page.has_content?('logged in')
-  #  end
-  #end
+  test 'login with secondary email' do
+    visit(root_path)
+    within('.navbar') do
+      assert page.has_content?('you are not logged in')
+    end
+    email = credentials(:alice2).email
+    primary_email = credentials(:alice).email
+    login(email)
+    within('.navbar') do
+      assert page.has_content?(email)
+      assert page.has_content?('logged in')
+    end
+    within('.alert-info') do
+      assert page.has_content?(primary_email)
+      assert page.has_content?('log in with your primary email')
+    end
+    login(primary_email)
+    within('.navbar') do
+      assert page.has_content?(primary_email)
+      assert page.has_content?('logged in')
+    end
+    assert page.has_no_selector?('.alert-info')
+  end
 
   test 'unused login and merge to existing account' do
     user_count = User.count

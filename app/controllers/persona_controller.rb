@@ -13,19 +13,19 @@ class PersonaController < ApplicationController
   def handle_login link_old_address=false
     old_email = session[:email]
     verify_assertion or return
-    @user = User.find_by_email(@email)
-    if @user
+    user = User.find_by_email(@email)
+    if user
       # existing primary login
       successful_login_message
-      @user.add_email(old_email) if link_old_address
+      user.add_email(old_email) if link_old_address
     else
       # first use: create account
       new_login_message
-      @user = User.create_account(@email)
+      user = User.create_account(@email)
     end
 
     session[:email] = @email
-    session[:id] = @user.id
+    session[:id] = user.id
     render_nothing
   end
 
@@ -40,6 +40,7 @@ class PersonaController < ApplicationController
 
 private
   def render_nothing
+    flash[:info] = nil
     render text: ''
   end
 
