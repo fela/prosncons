@@ -13,6 +13,7 @@ persona.default_login_callback = function(assertion){
 };
 
 persona.default_logout_callback = function(){
+    if (persona.loggedInEmail == null) return;
     $.post('/persona/logout').complete(function(){
         window.location.reload()
     });
