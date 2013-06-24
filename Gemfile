@@ -7,7 +7,10 @@ gem 'rails', '3.2.13'
 
 #gem 'sqlite3', group: [:development, :test]
 gem 'pg'#, group: :production
-
+gem 'jquery-rails'
+gem 'simple_form'
+gem 'rdiscount'
+gem 'cancan'
 
 
 # Gems used only for assets and not required
@@ -31,16 +34,13 @@ group :test do
   gem 'timecop'
   gem 'capybara'
   #gem 'selenium-webdriver'
-  gem "selenium-webdriver", "~> 2.32.1"
+  gem 'selenium-webdriver', '~> 2.32.1'
   #gem 'capybara-webkit'
   #gem 'poltergeist'
   gem 'database_cleaner' # needed by capybara
   gem 'launchy'
 end
 
-gem 'jquery-rails'
-gem 'simple_form'
-gem 'rdiscount'
 
 #gem 'debugger', group: [:development, :test]
 

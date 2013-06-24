@@ -9,7 +9,8 @@
       .span4
         %h4
           = a.summary
-          %small [#{link_to 'edit', edit_argument_path(a, option)}]
+          - if can? :edit, a
+            %small [#{link_to 'edit', edit_argument_path(a, option)}]
         :markdown
           #{a.description}
         .pull-right

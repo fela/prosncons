@@ -19,4 +19,9 @@ class ApplicationController < ActionController::Base
   rescue ActiveRecord::RecordNotFound
     session[:id] = session[:email] = @logged_in_user = nil
   end
+
+  # needed by cancan
+  def current_user
+    @logged_in_user
+  end
 end

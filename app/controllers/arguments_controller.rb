@@ -30,6 +30,7 @@ class ArgumentsController < ApplicationController
 
   def update
     @argument = Argument.find(params[:id])
+    authorize! :update, @argument
 
     if @argument.update_attributes(params[:argument])
       flash[:success] = 'Argument was successfully updated'
