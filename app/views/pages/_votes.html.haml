@@ -1,7 +1,9 @@
 / parameter a: argument
-.span1.votes
-  %a{onclick: "vote('up', #{a.id}, 1)"}
+.span1.votes{data:{id: a.id}}
+  /%a.vote-up{onclick: "vote('up', #{a.id}, 1)"}
+  %a.vote-up
     = glyph('chevron-up')
   %div{id: "votes#{a.id}"}= "%.1f" % (a.score * 10)
-  %a{onclick: "vote('down', #{a.id}, 1)"}
+  /%a.vote-down{onclick: "vote('down', #{a.id}, 1)"}
+  %a.vote-down
     = glyph('chevron-down')
