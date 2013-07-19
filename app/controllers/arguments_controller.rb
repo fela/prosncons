@@ -5,13 +5,11 @@ class ArgumentsController < ApplicationController
     @argument = Argument.new()
     @page = current_page
     @argument.page = @page
-    @option = params[:option]
     @argument.option = @option
   end
 
   def create
     @page = current_page
-    @option = params[:option]
     @argument = Argument.new(params[:argument])
     @argument.option = @option
     @argument.page = @page
