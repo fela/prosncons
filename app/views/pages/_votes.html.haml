@@ -1,5 +1,5 @@
 / parameter a: argument
-.span1.votes{data:{id: a.id}}
+.span1.votes{data:{id: a.id}, class: a.voting_status(@logged_in_user)}
   /%a.vote-up{onclick: "vote('up', #{a.id}, 1)"}
   %a.vote-up
     = glyph('chevron-up')

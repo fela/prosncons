@@ -25,11 +25,11 @@ class ArgumentsController < ApplicationController
   end
 
   def edit
-    @argument = Argument.find(params[:id])
+    @argument = current_argument
   end
 
   def update
-    @argument = Argument.find(params[:id])
+    @argument = current_argument
     authorize! :update, @argument
 
     if @argument.update_attributes(params[:argument])
@@ -40,8 +40,17 @@ class ArgumentsController < ApplicationController
     end
   end
 
+  def vote
+    argument = current_argument
+    argument.vote(user: @logged_in_user, vote_type: params[:vote_type])
+    render text: (argument.score * 10).round(1)
+  end
+
 private
   def current_page
     Page.find(params[:page_id])
+  end
+  def current_argument
+    Argument.find(params[:id])
   end
 end

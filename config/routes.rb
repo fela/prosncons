@@ -9,10 +9,15 @@ Prosncons::Application.routes.draw do
   get 'persona/new_user' => 'persona#new_user'
 
   resources :pages
+
+
+  put 'pages/:page_id/arguments/:id/vote/:vote_type' => 'arguments#vote'
+
   get 'pages/:page_id/arguments/:option/new' => 'arguments#new'
   post 'pages/:page_id/arguments/:option' => 'arguments#create'
   get 'pages/:page_id/arguments/:option/:id/edit' => 'arguments#edit'
   put 'pages/:page_id/arguments/:option/:id' => 'arguments#update'
+
 
   post 'pages/votes/:argument_id/:vote' => 'votes#create'
 

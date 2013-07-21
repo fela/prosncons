@@ -17,13 +17,16 @@
 
 ProsNCons = {};
 
-function vote(action, id, diff) {
+// id is the argument id
+// action can be 'up', 'down' or 'undo'
+function vote(id, action) {
     id = Number(id);
-    var url = '/pages/votes/'+id+'/'+action;
+    var url = window.location.pathname + '/arguments/'+id+'/vote/'+action;
 
     $.ajax({
         type: 'POST',
         url: url,
+        data: {'_method': 'put'},
         success: function(res) { $('#votes'+id).html(res) }
     });
 }
@@ -44,26 +47,32 @@ $(document).ready(function(){
     // votes
     $('.vote-up').click(function() {
         var votes = $(this).parent('.votes');
+        var id = votes.data('id');
         if (votes.hasClass('up-voted')) {
             // undo vote
+            vote(id, 'undo');
             votes.removeClass('up-voted');
         } else {
             // the class either has no vote or a down vote
             // in either case vote up
             votes.removeClass('down-voted'); // might do nothing
             votes.addClass('up-voted');
+            vote(id, 'up');
         }
     });
     // analogous as an up-vote
     $('.vote-down').click(function() {
         var votes = $(this).parent('.votes');
+        var id = votes.data('id');
         if (votes.hasClass('down-voted')) {
             // undo vote
             votes.removeClass('down-voted');
+            vote(id, 'undo')
         }
         else {
             votes.removeClass('up-voted');
             votes.addClass('down-voted');
+            vote(id, 'down')
         }
     });
 });
