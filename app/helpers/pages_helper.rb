@@ -11,9 +11,6 @@ module PagesHelper
   def update_argument_path(argument)
     base_argument(path(argument.page, argument.option))
   end
-  def argument_path
-
-  end
   def update_or_create_path(argument)
     page = argument.page
     option = argument.option
