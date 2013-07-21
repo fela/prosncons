@@ -14,6 +14,7 @@ class ArgumentsController < ApplicationController
     @argument = Argument.new(params[:argument])
     @argument.option = @option
     @argument.page = @page
+    @argument.user = @logged_in_user
 
     if @argument.save
       flash[:success] =  'Argument was successfully added.'
