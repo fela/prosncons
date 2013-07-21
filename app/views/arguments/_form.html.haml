@@ -1,5 +1,5 @@
-%h2 #{@page.title}: #{params[:option]}
-= simple_form_for @argument,  edit_or_create_path do |f|
+%h2 #{@argument.page.title}: #{params[:option]}
+= simple_form_for @argument,  update_or_create_path(@argument) do |f|
   = f.error_notification
 
   .form-inputs
@@ -10,4 +10,4 @@
     = f.button :submit
 
 
-= link_to 'Back', page_path(@page)
+= link_to 'Back', page_path(@argument.page)

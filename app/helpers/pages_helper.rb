@@ -1,25 +1,29 @@
 module PagesHelper
-  def base_argument_path(option=nil)
-    option ||= @option
-    "/pages/#{@page.id}/arguments/#{option.parameterize}"
+  def base_argument_path(page, option)
+    "/pages/#{page.id}/arguments/#{option.parameterize}"
   end
-  def new_argument_path(option=nil)
-    base_argument_path(option) + '/new'
+  def new_argument_path(page, option)
+    base_argument_path(page, option) + '/new'
   end
-  def create_argument_path
-    base_argument_path
+  def edit_argument_path(argument)
+    base_argument_path(argument.page, argument.option) + "/#{argument.id}/edit"
   end
-  def edit_argument_path(a, option)
-    base_argument_path(option) + "/#{a.id}/edit"
+  def update_argument_path(argument)
+    base_argument(path(argument.page, argument.option))
   end
   def argument_path
-    base_argument_path + "/#{@argument.id}/"
+
   end
-  def edit_or_create_path
-    if @argument.new_record?
-      {url: create_argument_path, method: :post}
+  def update_or_create_path(argument)
+    page = argument.page
+    option = argument.option
+    if argument.new_record?
+      url = base_argument_path(page, option)
+      method = :post
     else
-      {url: argument_path, method: :put}
+      url = base_argument_path(page, option) + "/#{argument.id}/"
+      method = :put
     end
+    {url: url, method: method}
   end
 end

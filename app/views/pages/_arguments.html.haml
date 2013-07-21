@@ -1,7 +1,7 @@
 .span5
   %h2
     = option
-    =link_to 'Add', new_argument_path(option), class: 'btn btn-primary'
+    =link_to 'Add', new_argument_path(@page, option), class: 'btn btn-primary'
   - @page.arguments_for(option).each do |a|
     %hr
     .row
@@ -10,7 +10,7 @@
         %h4
           = a.summary
           - if can? :edit, a
-            %small [#{link_to 'edit', edit_argument_path(a, option)}]
+            %small [#{link_to 'edit', edit_argument_path(a)}]
         :markdown
           #{a.description}
         .pull-right
