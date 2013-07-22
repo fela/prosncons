@@ -20,6 +20,11 @@ ProsNCons = {};
 // id is the argument id
 // action can be 'up', 'down' or 'undo'
 function vote(id, action) {
+    if (!persona.loggedInEmail) {
+        alert('please log in to be able to vote');
+        return false;
+    }
+
     id = Number(id);
     var url = window.location.pathname + '/arguments/'+id+'/vote/'+action;
 
@@ -29,6 +34,7 @@ function vote(id, action) {
         data: {'_method': 'put'},
         success: function(res) { $('#votes'+id).html(res) }
     });
+    return true;
 }
 
 $(document).ready(function(){
@@ -50,14 +56,16 @@ $(document).ready(function(){
         var id = votes.data('id');
         if (votes.hasClass('up-voted')) {
             // undo vote
-            vote(id, 'undo');
-            votes.removeClass('up-voted');
+            if (vote(id, 'undo'))
+                votes.removeClass('up-voted');
         } else {
             // the class either has no vote or a down vote
             // in either case vote up
-            votes.removeClass('down-voted'); // might do nothing
-            votes.addClass('up-voted');
-            vote(id, 'up');
+
+            if ( vote(id, 'up') ) {
+                votes.removeClass('down-voted'); // might do nothing
+                votes.addClass('up-voted');
+            }
         }
     });
     // analogous as an up-vote
@@ -66,13 +74,15 @@ $(document).ready(function(){
         var id = votes.data('id');
         if (votes.hasClass('down-voted')) {
             // undo vote
-            votes.removeClass('down-voted');
-            vote(id, 'undo')
+            if (vote(id, 'undo')) {
+                votes.removeClass('down-voted');
+            }
         }
         else {
-            votes.removeClass('up-voted');
-            votes.addClass('down-voted');
-            vote(id, 'down')
+            if (vote(id, 'down')) {
+                votes.removeClass('up-voted');
+                votes.addClass('down-voted');
+            }
         }
     });
 });
