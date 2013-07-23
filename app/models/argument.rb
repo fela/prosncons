@@ -45,6 +45,7 @@ class Argument < ActiveRecord::Base
   end
 
   def voting_status(user)
+    return nil if user.nil?
     vote = votes.where(user_id: user).first
     return nil if vote.nil?
     vote.vote > 0 ? 'up-voted' : 'down-voted'
