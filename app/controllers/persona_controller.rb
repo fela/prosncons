@@ -30,17 +30,15 @@ class PersonaController < ApplicationController
   end
 
   def logout
-    flash[:info] = 'Logged out'
-
     session[:email] = nil
     session[:id] = nil
 
-    render_nothing
+    render_nothing('Logged out')
   end
 
 private
-  def render_nothing
-    flash[:info] = nil
+  def render_nothing(info=nil)
+    flash[:info] = info
     render text: ''
   end
 
