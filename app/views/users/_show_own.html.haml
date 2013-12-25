@@ -12,9 +12,10 @@ Display Name:
 [#{link_to 'edit profile', edit_user_path(@user)}]
 %br
 %br
-If you log in with a secondary email address a message will be displayed asking to use
-primaryemailaddress instead.
-Secondary email addresses will not be used in any other way
+If you log in with a secondary email address a message will be displayed asking you to use
+you primary email address instead. This is for your convenience in case you forget which
+address was used during first registration.
+Secondary email addresses will not be used in any other way.
 - @user.credentials.each do |c|
   %br
   %strong
