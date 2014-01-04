@@ -1,11 +1,14 @@
 SHORT TERM
-* unlink secondary email address
+* unlink secondary email address:
+  - from page saying to redirect
+  - from profile page on list
 
 MEDIUM TERM
 * add secondary email addresses
   - manually
-  - automatically: click on if you already have an account click here to add
-    secondary@email.com to an existing account.
+  - automatically: from user profile click to add
+    secondary@email.com to the current account
+*
 * test login corner cases
 
 LONG TERM
