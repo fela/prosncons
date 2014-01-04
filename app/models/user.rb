@@ -17,6 +17,12 @@ class User < ActiveRecord::Base
     write_attribute(:primary_email, email.downcase)
   end
 
+  def secondary_emails
+    # TODO use where not after RAILS4 conversion
+    all_emails = credentials.map {|c| c.email}
+    all_emails - [primary_email]
+  end
+
   def self.logged_in(email)
     user = find_by_email(email)
     user.touch
