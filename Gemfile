@@ -35,7 +35,7 @@ group :test do
   gem 'timecop'
   gem 'capybara'
   #gem 'selenium-webdriver'
-  gem 'selenium-webdriver', '~> 2.32.1'
+  gem 'selenium-webdriver', '~> 2.39.0'
   #gem 'capybara-webkit'
   #gem 'poltergeist'
   gem 'database_cleaner' # needed by capybara
