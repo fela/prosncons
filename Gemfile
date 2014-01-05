@@ -32,6 +32,7 @@ gem 'cancan'
 
 group :test do
   gem 'test-unit'
+  gem 'mocha', :require => false
   gem 'timecop'
   gem 'capybara'
   #gem 'selenium-webdriver'

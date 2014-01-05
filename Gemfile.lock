@@ -79,7 +79,10 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    metaclass (0.0.1)
     mime-types (1.23)
+    mocha (0.14.0)
+      metaclass (~> 0.0.1)
     multi_json (1.7.3)
     nokogiri (1.5.9)
     pg (0.15.1)
@@ -164,6 +167,7 @@ DEPENDENCIES
   jquery-rails
   launchy
   less-rails
+  mocha
   pg
   rails (= 3.2.13)
   rdiscount
