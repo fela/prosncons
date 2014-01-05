@@ -129,4 +129,6 @@ class UserTest < ActiveSupport::TestCase
     assert_equal first, u.urls.first
     assert_equal second, u.urls.second
   end
+
+
 end

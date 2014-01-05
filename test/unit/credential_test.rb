@@ -16,7 +16,4 @@ class CredentialTest < ActiveSupport::TestCase
     c = Credential.new
     assert !c.valid?, "#{c.inspect} should not be valid"
   end
-  test 'user' do
-    assert true
-  end
 end
