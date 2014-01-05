@@ -11,9 +11,10 @@ class ApplicationController < ActionController::Base
     #puts "primary email: #{@logged_in_user && @logged_in_user.primary_email}"
     if @logged_in_user && @logged_in_user.primary_email != session[:email]
       # logged in user didn't use primary email address
+      email = CGI::escapeHTML(@logged_in_user.primary_email)
       flash[:info] = ("To be able to use you account please " +
           "<a id='login' href='/js'>log in</a> with your primary email " +
-          "address <strong>#{@logged_in_user.primary_email}</strong>").html_safe
+          "address <strong>#{email}</strong>").html_safe
       @secondary_login = true
     end
   rescue ActiveRecord::RecordNotFound
