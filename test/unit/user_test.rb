@@ -36,6 +36,14 @@ class UserTest < ActiveSupport::TestCase
     assert_match /already been taken/, msg
   end
 
+  test 'secondary emails works corrently' do
+    u = users(:alice)
+    new_email = 'addedemail@email.com'
+    u.add_email new_email
+    expected = ['alice2@mockmyid.com', new_email].sort
+    assert_equal expected, u.secondary_emails.sort
+  end
+
   test 'avatar_url' do
     u = users(:alice)
     url = u.avatar_url(30)
