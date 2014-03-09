@@ -1,4 +1,5 @@
 class Page < ActiveRecord::Base
+  has_paper_trail
   attr_accessible :content, :option1, :option2, :title
   validates_presence_of :title, :content
 

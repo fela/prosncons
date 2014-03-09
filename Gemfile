@@ -12,6 +12,7 @@ gem 'jquery-rails'
 gem 'simple_form'
 gem 'rdiscount'
 gem 'cancan'
+gem 'paper_trail', '~> 3.0.0'
 
 
 # Gems used only for assets and not required

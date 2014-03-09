@@ -36,7 +36,7 @@ class UserTest < ActiveSupport::TestCase
     assert_match /already been taken/, msg
   end
 
-  test 'secondary emails works corrently' do
+  test 'secondary_emails' do
     u = users(:alice)
     new_email = 'addedemail@email.com'
     u.add_email new_email
