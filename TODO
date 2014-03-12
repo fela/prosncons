@@ -1,3 +1,20 @@
+BEFORE PRIVATE BETA, I should have
+* commit history:
+ - show versions and what has been edited, later also:
+   > possibility to restore?
+   > display diffs
+* i should be able to admin: be able to edit and retire all edits
+* log position of other posts when related to votes
+* add a basic FAQ
+* (not mandatory but nice) public votes
+* a way of communication (maybe disqus), or just mailing list
+* db backups: https://addons.heroku.com/pgbackups#auto-month
+* deploy to aws
+* better meta page (to make it a possible page to share on HN)
+
+ON NEXT MIGRATION
+* rename Argument::description to content
+
 SHORT TERM
 * unlink secondary email address:
   - from page saying to redirect
@@ -8,7 +25,6 @@ MEDIUM TERM
   - manually
   - automatically: from user profile click to add
     secondary@email.com to the current account
-*
 * test login corner cases
 
 LONG TERM

@@ -3,6 +3,7 @@ class Argument < ActiveRecord::Base
   BETA_PARAMETERS = {a: 2, b: 1}
 
 
+  has_paper_trail
   attr_accessible :summary, :description, :option
   validates_presence_of :summary, :description, :option, :page
   belongs_to :page
