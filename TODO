@@ -7,7 +7,7 @@ BEFORE PRIVATE BETA, I should have
 * log position of other posts when related to votes
 * add a basic FAQ
 * (not mandatory but nice) public votes
-* a way of communication (maybe disqus), or just mailing list
+* a way of communication (maybe discourse), or just mailing list
 * db backups: https://addons.heroku.com/pgbackups#auto-month
 * deploy to aws
 * better meta page (to make it a possible page to share on HN)

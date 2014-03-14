@@ -4,4 +4,6 @@ class HomeController < ApplicationController
   def test
     render text: 'test'
   end
+  def faq
+  end
 end

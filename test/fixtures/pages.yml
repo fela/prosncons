@@ -1,6 +1,6 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 page1:
-  title: Advantages of this approce as opposed to traditional QA apps
+  title: Advantages of this approace as opposed to traditional QA apps
   content:
     What are the advantages and disadvatages of the model of crowdsoursing
     used in this

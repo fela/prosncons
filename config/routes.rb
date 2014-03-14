@@ -1,6 +1,7 @@
 Prosncons::Application.routes.draw do
 
   root :to => 'home#index'
+  get 'faq' => 'home#faq'
 
   resources :users
   #resource :session
