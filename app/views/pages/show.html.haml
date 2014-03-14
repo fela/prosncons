@@ -8,9 +8,9 @@
 .page-content
   :markdown
     #{@page.content}
-  .pull-right
+  .text-right
     = render partial: 'users/signature',
-             locals: {user: @page.author, time: @page.created_at}
+      locals: {user: @page.author, time: @page.created_at, edits: @page.versions.size}
 .row
   = render partial: 'arguments', locals: { option: @page.option1 }
   = render partial: 'arguments', locals: { option: @page.option2 }

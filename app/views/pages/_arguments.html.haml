@@ -15,7 +15,7 @@
           #{a.description}
         .pull-right
           = render partial: 'users/signature',
-                   locals: {user: a.author, time: a.created_at}
+            locals: {user: a.author, time: a.created_at, edits: a.versions.size}
 
 
   - unless @page.arguments_for(option).empty?

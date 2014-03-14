@@ -1,5 +1,5 @@
 class Page < ActiveRecord::Base
-  has_paper_trail
+  has_paper_trail :on => [:update, :destroy]
   attr_accessible :content, :option1, :option2, :title
   validates_presence_of :title, :content
 
