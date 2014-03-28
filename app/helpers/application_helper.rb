@@ -15,4 +15,8 @@ module ApplicationHelper
     # (' "email@doamin.con" ' or 'null') as a string
     session[:email] ? '"'.html_safe + session[:email] + '"'.html_safe : 'null'
   end
+
+  def link_to_user(user)
+    user ? link_to(user.display_name, user) : 'anonymous'
+  end
 end

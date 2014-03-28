@@ -11,6 +11,10 @@ module PagesHelper
   def update_argument_path(argument)
     base_argument(path(argument.page, argument.option))
   end
+  def versions_argument_path(argument)
+    base_argument_path(argument.page, argument.option) +
+        "/#{argument.id}/versions"
+  end
   def update_or_create_path(argument)
     page = argument.page
     option = argument.option

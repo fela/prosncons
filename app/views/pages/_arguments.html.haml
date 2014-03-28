@@ -16,6 +16,7 @@
         .pull-right
           = render partial: 'users/signature',
             locals: {user: a.author, time: a.created_at, edits: a.versions.size}
+          #{link_to 'versions', versions_argument_path(a)}
 
 
   - unless @page.arguments_for(option).empty?

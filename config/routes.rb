@@ -18,6 +18,7 @@ Prosncons::Application.routes.draw do
   post 'pages/:page_id/arguments/:option' => 'arguments#create'
   get 'pages/:page_id/arguments/:option/:id/edit' => 'arguments#edit'
   put 'pages/:page_id/arguments/:option/:id' => 'arguments#update'
+  get 'pages/:page_id/arguments/:option/:id/versions' => 'arguments#versions'
 
 
   post 'pages/votes/:argument_id/:vote' => 'votes#create'

@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
   before_filter :authorization_init
 
   def authorization_init
+    # make sure it is run at most once
+    return if @authorization_init_run
+    @authorization_init_run = true
+
     @logged_in_user = session[:id] && User.find(session[:id])
     #puts '--------------'
     #puts request.url
@@ -21,8 +25,11 @@ class ApplicationController < ActionController::Base
     session[:id] = session[:email] = @logged_in_user = nil
   end
 
-  # needed by cancan
+  # used by cancan and paper_trail
   def current_user
+    # authorization initialization if not run yet
+    # (in the case of paper_trial it might not have run)
+    authorization_init
     @logged_in_user
   end
 end

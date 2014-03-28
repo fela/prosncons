@@ -32,6 +32,8 @@ class ArgumentsController < ApplicationController
     @argument = current_argument
     authorize! :update, @argument
 
+    puts 'current user:'
+    puts current_user
     if @argument.update_attributes(params[:argument])
       flash[:success] = 'Argument was successfully updated'
       redirect_to current_page
@@ -44,6 +46,10 @@ class ArgumentsController < ApplicationController
     argument = current_argument
     argument.vote(user: @logged_in_user, vote_type: params[:vote_type])
     render text: (argument.score * 10).round(1)
+  end
+
+  def versions
+    @argument = current_argument
   end
 
 private

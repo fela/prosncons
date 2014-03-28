@@ -1,6 +1,5 @@
 .signature
-  - disp_name = user ? link_to(user.display_name, user) : 'anonimous'
-  by #{disp_name}, on #{time.to_s(:short)}
+  by #{link_to_user user}, on #{time.to_s(:short)}
 - if edits > 0
   .edits
     - pluralized = edits == 1 ? "edit" : "edits"
