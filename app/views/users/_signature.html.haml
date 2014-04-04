@@ -1,6 +1,7 @@
 .signature
-  by #{link_to_user user}, on #{time.to_s(:short)}
+  by #{link_to_user obj.author}, on #{obj.created_at.to_s(:short)}
+- edits = obj.versions.size
 - if edits > 0
   .edits
     - pluralized = edits == 1 ? "edit" : "edits"
-    #{edits} #{pluralized}
+    #{edits} #{link_to pluralized, versions_path(obj)}

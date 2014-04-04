@@ -10,7 +10,7 @@
     #{@page.content}
   .text-right
     = render partial: 'users/signature',
-      locals: {user: @page.author, time: @page.created_at, edits: @page.versions.size}
+      locals: {obj: @page}
 .row
   = render partial: 'arguments', locals: { option: @page.option1 }
   = render partial: 'arguments', locals: { option: @page.option2 }
