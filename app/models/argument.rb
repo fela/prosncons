@@ -10,7 +10,7 @@ class Argument < ActiveRecord::Base
   has_many :votes, as: :votable
   belongs_to :user
 
-  alias :author :user
+  alias_attribute :author, :user
 
   # returns all versions including the user that made it and the
   def version_history
