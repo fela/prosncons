@@ -7,7 +7,7 @@ class Page < ActiveRecord::Base
   has_many :votes, as: :votable
   belongs_to :user
 
-  alias :author :user
+  alias_attribute :author, :user
 
   def arguments_for(option)
     res = arguments.select{|x| x.option.parameterize == option.parameterize}
