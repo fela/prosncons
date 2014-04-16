@@ -19,6 +19,7 @@ class PagesController < ApplicationController
 
   # POST /pages
   def create
+    @page.user = @logged_in_user
     if @page.save
       flash[:success] =  'Page was successfully created.'
       redirect_to @page

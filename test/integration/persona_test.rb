@@ -1,25 +1,16 @@
 require 'test_helper'
 
 class PersonaTest < ActionDispatch::IntegrationTest
-  def self.startup
-    Capybara.default_driver = :selenium
-    Capybara.default_wait_time = 5
-    #if `iwconfig wlan2` =~ /GenuaWifi/
-    #  b = Capybara.current_session.driver.browser
-    #  b.set_proxy host: 'wifiproxy.unige.it', port: '80'
-    #end
-
-    # problem with other drivers:
-    # poltergeist doesn't provide proper multi-window
-    # webkit doesn't allow the request to persona
-    window = Capybara.current_session.driver.browser.manage.window
-    window.resize_to(1024, 768)
-  end
-
   teardown do
     sleep(0.2) # no clue why it does not work without this :(
     page.execute_script('navigator.id.logout()')
     assert page.has_content?('you are not logged in')
+  end
+
+  teardown do
+    DatabaseCleaner.clean       # Truncate the database
+    Capybara.reset_sessions!    # Forget the (simulated) browser state
+    Capybara.use_default_driver # Revert Capybara.current_driver to Capybara.default_driver
   end
 
   # meta test

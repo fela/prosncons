@@ -1,5 +1,5 @@
 .span5
-  %h2
+  %h2.option-header
     = option
     =link_to 'Add', new_argument_path(@page, option), class: 'btn btn-primary'
   - @page.arguments_for(option).each do |a|

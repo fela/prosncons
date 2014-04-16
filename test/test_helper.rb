@@ -41,10 +41,16 @@ class ActionDispatch::IntegrationTest
   # Stop ActiveRecord from wrapping tests in transactions
   self.use_transactional_fixtures = false
 
-  teardown do
-    DatabaseCleaner.clean       # Truncate the database
-    Capybara.reset_sessions!    # Forget the (simulated) browser state
-    Capybara.use_default_driver # Revert Capybara.current_driver to Capybara.default_driver
+
+  def self.startup
+    Capybara.default_driver = :selenium
+    Capybara.default_wait_time = 5
+
+    # problem with other drivers:
+    # poltergeist doesn't provide proper multi-window
+    # webkit doesn't allow the request to persona
+    window = Capybara.current_session.driver.browser.manage.window
+    window.resize_to(1024, 768)
   end
 
   private
