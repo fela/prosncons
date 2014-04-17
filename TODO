@@ -11,6 +11,7 @@ BEFORE PRIVATE BETA, I should have
 * db backups: https://addons.heroku.com/pgbackups#auto-month
 * deploy to aws
 * better meta page (to make it a possible page to share on HN)
+* fix old rails plugins warning
 
 ON NEXT MIGRATION
 * rename Argument::description to content
