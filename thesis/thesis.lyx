@@ -178,7 +178,7 @@ UNIVERSITÀ DEGLI STUDI DI GENOVA
 \end_layout
 
 \begin_layout Date
-Marzo 2013
+Luglio 2014
 \end_layout
 
 \begin_layout Standard
@@ -192,6 +192,18 @@ LatexCommand tableofcontents
 
 \begin_layout Chapter
 Introduction
+\end_layout
+
+\begin_layout Standard
+This is a very early draft.
+ The sections marked as 
+\emph on
+[Work in progress]
+\emph default
+ are, well very much work in progress so should not be read yet :) They
+ might contain incomplete thoughts and sentences, spelling and logical errors
+ and similar.
+ Even what is not marked as such is in a very early draft state.
 \end_layout
 
 \begin_layout Section
@@ -226,7 +238,25 @@ In question and answer applications votes determine what answers get displayed
  based on political opinion rather then relevance and quality.
  This is the reason why for example the StackExchange questions and answers
  platform, to maintain the quality of its content, bans questions that are
- prone to strong opinions.
+ prone to strong opinions
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+for example 
+\begin_inset CommandInset href
+LatexCommand href
+name "http://stackoverflow.com/questions/6548826/angular-js-vs-backbone-js"
+target "http://stackoverflow.com/questions/6548826/angular-js-vs-backbone-js"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
  This leaves out many questions, such as those in the form 'What are the
  pros and cons of ...'.
  In this thesis I will describe and implement a web applications that tries
@@ -248,13 +278,29 @@ Building an online community
 \begin_layout Standard
 The content and voting behaviour will depend on the community that forms
  itself arount the website.
- As Aaron Swarz notes when discussing wikipedia and bringing ideas of the
- open enciclopedia to other contexts, a community is a combination of technology
-, rules and people.
+ As Aaron Swarz notes
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+name "http://www.aaronsw.com/weblog/morewikipedias"
+target "http://www.aaronsw.com/weblog/morewikipedias"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+ when discussing wikipedia and bringing ideas of the open enciclopedia to
+ other contexts, a community is a combination of technology, rules and people.
  Each component influences the other: different people will want different
- rules and guidelines, while different rules and conventions will attract
- different people.
- Technology can keep people away or atract them, and can help enforce some
+ rules and guidelines, while the specific rules and conventions will attract
+ certain kind of people.
+ Technology can keep people away or attract them, and can help enforce some
  of the rules.
 \end_layout
 
@@ -271,7 +317,7 @@ Similar web applications
 \begin_layout Standard
 To my knowledge there is no application with the exact same goal and with
  the same approach, but there are many that share it at least partially
- and have interesting properties woth looking at.
+ and have interesting properties worth looking at.
 \end_layout
 
 \begin_layout Subsection
@@ -282,8 +328,9 @@ Procon.org
 This is a website with the goal of collecting pros and cons on controversial
  issues.
  This is, on the surface, very similar to what this work aims at.
- A deeper look, however, will show important differences.
- The most important one is the role of the community.
+ A deeper look, however, will show some very fundamental differences.
+ The most important one is the role of the community and the way content
+ is selected.
  The main content of the procon.org website is collected by a selected group
  of paid editors.
  Nobody ouside of this group has any effective influence on the content
@@ -301,7 +348,25 @@ The resulting comments are instructive of how the technology (the voting
  On most comment pages the votes are heavily biased toward one side of the
  issue, for example the commenters are videly favorable to medical use of
  marijuana, so much that the lowest rated pro comment has a higher rating
- than the highest rated con comment.
+ than the highest rated con comment
+\begin_inset Foot
+status collapsed
+
+\begin_layout Plain Layout
+as of June 2013 
+\begin_inset CommandInset href
+LatexCommand href
+name "http://medicalmarijuana.procon.org/view.answers.reader-comments.php?questionID=1325"
+target "http://medicalmarijuana.procon.org/view.answers.reader-comments.php?questionID=1325"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+.
  Other topics, while less drastic, show similar trends.
  The ratings mostly indicates if the view of the commenter is viewed favourably,
  rather than indicating if it raises any interesting and important point
@@ -313,11 +378,11 @@ The resulting comments are instructive of how the technology (the voting
 \end_layout
 
 \begin_layout Standard
-Additionaly, as the comments do not follow rules there is a lot of duplicate
- comments, very subjective opinions, rethorical answers without much substance,
- and personal experiences.
- In the specifica case it is probably not meant to be otherwise, but if
- users are to create the main content, rules about the kind of content allowed
+Additionaly, as the commenting behaviour is not subject to any guideline
+ there are a lot of duplicate comments, very subjective opinions, rethorical
+ answers without much substance, and personal experiences.
+ In the specific case it is probably not meant to be otherwise, but if users
+ are to create the main content, rules about the kind of content allowed
  are needed.
 \end_layout
 
@@ -326,17 +391,17 @@ StackExchange
 \end_layout
 
 \begin_layout Standard
-There are a vast number of question and answer platforms, I will concentrate
+There exist a vast number of question and answer platforms, I will concentrate
  on the StackExchange network as it is one of the most successful ones,
- has interesting properties, and strongly influences my work.
+ has many interesting properties, and strongly influences my work.
  A general property of question and answer websites is that they allow everybody
  to answer and to vote to decide the best questions, which will be displayed
  first.
  While many websites allow a great variety of quesitons to be asked, Stack
  Exchange is composed of multiple websites, each focused on a single topic,
  with fairly restricted rules about the questions and answers that are allowed.
- This, coupled with the reputation system, has the effect of creating topic
- centered communities.
+ This, coupled with the reputation system, has the effect of creating very
+ strong and healty communities centered around the various topics.
 \end_layout
 
 \begin_layout Subsection
@@ -348,17 +413,23 @@ On wikipedia many people successfully cooperate to write about a wide range
  of topics, including controversial ones.
  It is an example of a community build by the combination of people, rules
  and technology.
- On wikipedia community guidelines and consensus have a stronger degree
- of importance.
+ On wikipedia community guidelines and consensus are of great importance.
 \end_layout
 
 \begin_layout Standard
-As wikipedia it will be possible to edit, more restricted (common users
- can contribute in other ways).
+As wikipedia it will be possible to edit content, athough the type of edits
+ are more restricted, and new users will not be allowed to edit other peoples
+ content.
 \end_layout
 
 \begin_layout Chapter
 Authentication with multiple email addresses
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+[Work in progress]
 \end_layout
 
 \begin_layout Section
@@ -429,7 +500,8 @@ key "Gross07"
 
 \end_inset
 
-, therefore a user might not remember which one was used during registration.
+, and it can happen that a user might does not remember which one was used
+ during registration.
  To overcome this inconvenience a user that logs in with a new email address
  will be prompted with two choices.
  He can either create a new account or link the new email address to an
@@ -645,6 +717,10 @@ Email confirmation is used my mozilla persona, so implicitely if the user
 \begin_layout Standard
 The two most important use cases are that of a user logging in for the first
  time, and one logging in with the correct email address.
+\end_layout
+
+\begin_layout Standard
+From the primary email address it is possible to change the address
 \end_layout
 
 \begin_layout Chapter
@@ -878,12 +954,24 @@ status open
 
 \begin_layout Standard
 There is a generalization of this algorithm for the case where the votes
- can assume more than two values, this version currently in use by a number
- of websites.
+ can assume more than two values, this version is currently in use by a
+ number of websites.
  IMDB, for example, uses it for its top 250 list and calls it true bayesian
  estimate.
- It has also been variously referred to online as bayesian average and bayesian
- ranking, but without ever giving much explanation.
+ 
+\end_layout
+
+\begin_layout Standard
+The formula also has a more elegant probabilistic giustification.
+ It has also been variously referred to online as 
+\emph on
+bayesian average
+\emph default
+ and 
+\emph on
+bayesian ranking
+\emph default
+, but without to my knoledge ever giving a complete explanation.
  
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1426,6 +1514,49 @@ key "Huang11"
 .
 \end_layout
 
+\begin_layout Subsection
+Interpretation of number of views
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+[Work in progress]
+\end_layout
+
+\begin_layout Standard
+There are different way too look at incorporating the number of views in
+ the ranking.
+\end_layout
+
+\begin_layout Standard
+One way is to consider them neutral votes, with a value between 0 and 1.
+ Using a low value means ignored scores will rank low compared to controversial
+ ones, and viceversa.
+\end_layout
+
+\begin_layout Standard
+A different approach would be to calculate the bayesian average separatedly
+ from the bayesian average of the percentage of people that voted on a given
+ argument.
+ So you would obtain two scores: one that estimates the number of positive
+ votes/the number of negative votes, another that estimates the number of
+ votes/number of views.
+ Those two can then be combine with an arbitrary function.
+ With the appropriate function the result would be equivalent to the previous
+ case.
+\end_layout
+
+\begin_layout Standard
+There might be some variants, for example: number of positive votes/number
+ of views and number of negative votes/number of views.
+ Or even number of positive votes/number of votes and number of positive
+ votes/number of votes.
+ There are three variables: number of positive votes, number of negative
+ votes, number of views, that can be paired in any way to obtain a bayesian
+ average.
+\end_layout
+
 \begin_layout Section
 Normalization
 \end_layout
@@ -1442,6 +1573,12 @@ The bayesian average is normalized to the interval
 
 \begin_layout Chapter
 Reputation
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+[Work in progress]
 \end_layout
 
 \begin_layout Standard
@@ -1493,67 +1630,7 @@ FAQ
 \end_layout
 
 \begin_layout Standard
-This chapter reports the Frequently Asked Questions that are showed in the
- website to guide the users answers
-\end_layout
-
-\begin_layout Subsection*
-What kind of questions are allowed?
-\end_layout
-
-\begin_layout Standard
-Questions should offer a choice between two options and should be asking
- reasons to choose one rather than the other.
- When there are more than two options to compare, two of them have to be
- chosen.
- More than one question could be created comparing different options.
-\end_layout
-
-\begin_layout Subsection*
-What kind of answers are allowed?
-\end_layout
-
-\begin_layout Standard
-Each answer should contain a reason to prefer one of the two options.
- Each answer should contain only one reason and a single user can give more
- answers if he wants to suggest more arguments in favour of a given choice.
-\end_layout
-
-\begin_layout Subsection*
-Are duplicate questions allowed?
-\end_layout
-
-\begin_layout Standard
-It is preferrable to edit the original question.
-\end_layout
-
-\begin_layout Subsection*
-Isn't it unfair to give pros and cons always the same weight?
-\end_layout
-
-\begin_layout Standard
-It is not the aim of this website to directly decide if pros or cons deserve
- more weight.
- It should therefore be the users burden to carefully analize the poinst
- and decide if maybe one side of the issue, on closer analysis doens't have
- many convincing arguments, or if one argument is so important that it overshado
-ws all those on for the opposing view.
- Looking for arguments on both side is a good habit, and doesn't mean the
- conclusion cannot be heavily leaning to one side.
-\end_layout
-
-\begin_layout Subsection*
-Is there a risk for people willfully voting for bad arguments arguing for
- the view they don't agree on?
-\end_layout
-
-\begin_layout Standard
-While it would be possible to do this, if people really thing their view
- is better when all is said and done, then it is only in their best interest
- to give any interested person the correct information, so that he can claim
- the truth.
- A single user does not have.
- 
+See website :)
 \end_layout
 
 \begin_layout Chapter
