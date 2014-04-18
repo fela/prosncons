@@ -10,15 +10,15 @@ class Page < ActiveRecord::Base
   alias_attribute :author, :user
 
   def arguments_for(option)
-    res = arguments.select{|x| x.option.parameterize == option.parameterize}
+    res = arguments.select{|x| x.option == option}
     res.sort {|x, y| y.score <=> x.score}
   end
 
   def arguments1
-    arguments_for(option1)
+    arguments_for(0)
   end
 
   def arguments2
-    arguments_for(option2)
+    arguments_for(1)
   end
 end
