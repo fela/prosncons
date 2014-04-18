@@ -1,5 +1,5 @@
 page1arg1:
-  option: pros
+  option: 0
   summary: granularity
   description:
     More granularity is encouraged, as there is not one correct answer,
@@ -10,7 +10,7 @@ page1arg1:
   user: bob
 
 page1arg2:
-  option: pros
+  option: 0
   summary: more robust to polarization
   description: The standard Q&A format doesn't work well when strong opinions are
     involved. In such a case voting of a claim is often only driven by
@@ -22,7 +22,7 @@ page1arg2:
   user: alice
 
 page1arg3:
-  option: cons
+  option: 1
   summary: complexity
   description: It is more complex than the simple Q&A format, this might
     make it less intuitive to new users.
@@ -30,7 +30,7 @@ page1arg3:
   user: bob
 
 page1arg4:
-  option: cons
+  option: 1
   summary: hard to describe complex interrelations
   description: Often the whole is more that the sum of the parts, so a
     topic might require a complex answer which cannot easily be split into
@@ -39,7 +39,7 @@ page1arg4:
   user: bob
 
 page1arg5:
-  option: cons
+  option: 1
   summary: less known
   description: The traditional format is more familiar to most people
   page: page1
@@ -47,7 +47,7 @@ page1arg5:
 
 
 page2arg1:
-  option: pros
+  option: 0
   summary: lorem
   description: Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
     sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
@@ -57,7 +57,7 @@ page2arg1:
   user: bob
 
 page2arg2:
-  option: cons
+  option: 1
   summary: ipsum
   description: Lorem ipsum dolor sit amet
   page: page2

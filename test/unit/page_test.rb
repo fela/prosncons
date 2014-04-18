@@ -21,4 +21,19 @@ class PageTest < ActiveSupport::TestCase
     assert_equal page.title, 'First Title'
     assert_equal page.content, 'First content'
   end
+
+  test "renaming options" do
+    page = pages(:page1)
+    n_pros = page.arguments1.size
+    n_cons = page.arguments2.size
+    page.update_attributes(option1: 'test1', option2: 'test2')
+    assert_equal n_pros, page.arguments1.size
+    assert_equal n_cons, page.arguments1.size
+  end
+
+  test "options with same name" do
+    assert_raises do
+      pages(:page1).update_attributes(option1: 'abc', option2: 'abc')
+    end
+  end
 end
