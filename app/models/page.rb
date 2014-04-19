@@ -21,4 +21,12 @@ class Page < ActiveRecord::Base
   def arguments2
     arguments_for(1)
   end
+
+  def option_index(option)
+    options.index(option)
+  end
+
+  def options
+    [option1, option2]
+  end
 end

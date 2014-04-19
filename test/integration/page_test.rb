@@ -43,9 +43,4 @@ class PersonaTest < ActionDispatch::IntegrationTest
     page.all('.option-header')[1].find('.btn').click
   end
 
-  test "test2" do
-    visit(users_path)
-    sleep 1
-  end
-
 end

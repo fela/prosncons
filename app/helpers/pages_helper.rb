@@ -1,6 +1,6 @@
 module PagesHelper
   def base_argument_path(page, option)
-    "/pages/#{page.id}/arguments/#{option.parameterize}"
+    "/pages/#{page.id}/arguments/#{option}"
   end
   def new_argument_path(page, option)
     base_argument_path(page, option) + '/new'
@@ -25,6 +25,7 @@ module PagesHelper
   def update_or_create_path(argument)
     page = argument.page
     option = argument.option
+    puts option.inspect
     if argument.new_record?
       url = base_argument_path(page, option)
       method = :post

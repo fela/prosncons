@@ -12,6 +12,10 @@ class Argument < ActiveRecord::Base
 
   alias_attribute :author, :user
 
+  def option_string
+    page.options[option]
+  end
+
   # returns all versions including the user that made it and the
   def version_history
     res = []

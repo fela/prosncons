@@ -1,4 +1,4 @@
-%h2 #{@argument.page.title}: #{params[:option]}
+%h2 #{@argument.page.title}: #{@argument.option_string}
 = simple_form_for @argument,  update_or_create_path(@argument) do |f|
   = f.error_notification
 
