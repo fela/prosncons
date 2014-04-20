@@ -6,6 +6,7 @@ class PersonaTest < ActionDispatch::IntegrationTest
   end
 
   teardown do
+    page.execute_script("navigator && navigator.id && navigator.id.logout()")
     DatabaseCleaner.clean       # Truncate the database
     Capybara.reset_sessions!    # Forget the (simulated) browser state
     Capybara.use_default_driver # Revert Capybara.current_driver to Capybara.default_driver
@@ -60,7 +61,7 @@ class PersonaTest < ActionDispatch::IntegrationTest
     assert_equal user_count+1, User.count
     assert_equal cred_count+1, Credential.count
     assert User.find_by_primary_email(email)
-    assert_equal 1, Credential.find_all_by_email(email).count
+    assert_equal 1, Credential.where(email: email).count
     logout
   end
 
@@ -106,7 +107,7 @@ class PersonaTest < ActionDispatch::IntegrationTest
     assert_equal cred_count+1, Credential.count
     assert !User.find_by_primary_email(email)
     assert_equal email2, User.find_by_email(email).primary_email
-    assert_equal 1, Credential.find_all_by_email(email).count
+    assert_equal 1, Credential.where(email: email).count
     assert_equal user, Credential.find_by_email(email).user
   end
 

@@ -5,17 +5,12 @@ require 'capybara/rails'
 
 
 Capybara.register_driver :selenium do |app|
-  puts 'registering selenium driver'
-  profile = Selenium::WebDriver::Firefox::Profile.new
-  if `iwconfig wlan2` =~ /GenuaWifi/
-    puts 'setting proxy'
-    profile.proxy = Selenium::WebDriver::Proxy.new(
-      :http => 'wifiproxy.unige.it:80',
-      :ssl => 'wifiproxy.unige.it:80',
-      :no_proxy => 'localhost,127.0.0.1')
-  end
+  Capybara::Selenium::Driver.new(app)
+end
 
-  Capybara::Selenium::Driver.new(app, :profile => profile)
+Capybara.register_driver :chrome do |app|
+  # need chrome driver
+  Capybara::Selenium::Driver.new(app, :browser => :chrome)
 end
 
 class ActiveSupport::TestCase
@@ -61,7 +56,9 @@ class ActionDispatch::IntegrationTest
   def login(email=users(:alice).primary_email, opt={})
     assert find('.footer')
     page.execute_script("navigator.id.request()")
+    sleep 0.1
     main_window, persona_popup = page.driver.browser.window_handles
+    assert persona_popup
     within_window(persona_popup) do
       using_wait_time(2) do
         if page.has_selector?('#selectEmail')#[:id] == 'selectEmail'
