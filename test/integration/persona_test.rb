@@ -3,8 +3,6 @@ require 'test_helper'
 class PersonaTest < ActionDispatch::IntegrationTest
   teardown do
     sleep(0.2) # no clue why it does not work without this :(
-    page.execute_script('navigator.id.logout()')
-    assert page.has_content?('you are not logged in')
   end
 
   teardown do

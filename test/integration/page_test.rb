@@ -29,7 +29,9 @@ class PersonaTest < ActionDispatch::IntegrationTest
     end
 
     # edit page
-    click_on('edit')
+    within('.page-header') do
+      click_on('edit')
+    end
     fill_in('page_title', with: 'Test title XXX')
     fill_in('page_content', with: 'Content 222')
     click_on('Update Page')
