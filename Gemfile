@@ -13,6 +13,8 @@ gem 'simple_form'
 gem 'rdiscount'
 gem 'cancan'
 gem 'paper_trail', '~> 3.0.0'
+# needed for Heroku
+gem 'rails_12factor', group: :production
 
 
 # Gems used only for assets and not required
