@@ -15,3 +15,4 @@
 /tmp
 
 /thesis/*~*
+/config/secrets.yml

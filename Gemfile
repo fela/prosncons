@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 ruby "2.1.1"
-gem 'rails', '~> 4.0.0'
+gem 'rails', '~> 4.1.0'
 
 gem 'pg'
 gem 'jquery-rails'
@@ -15,7 +15,7 @@ gem 'rails_12factor', group: :production
 gem "therubyracer"
 gem "less-rails"
 gem 'twitter-bootstrap-rails'
-gem 'sass-rails'
+#gem 'sass-rails'
 gem 'coffee-rails'
 gem 'uglifier'
 gem 'haml-rails'
