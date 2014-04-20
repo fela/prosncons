@@ -1,33 +1,27 @@
 source 'https://rubygems.org'
 
 ruby "2.1.1"
-gem 'rails', '3.2.13'
+gem 'rails', '~> 4.0.0'
 
 gem 'pg'
 gem 'jquery-rails'
 gem 'simple_form'
 gem 'rdiscount'
 gem 'cancan'
-gem 'paper_trail', '~> 3.0.0'
+gem 'paper_trail', '~> 3.0.1'
 # needed for Heroku
 gem 'rails_12factor', group: :production
 
+gem "therubyracer"
+gem "less-rails"
+gem 'twitter-bootstrap-rails'
+gem 'sass-rails'
+gem 'coffee-rails'
+gem 'uglifier'
+gem 'haml-rails'
 
-# Gems used only for assets and not required
-# in production environments by default.
-#group :assets do
-  gem "therubyracer"
-  gem "less-rails"
-  gem 'twitter-bootstrap-rails'
-  gem 'sass-rails',   '~> 3.2.3'
-  gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
-  gem 'uglifier', '>= 1.0.3'
-  gem 'haml-rails'
-#end
+# TODO: use the new recommended protection model for params
+gem 'protected_attributes'
 
 group :test do
   gem 'test-unit'
