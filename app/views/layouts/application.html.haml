@@ -15,7 +15,7 @@
     %link(href="images/apple-touch-icon-114x114.png" rel="apple-touch-icon-precomposed" sizes="114x114")
     %link(href="images/apple-touch-icon-72x72.png" rel="apple-touch-icon-precomposed" sizes="72x72")
     %link(href="images/apple-touch-icon.png" rel="apple-touch-icon-precomposed")
-    =favicon_link_tag
+    %link(href="/favicon.ico" rel="shortcut icon")
 
 
   %body
@@ -30,15 +30,6 @@
           .span10
             = bootstrap_flash
             = yield
-          /
-            .span3
-            .well.sidebar-nav
-              %h3 Sidebar
-              %ul.nav.nav-list
-                %li.nav-header Sidebar
-                %li= link_to "Link 1", "/path1"
-                %li= link_to "Link 2", "/path2"
-                %li= link_to "Link 3", "/path3"
     
     %footer.footer
       .container
