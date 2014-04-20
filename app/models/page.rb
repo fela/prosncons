@@ -2,6 +2,7 @@ class Page < ActiveRecord::Base
   has_paper_trail :on => [:update, :destroy]
   attr_accessible :content, :option1, :option2, :title
   validates_presence_of :title, :content
+  validate :options_should_be_different
 
   has_many :arguments, dependent: :destroy
   has_many :votes, as: :votable
@@ -28,5 +29,11 @@ class Page < ActiveRecord::Base
 
   def options
     [option1, option2]
+  end
+
+  def options_should_be_different
+    if option1 == option2
+      errors.add(:option2, 'should be different from the first option')
+    end
   end
 end
