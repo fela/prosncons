@@ -32,7 +32,7 @@ class PageTest < ActiveSupport::TestCase
   end
 
   test 'options with same name' do
-    assert_false pages(:page1).update_attributes(option1: 'abc', option2: 'abc')
+    refute pages(:page1).update_attributes(option1: 'abc', option2: 'abc')
   end
 
   test 'arguments1 and arguments2' do

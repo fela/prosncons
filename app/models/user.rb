@@ -32,10 +32,13 @@ class User < ActiveRecord::Base
 
   def self.create_account(email)
     cred = Credential.create!(email: email)
-    user = User.create! do |u|
-      u.primary_email = email
-      u.credentials << cred
-    end
+    user = User.new
+    user.primary_email = email
+    user.credentials << cred
+    # would not work because the credentials have not yet been updated
+    user.save(validate: false)
+    # now it can validate
+    user.save!
     user
   end
 
@@ -75,7 +78,7 @@ class User < ActiveRecord::Base
   private
   def has_primary_credential
     if credentials.where(email: primary_email).empty?
-      errors.add(:base, 'email must be in Credentials')
+      errors.add(:base, "email #{primary_email.inspect} must be in Credentials")
     end
   end
 end

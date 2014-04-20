@@ -20,15 +20,12 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test 'email has to be unique after modification' do
-    email1 = credentials(:unused1).email
-    email2 = credentials(:unused2).email
-    u = User.new
-    u.primary_email = email2
-    u.save!
-    u2 = User.new
-    u2.primary_email = email1
-    u2.save!
+    email1 = 'unusedemail1@abc.com'
+    email2 = 'unusedemail2@abc.com'
+    User.create_account(email1)
+    u = User.create_account(email2)
 
+    assert u.valid?
     u.primary_email = email1
     assert !u.valid?, "#{u.inspect} is valid, it shouldn't be"
     assert !u.save, "#{u.inspect} could be saved, it shouldn't have"
@@ -92,11 +89,12 @@ class UserTest < ActiveSupport::TestCase
     cred_count = Credential.count
     email = 'new_unused_email@email.com'
     u = User.create_account(email)
+    assert u.valid?
     assert_equal u, User.find_by_primary_email(email)
     assert_equal email, u.primary_email
     assert_equal user_count+1, User.count
     assert_equal cred_count+1, Credential.count
-    assert_equal 1, Credential.find_all_by_email(email).count
+    assert_equal 1, Credential.where(email: email).count
   end
 
   test 'find_by_email returns nil if the email is not in Credentials' do
@@ -123,7 +121,7 @@ class UserTest < ActiveSupport::TestCase
     u.add_email(email)
     assert_equal user_count, User.count
     assert_equal cred_count+1, Credential.count
-    assert_equal 1, Credential.find_all_by_email(email).count
+    assert_equal 1, Credential.where(email: email).count
     assert u.credentials.any?{|c| c.email == email}
   end
 

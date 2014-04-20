@@ -42,7 +42,7 @@ class ActionDispatch::IntegrationTest
   self.use_transactional_fixtures = false
 
 
-  def self.startup
+  setup do
     Capybara.default_driver = :selenium
     Capybara.default_wait_time = 5
 
