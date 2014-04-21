@@ -15,5 +15,4 @@
 /tmp
 
 /thesis/*~*
-/config/secrets.yml
 .elasticbeanstalk/
