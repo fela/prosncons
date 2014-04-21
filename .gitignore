@@ -16,3 +16,4 @@
 
 /thesis/*~*
 /config/secrets.yml
+.elasticbeanstalk/
