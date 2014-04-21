@@ -81,7 +81,7 @@ GEM
     minitest (5.3.3)
     mocha (1.0.0)
       metaclass (~> 0.0.1)
-    multi_json (1.9.2)
+    multi_json (1.7.8)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     paper_trail (3.0.1)
@@ -173,6 +173,7 @@ DEPENDENCIES
   launchy
   less-rails
   mocha
+  multi_json (= 1.7.8)
   paper_trail (~> 3.0.1)
   pg
   protected_attributes

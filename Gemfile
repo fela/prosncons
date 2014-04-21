@@ -20,6 +20,8 @@ gem 'coffee-rails'
 gem 'uglifier'
 gem 'haml-rails'
 
+gem 'multi_json', '1.7.8'
+
 # TODO: use the new recommended protection model for params
 gem 'protected_attributes'
 
