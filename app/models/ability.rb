@@ -29,6 +29,7 @@ class Ability
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
     can :read, :all
+    can :versions, :all
     if user
       can :update, User, id: user.id
       if user.beta_tester?
