@@ -1,4 +1,5 @@
 class ArgumentsController < ApplicationController
+  load_and_authorize_resource
 
   def new
     @argument = Argument.new()
