@@ -31,6 +31,7 @@ class Ability
     can :read, :all
     can :versions, :all
     if user
+      can :vote, :all
       can :update, User, id: user.id
       if user.beta_tester?
         can :create, :all
