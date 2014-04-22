@@ -1,13 +1,9 @@
 BEFORE PRIVATE BETA, I should have
-* fix old rails plugins warning
-* i should be able to admin: be able to edit and retire all edits
+* make announcement mailing list
 * log position of other posts when related to votes
-* a way of communication (maybe discourse), or just mailing list
-* db backups: https://addons.heroku.com/pgbackups#auto-month
-* deploy to aws
-* better meta page (to make it a possible page to share on HN)
 
 ON NEXT MIGRATION
+* i should be able to admin: be able to edit and retire all edits
 * rename Argument::description to content
 
 SHORT TERM

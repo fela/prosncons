@@ -38,6 +38,9 @@ class PersonaTest < ActionDispatch::IntegrationTest
       assert page.has_content?('logged in')
     end
     logout
+    within('.alert-info') do
+      assert page.has_content?('Logged out')
+    end
   end
 
   # test case for automatic user creation first encounter of an email address
