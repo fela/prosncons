@@ -1,4 +1,5 @@
 Prosncons::Application.routes.draw do
+  match '*path' => redirect('http://www.prosncons.io'), via: :get
 
   root :to => 'home#index'
   get 'faq' => 'home#faq'
