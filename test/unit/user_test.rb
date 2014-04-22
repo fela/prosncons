@@ -136,5 +136,8 @@ class UserTest < ActiveSupport::TestCase
     assert_equal second, u.urls.second
   end
 
-
+  test 'beta_tester?' do
+    assert users(:alice).beta_tester?
+    refute users(:bob).beta_tester?
+  end
 end

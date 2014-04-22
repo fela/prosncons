@@ -2,7 +2,7 @@ class ArgumentsController < ApplicationController
   load_and_authorize_resource
 
   def new
-    @argument = Argument.new()
+    @argument = Argument.new
     @page = current_page
     @argument.page = @page
     @option = params[:option]

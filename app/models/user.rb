@@ -1,4 +1,14 @@
+require 'set'
+require 'digest'
+
 class User < ActiveRecord::Base
+  SALT = ':803e380b0a804bc9f0b4c97c30c17b1e0d255.7cf3384755c66aea79c2c82264b4c'
+  # salted hashes of emails of beta testers
+  BETA_TESTERS = [
+      '3j3KI990i+7C1GGCZBDwxPC8tVFwO+WxUZWQ1t9hm3A=',
+      'ooktG4O/64NJJigUUvAB7K4eWpHbqocVYnaE2zl/38k='
+  ].to_set
+
   attr_accessible :name
   validates :primary_email, presence: true, uniqueness: true
   validate :has_primary_credential
@@ -73,6 +83,11 @@ class User < ActiveRecord::Base
   def avatar_url(size=24)
     hash = Digest::MD5.hexdigest(primary_email.downcase)
     "http://gravatar.com/avatar/#{hash}.png?s=#{size}"
+  end
+
+  def beta_tester?
+    hash = Digest::SHA256.new.base64digest primary_email + SALT
+    BETA_TESTERS.include? hash
   end
 
   private

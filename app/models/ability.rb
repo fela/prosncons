@@ -30,9 +30,11 @@ class Ability
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
     can :read, :all
     if user
-      can :create, :all
-      can :update, [Page, Argument], user_id: user.id
       can :update, User, id: user.id
+      if user.beta_tester?
+        can :create, :all
+        can :update, [Page, Argument], user_id: user.id
+      end
     end
   end
 end
