@@ -8,6 +8,7 @@ class Argument < ActiveRecord::Base
   validates_presence_of :summary, :description, :option, :page
   belongs_to :page
   has_many :votes, as: :votable
+  has_many :indirect_votes
   belongs_to :user
 
   alias_attribute :author, :user
@@ -86,6 +87,24 @@ class Argument < ActiveRecord::Base
     a = beta_parameters[:a]
     b = beta_parameters[:b]
     (up + a).to_f / (tot + a + b)
+  end
+
+  def views
+    author_views = indirect_votes.group_by {|x| x.vote.author}.values
+    author_views.map(&author_view).inject{|x, y| x+y}
+  end
+
+  # probability a certain author viewed it given the indirect votes
+  def view_probability(indirect_votes)
+    max = 0
+    indirect_votes.each do |iv|
+      if iv.direct_vote?
+        return 0
+      else
+        max = [iv.view_probability, max].max
+      end
+    end
+    max
   end
 
 private

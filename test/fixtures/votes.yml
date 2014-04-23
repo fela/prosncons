@@ -1,0 +1,4 @@
+one:
+  user: alice
+  votable: page1arg1 (Argument)
+  vote: 1

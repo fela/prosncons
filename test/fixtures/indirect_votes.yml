@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  vote_id: 
+  argument_id: 
+  position: 1
+  voted_for_position: 1
+  same_option: false
+
+two:
+  vote_id: 
+  argument_id: 
+  position: 1
+  voted_for_position: 1
+  same_option: false
