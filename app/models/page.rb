@@ -4,15 +4,15 @@ class Page < ActiveRecord::Base
   validates_presence_of :title, :content
   validate :options_should_be_different
 
-  has_many :arguments, dependent: :destroy
+  has_many :arguments, -> {order [:option, :created_at]}, dependent: :destroy
   has_many :votes, as: :votable
   belongs_to :user
 
   alias_attribute :author, :user
 
   def arguments_for(option)
-    res = arguments.select{|x| x.option == option}
-    res.sort {|x, y| y.score <=> x.score}
+    res = arguments.where(option: option)
+    res.sort_by {|x| [-x.score, -x.created_at.to_i]}
   end
 
   def arguments1
