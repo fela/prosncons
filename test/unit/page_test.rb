@@ -43,6 +43,11 @@ class PageTest < ActiveSupport::TestCase
     arg5 = arguments(:page1arg5)
 
     now = Time.now
+    arg1.created_at = now + 2
+    arg1.save!
+    arg2.created_at = now + 10
+    arg2.save!
+
     arg5.created_at = now + 2
     arg5.save!
     arg3.created_at = now + 1
