@@ -20,6 +20,20 @@ class IndirectVoteTest < ActiveSupport::TestCase
     assert_equal 'granularity', indirect_vote.voted_for_argument.summary
   end
 
+  test 'author' do
+    indirect_vote = create_indirect_vote
+    assert_equal votes(:one).user, indirect_vote.author
+  end
+
+  test 'removed_vote?' do
+    indirect_vote = create_indirect_vote
+    refute indirect_vote.removed_vote?
+    votes(:one).destroy
+    # refresh cache
+    indirect_vote.vote(true)
+    assert indirect_vote.removed_vote?
+  end
+
   test 'direct_vote? true' do
     indirect_vote = create_indirect_vote(argument: :page1arg1, position: 1)
     assert indirect_vote.direct_vote?
@@ -30,14 +44,9 @@ class IndirectVoteTest < ActiveSupport::TestCase
     refute indirect_vote.direct_vote?
   end
 
-  test 'view probability for direct vote should be nil' do
+  test 'view probability for direct vote should be 0.9' do
     indirect_vote = create_indirect_vote(argument: :page1arg1, position: 1)
-    assert_nil indirect_vote.view_probability
-  end
-
-  test 'view probability for same option same position' do
-    indirect_vote = create_indirect_vote(argument: :page1arg1, position: 1)
-    assert_nil indirect_vote.view_probability
+    assert_equal 0.9, indirect_vote.view_probability
   end
 
   test 'view probability different option same position' do

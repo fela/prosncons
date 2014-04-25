@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 20140422154038) do
   create_table "indirect_votes", force: true do |t|
     t.integer  "vote_id"
     t.integer  "argument_id"
+    t.integer  "voted_for_argument_id"
+    t.integer  "author_id"
     t.integer  "position"
     t.integer  "voted_for_position"
     t.boolean  "same_option"

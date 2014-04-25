@@ -8,6 +8,7 @@ page1arg1:
     information get voted up or down.
   page: page1
   user: bob
+  created_at: <%= 1.day.ago.to_s(:db) %>
 
 page1arg2:
   option: 0
@@ -20,6 +21,7 @@ page1arg2:
     the lists that will mattear.
   page: page1
   user: alice
+  created_at: <%= 2.day.ago.to_s(:db) %>
 
 page1arg3:
   option: 1
@@ -28,6 +30,7 @@ page1arg3:
     make it less intuitive to new users.
   page: page1
   user: bob
+  created_at: <%= 1.day.ago.to_s(:db) %>
 
 page1arg4:
   option: 1
@@ -37,6 +40,7 @@ page1arg4:
     single statements that have value on their own.
   page: page1
   user: bob
+  created_at: <%= 2.day.ago.to_s(:db) %>
 
 page1arg5:
   option: 1
@@ -44,6 +48,7 @@ page1arg5:
   description: The traditional format is more familiar to most people
   page: page1
   user: alice
+  created_at: <%= 3.day.ago.to_s(:db) %>
 
 
 page2arg1:
