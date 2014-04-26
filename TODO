@@ -1,6 +1,6 @@
 BEFORE PRIVATE BETA, I should have
+* fix edit link in header
 * make announcement mailing list
-* log position of other posts when related to votes
 
 ON NEXT MIGRATION
 * check flash notifications
@@ -9,6 +9,9 @@ ON NEXT MIGRATION
 
 SHORT TERM
 * public votes
+* simple reputation and ranking of users
+* notifications on edits/added-points/votes
+* voting on questions and display best/featured
 
 * unlink secondary email address:
   - from page saying to redirect

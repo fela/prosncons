@@ -10,7 +10,7 @@ Prosncons::Application.routes.draw do
   get 'persona/new_user' => 'persona#new_user'
 
   resources :pages
-
+  get 'pages/:page_id/versions' => 'pages#versions', as: :versions_page
 
   put 'pages/:page_id/arguments/:id/vote/:vote_type' => 'arguments#vote'
 

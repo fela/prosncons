@@ -36,4 +36,31 @@ class Page < ActiveRecord::Base
       errors.add(:option2, 'should be different from the first option')
     end
   end
+
+  # TODO: extract in common module
+  # returns all versions including the user that made it and the
+  def version_history
+    res = []
+    event = 'create'
+    author = user
+    versions.each do |version|
+      # some old entries still include create actions
+      # TODO remove next line
+      next if version.event == 'create'
+      res << {
+          obj: version.reify,
+          event: event,
+          author: author
+      }
+      event = version.event
+      author = User.find_by_id(version.whodunnit.to_i)
+    end
+    res << {
+        obj: self,
+        event: event,
+        author: author
+    }
+  end
+
+
 end

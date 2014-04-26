@@ -1,9 +1,9 @@
 / TODO: write more general version of it
 %h2 edit history
-- @argument.version_history.each do |version|
+- @page.version_history.each do |version|
   %hr
   %small #{version[:event]} by #{link_to_user version[:author]}
-  %h4= version[:obj].summary
+  %h4= version[:obj].title
   %p
     :markdown
-      #{version[:obj].description}
+      #{version[:obj].content}

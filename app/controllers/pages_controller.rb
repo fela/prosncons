@@ -44,4 +44,8 @@ class PagesController < ApplicationController
 
     redirect_to pages_url
   end
+
+  def versions
+    @page = Page.find(params[:page_id])
+  end
 end

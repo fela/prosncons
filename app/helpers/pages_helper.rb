@@ -18,6 +18,8 @@ module PagesHelper
   def versions_path(obj)
     if obj.is_a? Argument
       versions_argument_path(obj)
+    elsif obj.is_a? Page
+      versions_page_path(obj)
     else
       '#'
     end
