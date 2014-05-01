@@ -7,7 +7,8 @@ class User < ActiveRecord::Base
   BETA_TESTERS = [
       '3j3KI990i+7C1GGCZBDwxPC8tVFwO+WxUZWQ1t9hm3A=',
       'ooktG4O/64NJJigUUvAB7K4eWpHbqocVYnaE2zl/38k=',
-      "PtM9IZjv5Xh1QKg9ITK15I7WXIZltlT4C75CFDWHTGs="
+      'PtM9IZjv5Xh1QKg9ITK15I7WXIZltlT4C75CFDWHTGs=',
+      'RWAd4rLm4x6eUQk7nQDnIvClBwLqRgnaTLJSuSmSuSU='
   ].to_set
 
   attr_accessible :name
