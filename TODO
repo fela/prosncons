@@ -1,11 +1,7 @@
-BEFORE PRIVATE BETA, I should have
-* fix edit link in header
-* make announcement mailing list
-
-ON NEXT MIGRATION
+SOON
 * check flash notifications
 * i should be able to admin: be able to edit and retire all edits
-* rename Argument::description to content
+* rename Argument::description to content (?)
 
 SHORT TERM
 * public votes

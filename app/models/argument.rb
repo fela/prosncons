@@ -60,18 +60,20 @@ class Argument < ActiveRecord::Base
                    raise ArgumentError
                end
     # get arguments in their positions before the vote
-    args1 = page.arguments1
-    args2 = page.arguments2
+    args1 = page.arguments1.to_a
+    args2 = page.arguments2.to_a
 
     # remove any possible vote in the other direction
     undo_vote(user)
     vote = Vote.new
     vote.user = user
     vote.vote = vote_val
+    vote.votable = self
     vote.save!
 
     votes << vote
     save!
+
     add_indirect_votes args1, args2, vote
   end
 
@@ -84,12 +86,10 @@ class Argument < ActiveRecord::Base
     [args1, args2].each_with_index do |args|
       args.each_with_index do |arg, index|
         iv = IndirectVote.new
-        #IndirectVote.create do |iv|
-          iv.argument = arg
-          iv.vote = vote
-          iv.position = index
-          iv.voted_for_position = position
-        #end
+        iv.argument = arg
+        iv.vote = vote
+        iv.position = index
+        iv.voted_for_position = position
         unless iv.save
           puts iv.errors.full_messages
           raise iv.errors.full_messages.inspect

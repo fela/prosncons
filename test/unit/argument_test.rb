@@ -97,19 +97,27 @@ class ArgumentTest < ActiveSupport::TestCase
     assert_in_epsilon 0.6*0.8, arg_other_1.views_estimate
     assert_in_epsilon 0.6*0.7*0.7, arg_other_2.views_estimate
 
+    # more probability of being viewed and not being voted on decreases
+    # the score of arg2 more
+    assert arg2.score < arg3.score
+    # here there is already a vote present
+    assert arg_other_1.score > arg_other_2.score
+
     arg1.vote(user: users(:alice), vote_type: :down)
     [arg1, arg2, arg3, arg_other_1, arg_other_2].each {|a| a.reload}
     assert_equal 0, arg1.views_estimate
     assert_in_epsilon 0.7**2, arg2.views_estimate
-    assert_in_epsilon 0.7**3, arg3.views_estimate
+    assert_in_epsilon 0.7**2, arg3.views_estimate
     assert_in_epsilon 0.6*0.8, arg_other_1.views_estimate
     assert_in_epsilon 0.6*0.7*0.7, arg_other_2.views_estimate
 
+    # TODO: this might not be exactly the expected behaviour, unless the
+    # undo is done straight away
     arg1.vote(user: users(:alice), vote_type: :undo)
     [arg1, arg2, arg3, arg_other_1, arg_other_2].each {|a| a.reload}
     assert_equal 0.9, arg1.views_estimate
     assert_in_epsilon 0.7**2, arg2.views_estimate
-    assert_in_epsilon 0.7**3, arg3.views_estimate
+    assert_in_epsilon 0.7**2, arg3.views_estimate
     assert_in_epsilon 0.6*0.8, arg_other_1.views_estimate
     assert_in_epsilon 0.6*0.7*0.7, arg_other_2.views_estimate
 
@@ -117,9 +125,9 @@ class ArgumentTest < ActiveSupport::TestCase
     arg1.vote(user: users(:bob), vote_type: :down)
     [arg1, arg2, arg3, arg_other_1, arg_other_2].each {|a| a.reload}
     assert_equal 0, arg1.views_estimate
-    assert_in_epsilon 0.7**2 + 0.8, arg2.views_estimate
-    assert_in_epsilon 0.7**3 + 0.8, arg3.views_estimate
+    assert_in_epsilon 0.8 + 0.8, arg2.views_estimate
+    assert_in_epsilon 0.8 + 0.8, arg3.views_estimate
     assert_in_epsilon 0.6*0.8 + 0.6*0.8, arg_other_1.views_estimate
-    assert_in_epsilon 0.6*0.7*0.7 + 0.6*0.8, arg_other_2.views_estimate
+    assert_in_epsilon 0.6*0.8 + 0.6*0.8, arg_other_2.views_estimate
   end
 end
