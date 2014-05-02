@@ -19,6 +19,13 @@ $brand-primary: rgb(0, 136, 204);
 @import 'bootstrap';
 @import "font-awesome";
 
+
+.non-production {
+  height: 5px;
+  background: #2b6606;
+}
+
+
 input,
 textarea {
   width: auto;

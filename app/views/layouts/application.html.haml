@@ -19,6 +19,8 @@
 
 
   %body
+    - if not Rails.env.production?
+      .non-production
     .navbar.navbar-inverse.navbar-static-top
       .container
         = render 'layouts/navbar'
