@@ -1,9 +1,9 @@
 %h1 Listing users
-%table.offset2
+%table.col-offset-2
   %tr
-    %th.span2
-    %th.span3 Real name
-    %th.span2 ID
+    %th.col-md-2
+    %th.col-md-3 Real name
+    %th.col-md-2 ID
     /%th.span3 email
   - @users.each do |user|
     %tr{url: user_path(user)}

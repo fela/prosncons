@@ -89,16 +89,20 @@ h1 {
   }
 }
 
+table {
+  width: 100%;
+}
 
 tr {
   background: white;
   cursor: pointer;
-  .hovered {
-    background: $highlight-color;
-  }
   td {
     padding: 5px;
   }
+}
+
+tr.hovered {
+  background: $highlight-color;
 }
 
 th {

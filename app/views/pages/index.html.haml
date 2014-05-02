@@ -1,17 +1,18 @@
-%h1 Listing pages
+.textual-main-content
+  %h1 Listing pages
 
-%table
-  %tr
-    %th Title
-    %th
-    %th
+  %table
+    %tr
+      %th Title
+      %th
+      %th
 
-  - @pages.each do |page|
-    %tr{url: page_path(page)}
-      %td
-        %strong= link_to page.title, page
+    - @pages.each do |page|
+      %tr{url: page_path(page)}
+        %td
+          %strong= link_to page.title, page
 
-%br
+  %br
 
-- if can? :create, Page
-  = link_to 'New Page', new_page_path, class: 'btn btn-primary'
+  - if can? :create, Page
+    = link_to 'New Page', new_page_path, class: 'btn btn-primary'
