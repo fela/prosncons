@@ -17,7 +17,7 @@ $gray-lightest:          whitesmoke;
 $brand-primary: rgb(0, 136, 204);
 
 @import 'bootstrap';
-@import "font-awesome";
+@import 'font-awesome';
 
 
 .non-production {
@@ -142,5 +142,12 @@ textarea.text{
 
 input.string {
   width: 100%;
+}
+
+@media (min-width: $screen-md-min) {
+  .textual-main-content {
+    padding-left: 100px;
+    padding-right: 100px;
+  }
 }
 
