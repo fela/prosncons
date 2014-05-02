@@ -8,15 +8,8 @@
 
   - @pages.each do |page|
     %tr{url: page_path(page)}
-      %td.span5
+      %td
         %strong= link_to page.title, page
-      %td.span1
-        - if can? :edit, page
-          = link_to 'Edit', edit_page_path(page)
-
-      %td.span1
-        - if can? :delete, page
-          = link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' }
 
 %br
 
