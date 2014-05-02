@@ -11,6 +11,14 @@
   .text-right
     = render partial: 'users/signature',
       locals: {obj: @page}
+
+- if not can? :create, Argument
+  %br
+  .span
+    .alert.fade.in.alert-info
+      Only beta testers can add arguments, please write us in the
+      #{link_to 'mailing list', 'https://groups.google.com/forum/#!forum/prosncons', target: '_blank'}
+      if you would like to try out the application.
 .row
   = render partial: 'arguments', locals: { option: 0 }
   = render partial: 'arguments', locals: { option: 1 }

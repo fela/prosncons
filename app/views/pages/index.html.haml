@@ -16,3 +16,8 @@
 
   - if can? :create, Page
     = link_to 'New Page', new_page_path, class: 'btn btn-primary'
+  - else
+    .alert.fade.in.alert-info
+      Only beta testers can add pages, please write us in the
+      #{link_to 'mailing list', 'https://groups.google.com/forum/#!forum/prosncons', target: '_blank'}
+      if you would like to try out the application.
