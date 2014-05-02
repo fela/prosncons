@@ -3,13 +3,14 @@
   %span.icon-bar
   %span.icon-bar
   %span.icon-bar
-%a.brand(href="/") Pros'n'Cons
-.nav-collapse.collapse
-  %ul.nav
+.navbar-header
+  %a.navbar-brand(href="/") Pros'n'Cons
+.navbar-collapse.collapse
+  %ul.nav.navbar-nav
     %li= link_to "Users", users_path
     %li= link_to "Pages", pages_path
     %li= link_to "FAQ", '/faq'
-  %ul.nav.pull-right
+  %ul.nav.navbar-nav.pull-right
     - if session[:email]
       = render 'layouts/logged_in'
     - else

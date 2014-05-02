@@ -11,11 +11,13 @@ gem 'cancan'
 gem 'paper_trail', '~> 3.0.1'
 # needed for Heroku
 gem 'rails_12factor', group: :production
+gem 'rails_admin'
 
 gem "therubyracer"
 gem "less-rails"
-gem 'twitter-bootstrap-rails'
-#gem 'sass-rails'
+#gem 'twitter-bootstrap-rails'
+gem 'sass-rails', '>= 3.2'
+gem 'bootstrap-sass', '~> 3.1.1'
 gem 'coffee-rails'
 gem 'uglifier'
 gem 'haml-rails'

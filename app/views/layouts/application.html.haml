@@ -19,17 +19,15 @@
 
 
   %body
-    .navbar.navbar-fixed-top
-      .navbar-inner
-        .container
-          = render 'layouts/navbar'
+    .navbar.navbar-inverse.navbar-static-top
+      .container
+        = render 'layouts/navbar'
 
     .container
-      .content
-        .row
-          .span10
-            = display_flash
-            = yield
+      .row
+        .span10
+          = display_flash
+          = yield
     
     %footer.footer
       .container
