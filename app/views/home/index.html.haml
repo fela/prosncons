@@ -4,8 +4,9 @@
     %h2.subtitle Crowdsourced pros and cons on controversial issues
     .alert.fade.in.alert-warning
       %strong Notice:
-      this is an early alpha version of the software and is still incomplete.
-      Subscribe to the <a href="https://groups.google.com/forum/#!forum/prosncons-announcements">announcements mailing list</a> to be informed
-      of further developments. Write on the <a href="https://groups.google.com/forum/#!forum/prosncons">discussion mailing list</a> if you
-      want your account enabled for creating pages and arguments.
+      this is an early alpha version of the software and is still incomplete. Subscribe to the
+      #{link_to 'announcements mailing list', 'https://groups.google.com/forum/#!forum/prosncons-announcements', target: '_blank'}
+      to be informed of further developments. Write on the
+      #{link_to 'discussion mailing list', 'https://groups.google.com/forum/#!forum/prosncons', target: '_blank'}
+      if you want your account enabled for creating pages and arguments.
     = render partial: 'description'

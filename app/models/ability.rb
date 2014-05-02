@@ -37,6 +37,10 @@ class Ability
         can :create, :all
         can :update, [Page, Argument], user_id: user.id
       end
+      if user.id == 1
+        can :access, :rails_admin       # only allow admin users to access Rails Admin
+        can :dashboard
+      end
     end
   end
 end

@@ -1,5 +1,6 @@
 Prosncons::Application.routes.draw do
 
+  mount RailsAdmin::Engine => '/aadmin', as: 'rails_admin'
   root :to => 'home#index'
   get 'faq' => 'home#faq'
 
