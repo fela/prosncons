@@ -1,9 +1,9 @@
 / parameter a: argument
-.span1.votes{data:{id: a.id}, class: a.voting_status(@logged_in_user)}
+.col-xs-2.votes{data:{id: a.id}, class: a.voting_status(@logged_in_user)}
   /%a.vote-up{onclick: "vote('up', #{a.id}, 1)"}
   %a.vote-up
-    = glyph('chevron-up')
-  %div{id: "votes#{a.id}"}= "%.1f" % (a.score * 10)
+    = fa_icon 'chevron-up'
+  %div.vote-num{id: "votes#{a.id}"}= "%.1f" % (a.score * 10)
   /%a.vote-down{onclick: "vote('down', #{a.id}, 1)"}
   %a.vote-down
-    = glyph('chevron-down')
+    = fa_icon 'chevron-down'

@@ -21,6 +21,7 @@ gem 'bootstrap-sass', '~> 3.1.1'
 gem 'coffee-rails'
 gem 'uglifier'
 gem 'haml-rails'
+gem "font-awesome-rails"
 
 gem 'multi_json', '1.7.8'
 

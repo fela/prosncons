@@ -199,6 +199,7 @@ DEPENDENCIES
   capybara
   coffee-rails
   database_cleaner
+  font-awesome-rails
   haml-rails
   jquery-rails
   launchy

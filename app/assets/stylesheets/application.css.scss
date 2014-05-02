@@ -14,7 +14,10 @@ $gray-light:             #bbb;
 $gray-lighter:           #e4e4e4;
 $gray-lightest:          whitesmoke;
 
+$brand-primary: rgb(0, 136, 204);
+
 @import 'bootstrap';
+@import "font-awesome";
 
 input,
 textarea {
@@ -25,6 +28,23 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 1.5em;
 }
 
+.btn {
+  border: 0;
+  background: none repeat scroll 0 0 $brand-primary;
+  box-shadow: 0 2px 1px 0 $link-hover-color;
+  color: white;
+  border-radius: 2px 2px 2px 2px;
+}
+
+h4, h5, h6 {
+  color: $link-hover-color;
+  //font-weight: bold;
+}
+
+
+h1 {
+  margin-top: 0;
+}
 .subtitle {
   margin-top: 0;
   color: gray;
@@ -37,11 +57,14 @@ h1, h2, h3, h4, h5, h6 {
   color: $link-hover-color;
   text-align: center;
   margin-top: 0.5em;
-}
-
-.votes a {
-  text-decoration: none;
-  cursor: pointer;
+  a {
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .vote-num {
+    margin-top: -13px;
+    margin-bottom: -16px;
+  }
 }
 
 .votes.up-voted .vote-up, .votes.down-voted .vote-down{
@@ -113,3 +136,4 @@ textarea.text{
 input.string {
   width: 100%;
 }
+

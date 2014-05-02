@@ -1,10 +1,5 @@
 module ApplicationHelper
 
-  # Twitter Bootstrap glyphs
-  def glyph(*names)
-    content_tag :i, nil, class: names.map{|name| "icon-#{name.to_s.gsub('_','-')}" }
-  end
-
   # ref for links that will be overwritten by js
   def javascript_link
     '/js'
