@@ -45,7 +45,7 @@ private
   def successful_login_message(email=nil)
     @email = email || @email
     email = CGI::escapeHTML(@email)
-    flash[:success] = "Successfully logged in with <strong>#{email}</strong>".html_safe
+    flash[:success] = "Successfully logged in as <strong>#{email}</strong>".html_safe
   end
 
   def new_login_message
