@@ -10,7 +10,8 @@ class User < ActiveRecord::Base
       'PtM9IZjv5Xh1QKg9ITK15I7WXIZltlT4C75CFDWHTGs=',
       'RWAd4rLm4x6eUQk7nQDnIvClBwLqRgnaTLJSuSmSuSU=',
       'J0JTW3G3XJWG6jCnRxoxBCMtiUOVmXh2+sBV/gJGD+I=',
-      'LlqMwOjhjUoosvs5HEU4DUGdF7hVHVzn3lRVB2SQzTg='
+      'LlqMwOjhjUoosvs5HEU4DUGdF7hVHVzn3lRVB2SQzTg=',
+      'QVgtJAL3S0QrNvjvhMr+fcjCCxUNeoEtKpWjNIeo09Q='
   ].to_set
 
   attr_accessible :name
