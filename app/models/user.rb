@@ -11,7 +11,9 @@ class User < ActiveRecord::Base
       'RWAd4rLm4x6eUQk7nQDnIvClBwLqRgnaTLJSuSmSuSU=',
       'J0JTW3G3XJWG6jCnRxoxBCMtiUOVmXh2+sBV/gJGD+I=',
       'LlqMwOjhjUoosvs5HEU4DUGdF7hVHVzn3lRVB2SQzTg=',
-      'QVgtJAL3S0QrNvjvhMr+fcjCCxUNeoEtKpWjNIeo09Q='
+      'QVgtJAL3S0QrNvjvhMr+fcjCCxUNeoEtKpWjNIeo09Q=',
+      'DtPJ0IaEjdsK5YgoSXfux7EF4EjghetyW1FAJ7t0lrE=',
+      '/CpREHJGlW05RBJOkbdROLV9R/PPYVxo96sRaYEot2o='
   ].to_set
 
   attr_accessible :name
