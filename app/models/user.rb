@@ -100,7 +100,7 @@ class User < ActiveRecord::Base
 
   def avatar_url(size=24)
     hash = Digest::MD5.hexdigest(primary_email.downcase)
-    "http://gravatar.com/avatar/#{hash}.png?s=#{size}"
+    "http://gravatar.com/avatar/#{hash}.png?s=#{size}&default=identicon"
   end
 
   def beta_tester?
