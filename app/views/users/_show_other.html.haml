@@ -2,3 +2,7 @@
   Profile of #{@user.display_name}
   %span{class: 'pull-right'}
     =image_tag @user.avatar_url(128)
+
+%p
+  Reputation:
+  %strong= @user.reputation

@@ -11,6 +11,10 @@
   [#{link_to 'edit profile', edit_user_path(@user)}]
 
 %p
+  Reputation:
+  %strong= @user.reputation
+
+%p
   primary email address:
   %strong= @user.primary_email
 %h4 Secondary email addresses
