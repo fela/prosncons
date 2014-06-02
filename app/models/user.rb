@@ -41,10 +41,10 @@ class User < ActiveRecord::Base
     all_emails - [primary_email]
   end
 
-  def reputation
+  def reputation(cached: true)
     # TODO: denormalize the reputation
     # the nil in the where is redundant but added for clarity
-    if not @reputation
+    if !@reputation || !cached
       @reputation = received_votes.where('vote > 0') \
                                   .where.not(user: [self, nil]).count
     end

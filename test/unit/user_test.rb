@@ -45,7 +45,7 @@ class UserTest < ActiveSupport::TestCase
     u = users(:alice)
     url = u.avatar_url(30)
     puts u.primary_email
-    exp = 'http://gravatar.com/avatar/a13ff4259f302b291465bae4a48087d4.png?s=30'
+    exp = 'http://gravatar.com/avatar/a13ff4259f302b291465bae4a48087d4.png?s=30&default=identicon'
     assert_equal exp, url
   end
 
@@ -158,7 +158,7 @@ class UserTest < ActiveSupport::TestCase
     bob.arguments.first.vote(user: bob, vote_type: :up)
     assert_equal bob_initial_rep, bob.reputation
     bob.arguments.first.vote(user: alice, vote_type: :up)
-    assert_equal bob_initial_rep+1, bob.reputation
+    assert_equal bob_initial_rep+1, bob.reputation(cached: false)
     assert_equal alice_initial_rep, alice.reputation
   end
 
@@ -168,5 +168,14 @@ class UserTest < ActiveSupport::TestCase
     bob_initial_rep = bob.reputation
     bob.arguments.first.vote(user: alice, vote_type: :down)
     assert_equal bob_initial_rep, bob.reputation
+  end
+
+  test 'reputation cache' do
+    bob = users(:bob)
+    alice = users(:alice)
+    bob_initial_rep = bob.reputation
+    bob.arguments.first.vote(user: alice, vote_type: :up)
+    assert_equal bob_initial_rep, bob.reputation
+    assert_equal bob_initial_rep+1, bob.reputation(cached: false)
   end
 end
