@@ -1,14 +1,17 @@
 %h1 Listing users
-%table.col-offset-2
+%table.col-md-offset-2.col-md-8
   %tr
-    %th.col-md-2
-    %th.col-md-3 Real name
-    %th.col-md-2 ID
+    %th.col-md-1
+    %th.col-md-2 Real name
+    %th.col-md-1 Reputation
+    %th.col-md-1 ID
     /%th.span3 email
   - @users.each do |user|
     %tr{url: user_path(user)}
       %td=image_tag user.avatar_url(64)
       %td
         %strong= link_to user.display_name, user
+      %td
+        %strong= user.reputation
       %td= user.id
       /%td= user.primary_email

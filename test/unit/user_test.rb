@@ -140,4 +140,33 @@ class UserTest < ActiveSupport::TestCase
     assert users(:alice).beta_tester?
     refute users(:bob).beta_tester?
   end
+
+  test 'alice has no reputation' do
+    assert_equal 0, users(:alice).reputation
+  end
+
+  test 'bob has a reputation of one' do
+    assert_equal 1, users(:bob).reputation
+  end
+
+  test 'own reputation does not count' do
+    bob = users(:bob)
+    alice = users(:alice)
+    bob_initial_rep = bob.reputation
+    alice_initial_rep = alice.reputation
+
+    bob.arguments.first.vote(user: bob, vote_type: :up)
+    assert_equal bob_initial_rep, bob.reputation
+    bob.arguments.first.vote(user: alice, vote_type: :up)
+    assert_equal bob_initial_rep+1, bob.reputation
+    assert_equal alice_initial_rep, alice.reputation
+  end
+
+  test 'downvote does not cause any reputation change' do
+    bob = users(:bob)
+    alice = users(:alice)
+    bob_initial_rep = bob.reputation
+    bob.arguments.first.vote(user: alice, vote_type: :down)
+    assert_equal bob_initial_rep, bob.reputation
+  end
 end

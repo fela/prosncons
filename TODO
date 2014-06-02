@@ -6,6 +6,10 @@ SHORT TERM
 * rename Argument::description to content (?)
 * reorder arguments in js after vote
 * display upvotes/downvotes/novote estimate on hover
+* normalized score
+* rearrange elements on vote
+* voting for arguments
+* continuous integration
 
 
 MEDIUM TERM

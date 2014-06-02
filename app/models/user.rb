@@ -4,17 +4,17 @@ require 'digest'
 class User < ActiveRecord::Base
   SALT = ':803e380b0a804bc9f0b4c97c30c17b1e0d255.7cf3384755c66aea79c2c82264b4c'
   # salted hashes of emails of beta testers
-  BETA_TESTERS = [
-      '3j3KI990i+7C1GGCZBDwxPC8tVFwO+WxUZWQ1t9hm3A=',
-      'ooktG4O/64NJJigUUvAB7K4eWpHbqocVYnaE2zl/38k=',
-      'PtM9IZjv5Xh1QKg9ITK15I7WXIZltlT4C75CFDWHTGs=',
-      'RWAd4rLm4x6eUQk7nQDnIvClBwLqRgnaTLJSuSmSuSU=',
-      'J0JTW3G3XJWG6jCnRxoxBCMtiUOVmXh2+sBV/gJGD+I=',
-      'LlqMwOjhjUoosvs5HEU4DUGdF7hVHVzn3lRVB2SQzTg=',
-      'QVgtJAL3S0QrNvjvhMr+fcjCCxUNeoEtKpWjNIeo09Q=',
-      'DtPJ0IaEjdsK5YgoSXfux7EF4EjghetyW1FAJ7t0lrE=',
-      '/CpREHJGlW05RBJOkbdROLV9R/PPYVxo96sRaYEot2o='
-  ].to_set
+  BETA_TESTERS = %w(
+    3j3KI990i+7C1GGCZBDwxPC8tVFwO+WxUZWQ1t9hm3A=
+    ooktG4O/64NJJigUUvAB7K4eWpHbqocVYnaE2zl/38k=
+    PtM9IZjv5Xh1QKg9ITK15I7WXIZltlT4C75CFDWHTGs=
+    RWAd4rLm4x6eUQk7nQDnIvClBwLqRgnaTLJSuSmSuSU=
+    J0JTW3G3XJWG6jCnRxoxBCMtiUOVmXh2+sBV/gJGD+I=
+    LlqMwOjhjUoosvs5HEU4DUGdF7hVHVzn3lRVB2SQzTg=
+    QVgtJAL3S0QrNvjvhMr+fcjCCxUNeoEtKpWjNIeo09Q=
+    DtPJ0IaEjdsK5YgoSXfux7EF4EjghetyW1FAJ7t0lrE=
+    /CpREHJGlW05RBJOkbdROLV9R/PPYVxo96sRaYEot2o=
+  ).to_set
 
   attr_accessible :name
   validates :primary_email, presence: true, uniqueness: true
@@ -25,6 +25,7 @@ class User < ActiveRecord::Base
   has_many :pages
   has_many :votes
   has_many :arguments
+  has_many :received_votes, through: :arguments, source: :votes
 
   def display_name
     name or "user#{id}"
@@ -38,6 +39,16 @@ class User < ActiveRecord::Base
     # TODO use where not after RAILS4 conversion
     all_emails = credentials.map {|c| c.email}
     all_emails - [primary_email]
+  end
+
+  def reputation
+    # TODO: denormalize the reputation
+    # the nil in the where is redundant but added for clarity
+    if not @reputation
+      @reputation = received_votes.where('vote > 0') \
+                                  .where.not(user: [self, nil]).count
+    end
+    @reputation
   end
 
   def self.logged_in(email)
@@ -94,7 +105,8 @@ class User < ActiveRecord::Base
 
   def beta_tester?
     hash = Digest::SHA256.new.base64digest primary_email + SALT
-    BETA_TESTERS.include? hash
+    # TODO: remove ID
+    BETA_TESTERS.include? hash or id == 902541637
   end
 
   private

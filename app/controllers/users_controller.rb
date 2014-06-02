@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   # GET /users
   def index
-    @users = User.all
+    # TODO: change when reputation will be denormalized
+    @users = User.all.to_a.sort_by!(&:reputation).reverse
   end
 
   # GET /users/1
@@ -22,7 +23,7 @@ class UsersController < ApplicationController
       flash[:success] = 'Your profile was successfully updated'
       redirect_to @user
     else
-      render action: "edit"
+      render action: 'edit'
     end
   end
 end
