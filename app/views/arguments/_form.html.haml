@@ -4,7 +4,12 @@
 
   .form-inputs
     = f.input :summary
-    = f.input :description
+    = f.label :description
+    (you can format the text by using
+    = link_to 'markdown', 'http://daringfireball.net/projects/markdown/syntax',
+      target: '_blank'
+    )
+    = f.input_field :description
 
   .form-actions
     = f.button :submit

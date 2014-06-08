@@ -3,7 +3,12 @@
 
   .form-inputs
     = f.input :title
-    = f.input :content
+    = f.label :content
+    (you can format the text by using
+    = link_to 'markdown', 'http://daringfireball.net/projects/markdown/syntax',
+      target: '_blank'
+    )
+    = f.input_field :content
     = f.input :option1
     = f.input :option2
 
