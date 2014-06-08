@@ -9,8 +9,11 @@
       target: '_blank'
     )
     = f.input_field :content
-    = f.input :option1
-    = f.input :option2
+    .row
+      .col-sm-6
+        = f.input :option1, label: 'Option 1'
+      .col-sm-6
+        = f.input :option2, label: 'Option 2'
 
   .form-actions
     = f.button :submit
