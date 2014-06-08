@@ -12,7 +12,6 @@
     = f.input_field :description
 
   .form-actions
+    = link_to 'Back', page_path(@argument.page), class: 'btn btn-default'
     = f.button :submit
 
-
-= link_to 'Back', page_path(@argument.page)
