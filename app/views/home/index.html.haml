@@ -11,10 +11,10 @@
   %h3 Recent Arguments
   .row.recent
     - for a in @recent_arguments
-      .col-sm-9
+      .col-sm-10.summary
         = link_to(a.page.title, a.page) + ' > ' + a.option_string + ' > '
         %strong= a.summary
-      .col-sm-3.timestamp.small.text-muted.text-right
+      .col-sm-2.timestamp.small.text-muted.text-right
         #{time_ago_in_words a.created_at} ago
 
   = render partial: 'description'

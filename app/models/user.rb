@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   ).to_set
 
   attr_accessible :name
+  attr_accessible :all
   validates :primary_email, presence: true, uniqueness: true
   validate :has_primary_credential
 
