@@ -5,3 +5,12 @@
   .edits
     - pluralized = edits == 1 ? "edit" : "edits"
     #{edits} #{link_to pluralized, versions_path(obj)}
+
+- comments = obj.comments.size
+- if comments > 0
+  .comments
+    - pluralized = comments == 1 ? "comment" : "comments"
+    #{edits} #{pluralized}
+- else
+  .comments
+    add a comment

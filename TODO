@@ -1,4 +1,6 @@
 SHORT TERM
+* meta section for discussions and sections
+* possibility of adding comments
 * notifications on edits/added-points/votes
 * voting on questions and display best/featured
 * rename Argument::description to content (?)
@@ -7,6 +9,11 @@ SHORT TERM
 * normalized score
 * continuous integration
 * look at the PaperTrail integration in rails_admin
+* better way to add beta testers
+* comment system
+  * (meta) TODO
+  * think and implement db schema
+  *
 
 
 MEDIUM TERM

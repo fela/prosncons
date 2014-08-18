@@ -6,6 +6,7 @@ class Page < ActiveRecord::Base
 
   has_many :arguments, -> {order [:option, :created_at]}, dependent: :destroy
   has_many :votes, as: :votable
+  has_many :comments, as: :about
   belongs_to :user
 
   alias_attribute :author, :user

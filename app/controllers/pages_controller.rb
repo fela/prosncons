@@ -24,7 +24,7 @@ class PagesController < ApplicationController
       flash[:success] =  'Page was successfully created.'
       redirect_to @page
     else
-      render action: "new"
+      render action: 'new'
     end
   end
 
@@ -34,7 +34,7 @@ class PagesController < ApplicationController
       flash[:success] = 'Page was successfully updated'
       redirect_to @page
     else
-      render action: "edit"
+      render action: 'edit'
     end
   end
 

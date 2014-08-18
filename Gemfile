@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-ruby '2.0.0' # 2.1 not yet supported by Beanstalk
-gem 'rails', '~> 4.1.0'
+ruby '2.1.2' # 2.1 not yet supported by Beanstalk
+gem 'rails', '~> 4.1.4'
 
 gem 'pg'
 gem 'jquery-rails'

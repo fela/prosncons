@@ -8,6 +8,7 @@ class Argument < ActiveRecord::Base
   validates_presence_of :summary, :description, :option, :page
   belongs_to :page
   has_many :votes, as: :votable
+  has_many :comments, as: :about
   has_many :indirect_votes
   belongs_to :user
 
