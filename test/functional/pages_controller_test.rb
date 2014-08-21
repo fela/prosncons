@@ -18,7 +18,7 @@ class PagesControllerTest < ActionController::TestCase
   end
 
   test "should get new" do
-    @controller.stubs(:current_user).returns(users(:bob))
+    @controller.stubs(:current_user).returns(users(:alice))
     get :new
     assert_response :success
   end
@@ -30,7 +30,7 @@ class PagesControllerTest < ActionController::TestCase
   end
 
   test "should create page" do
-    @controller.stubs(:current_user).returns(users(:bob))
+    @controller.stubs(:current_user).returns(users(:alice))
     assert_difference('Page.count') do
       post :create, page: {
           content: @page.content,

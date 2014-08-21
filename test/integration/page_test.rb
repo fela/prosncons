@@ -1,11 +1,11 @@
 require 'test_helper'
 
-class PersonaTest < ActionDispatch::IntegrationTest
+class PageIntegrationTest < ActionDispatch::IntegrationTest
 
   setup do
     visit(root_path)
     email = users(:alice).primary_email
-    if ! page.has_content?(email)
+    if not page.has_content?(email)
       login email
     end
   end

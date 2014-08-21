@@ -56,10 +56,11 @@ class ActionDispatch::IntegrationTest
   # to finish
   def login(email=users(:alice).primary_email, opt={})
     assert find('.footer')
+    main_window = page.current_window
     page.execute_script("navigator.id.request()")
     sleep 0.1
-    main_window, persona_popup = page.driver.browser.window_handles
-    assert persona_popup
+    w1, persona_popup = page.windows
+    assert w1 == main_window
     within_window(persona_popup) do
       using_wait_time(2) do
         if page.has_selector?('#selectEmail')#[:id] == 'selectEmail'
@@ -77,7 +78,9 @@ class ActionDispatch::IntegrationTest
         end
       end
     end
-    page.driver.browser.switch_to.window(main_window)
+    #if main_window != page.current_window
+    #  page.driver.browser.switch_to.window(main_window)
+    page.switch_to_window(main_window)
     login_check(email) unless opt[:i_will_check]
   end
 
@@ -98,8 +101,7 @@ class ActionDispatch::IntegrationTest
     using_wait_time(15) do begin
       yield
     rescue Selenium::WebDriver::Error::NoSuchWindowError
-    #rescue Selenium::WebDriver::Error::UnknownError
-      puts 'window closed (NoSuchWindowError)'
+      #puts 'window closed (NoSuchWindowError)'
     end end
   end
 

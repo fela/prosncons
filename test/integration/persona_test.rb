@@ -1,8 +1,14 @@
 require 'test_helper'
 
 class PersonaTest < ActionDispatch::IntegrationTest
-  teardown do
-    sleep(0.2) # no clue why it does not work without this :(
+  #teardown do
+  #  sleep(0.2) # no clue why it does not work without this :(
+  #end
+
+  setup do
+    unless page.has_content?('you are not logged in')
+      page.execute_script("navigator && navigator.id && navigator.id.logout()")
+    end
   end
 
   teardown do
@@ -124,12 +130,5 @@ class PersonaTest < ActionDispatch::IntegrationTest
         assert page.has_content?('New Profile')
       end
     end
-  end
-
-  def display_cookies
-    #puts '=== begin of cookies ==='
-    #puts page.driver.browser.manage.all_cookies.map(&:inspect).join("\n")
-    #"#{puts '===  end of cookies  ==='
-    #puts
   end
 end
