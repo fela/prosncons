@@ -11,6 +11,6 @@
   .comments
     - pluralized = comments == 1 ? "comment" : "comments"
     = link_to comments.to_s + ' ' + pluralized, comments_path
-- else
+- elsif can? :create, Comment
   .comments
     = link_to "add a comment", new_comment_path
