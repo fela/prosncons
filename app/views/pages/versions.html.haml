@@ -5,5 +5,5 @@
   %small #{version[:event]} by #{link_to_user version[:author]}
   %h4= version[:obj].title
   %p
-    :markdown
+    :safemarkdown
       #{version[:obj].content}

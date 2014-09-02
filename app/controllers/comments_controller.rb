@@ -1,4 +1,4 @@
-class VotesController < ApplicationController
+class CommentsController < ApplicationController
   load_and_authorize_resource
 
   def index
@@ -9,11 +9,7 @@ class VotesController < ApplicationController
 
   def new
     @comment = Comment.new
-    if params[:argument_id]
-      @comment.about Argument.find(params[:argument_id])
-    else
-      @comment.about = Page.find(params[:page_id])
-    end
+    set_about
   end
 
   def edit
@@ -21,8 +17,9 @@ class VotesController < ApplicationController
 
   def create
     @comment.user = @logged_in_user
+    set_about
     if @comment.save
-      flash[:success] =  'Page was successfully created.'
+      flash[:success] = 'Your comment was successfully added.'
       redirect_to @comment.page
     else
       render action: 'new'
@@ -37,4 +34,13 @@ class VotesController < ApplicationController
       render action: 'edit'
     end
   end
+
+  private def set_about
+    if params[:argument_id]
+      @comment.about Argument.find(params[:argument_id])
+    else
+      @comment.about = Page.find(params[:page_id])
+    end
+  end
+
 end

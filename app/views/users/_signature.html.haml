@@ -10,7 +10,7 @@
 - if comments > 0
   .comments
     - pluralized = comments == 1 ? "comment" : "comments"
-    #{edits} #{pluralized}
+    = link_to comments.to_s + ' ' + pluralized, comments_path
 - else
   .comments
-    add a comment
+    = link_to "add a comment", new_comment_path

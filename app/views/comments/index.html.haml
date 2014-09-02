@@ -1,0 +1,7 @@
+= render partial: 'pages/page', object: @comments[0].about
+- @comments.each do |comment|
+  %h4= comment.title
+  :safemarkdown
+    #{comment.content}
+  %hr
+= link_to 'Add a Comment', new_page_comment_path, class: 'btn btn-primary'

@@ -1,4 +1,5 @@
 class Comment < ActiveRecord::Base
+  attr_accessible :title, :content
   belongs_to :about, polymorphic: true
   belongs_to :user
 
@@ -10,5 +11,9 @@ class Comment < ActiveRecord::Base
     else
       about.page
     end
+  end
+
+  def to_s
+    return "Comment ##{id}: #{title.inspect}"
   end
 end

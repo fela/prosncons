@@ -1,0 +1,15 @@
+%h1 New Comment
+= simple_form_for @comment, url: page_comments_path, method: :post  do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :title
+    = f.label :content
+    (you can format the text by using
+    #{link_to 'markdown', 'http://daringfireball.net/projects/markdown/syntax', target: '_blank'})
+    = f.input_field :content, class: 'form-control'
+    %br
+
+  .form-actions
+    = link_to 'Back', page_path(@comment.about), class: 'btn btn-default'
+    = f.button :submit, value: 'Add Comment'

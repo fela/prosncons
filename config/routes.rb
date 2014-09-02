@@ -10,7 +10,10 @@ Prosncons::Application.routes.draw do
   post 'persona/:action', controller: :persona
   get 'persona/new_user' => 'persona#new_user'
 
-  resources :pages
+  resources :pages do
+    resources :comments
+  end
+
   get 'pages/:page_id/versions' => 'pages#versions', as: :versions_page
 
   put 'pages/:page_id/arguments/:id/vote/:vote_type' => 'arguments#vote'
@@ -21,11 +24,16 @@ Prosncons::Application.routes.draw do
   put 'pages/:page_id/arguments/:option/:id' => 'arguments#update'
   get 'pages/:page_id/arguments/:option/:id/versions' => 'arguments#versions'
 
-
+  # XXX: what is the difference between arguments#vote and votes#create?
   post 'pages/votes/:argument_id/:vote' => 'votes#create'
 
+  #get 'pages/:page_id/comments' => 'comments#index'
+  #get 'pages/:page_id/comments/new' => 'comments#new'
+  #post 'pages/:page_id/comments' => 'comments#create'
 
-  # XXX: should be POST
+  get 'pages/:page_id/arguments/:id/comments' => 'comments#index'
+  get 'pages/:page_id/arguments/:id/comments/new' => 'comments#new'
+  post 'pages/:page_id/arguments/:id/comments' => 'comments#create'
 
 
   # The priority is based upon order of creation:

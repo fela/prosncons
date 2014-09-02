@@ -8,7 +8,8 @@
     = link_to 'markdown', 'http://daringfireball.net/projects/markdown/syntax',
       target: '_blank'
     )
-    = f.input_field :content
+    = f.input_field :content, class: 'form-control'
+    %br
     .row
       .col-sm-6
         = f.input :option1, label: 'Option 1'

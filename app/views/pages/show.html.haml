@@ -1,16 +1,6 @@
 %p#notice= notice
 
-%h3.page-header
-  =@page.title
-  - if can? :edit, @page
-    %small
-      [#{link_to 'edit', edit_page_path(@page)}]
-.page-content
-  :markdown
-    #{@page.content}
-  .text-right
-    = render partial: 'users/signature',
-      locals: {obj: @page}
+= render @page
 
 - if not can? :create, Argument
   %br
