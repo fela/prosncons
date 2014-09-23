@@ -2,6 +2,11 @@ class CommentsController < ApplicationController
   load_and_authorize_resource
 
   def index
+    if params[:argument_id]
+      @comments = Comment.where(about_id: params[:argument_id])
+    else
+      @comments = Comment.where(about_id: params[:page_id])
+    end
   end
 
   def show

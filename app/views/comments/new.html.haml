@@ -1,5 +1,6 @@
 %h1 New Comment
-= simple_form_for @comment, url: page_comments_path, method: :post  do |f|
+- url = @comment.about.is_a?(Page) ? page_comments_path : page_argument_comments_path
+= simple_form_for @comment, url: url, method: :post  do |f|
   = f.error_notification
 
   .form-inputs

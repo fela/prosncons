@@ -1,4 +1,4 @@
-= render partial: 'pages/page', object: @comments[0].about
+/= render partial: 'pages/page', object: @comments[0].about
 - @comments.each do |comment|
   %h4= comment.title
   :safemarkdown
