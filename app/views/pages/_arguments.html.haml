@@ -16,7 +16,7 @@
           #{a.description}
         .pull-right
           = render partial: 'users/signature',
-            locals: {obj: a, new_comment_path: new_page_comment_path(a.page), comments_path: page_comments_path(a.page)}
+            locals: {obj: a, new_comment_path: new_page_argument_comment_path(@page, a), comments_path: page_argument_comments_path(@page, a)}
 
 
   - unless @page.arguments_for(option).empty?

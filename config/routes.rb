@@ -12,16 +12,15 @@ Prosncons::Application.routes.draw do
 
   resources :pages do
     resources :comments
+    resources :arguments, except: :new, as: :argument do
+      resources :comments
+    end
   end
 
+  get 'pages:page_id/arguments1/:argument_id/:option/new' => 'arguments#new'
+
   get 'pages/:page_id/versions' => 'pages#versions', as: :versions_page
-
   put 'pages/:page_id/arguments/:id/vote/:vote_type' => 'arguments#vote'
-
-  get 'pages/:page_id/arguments/:option/new' => 'arguments#new'
-  post 'pages/:page_id/arguments/:option' => 'arguments#create'
-  get 'pages/:page_id/arguments/:option/:id/edit' => 'arguments#edit'
-  put 'pages/:page_id/arguments/:option/:id' => 'arguments#update'
   get 'pages/:page_id/arguments/:option/:id/versions' => 'arguments#versions'
 
   # XXX: what is the difference between arguments#vote and votes#create?
@@ -31,9 +30,9 @@ Prosncons::Application.routes.draw do
   #get 'pages/:page_id/comments/new' => 'comments#new'
   #post 'pages/:page_id/comments' => 'comments#create'
 
-  get 'pages/:page_id/arguments/:id/comments' => 'comments#index'
-  get 'pages/:page_id/arguments/:id/comments/new' => 'comments#new'
-  post 'pages/:page_id/arguments/:id/comments' => 'comments#create'
+  #get 'pages/:page_id/arguments/:id/comments' => 'comments#index'
+  #get 'pages/:page_id/arguments/:id/comments/new' => 'comments#new'
+  #post 'pages/:page_id/arguments/:id/comments' => 'comments#create'
 
 
   # The priority is based upon order of creation:

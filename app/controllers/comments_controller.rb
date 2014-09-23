@@ -37,7 +37,7 @@ class CommentsController < ApplicationController
 
   private def set_about
     if params[:argument_id]
-      @comment.about Argument.find(params[:argument_id])
+      @comment.about = Argument.find(params[:argument_id])
     else
       @comment.about = Page.find(params[:page_id])
     end
