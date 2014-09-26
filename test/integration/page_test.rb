@@ -10,7 +10,7 @@ class PageIntegrationTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test "creating page and argument" do
+  test "creating many items" do
     # creating page
     visit(pages_path)
     click_on('New Page')
@@ -43,6 +43,8 @@ class PageIntegrationTest < ActionDispatch::IntegrationTest
 
     # add argument
     page.all('.option-header')[1].find('.btn').click
+
+    # TODO: to be finished
   end
 
 end
