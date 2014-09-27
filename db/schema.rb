@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(version: 20140714160631) do
     t.text     "description"
     t.integer  "page_id"
     t.integer  "user_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "option"
   end
 
@@ -39,8 +39,8 @@ ActiveRecord::Schema.define(version: 20140714160631) do
   create_table "credentials", force: true do |t|
     t.integer  "user_id"
     t.string   "email"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "indirect_votes", force: true do |t|
@@ -64,16 +64,16 @@ ActiveRecord::Schema.define(version: 20140714160631) do
     t.string   "option1",    default: "pros"
     t.string   "option2",    default: "cons"
     t.integer  "user_id"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "users", force: true do |t|
     t.string   "primary_email"
     t.string   "name"
     t.text     "urls"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "versions", force: true do |t|
@@ -93,8 +93,8 @@ ActiveRecord::Schema.define(version: 20140714160631) do
     t.string   "votable_type"
     t.integer  "vote"
     t.string   "ip"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
