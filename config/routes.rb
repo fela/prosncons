@@ -17,6 +17,10 @@ Prosncons::Application.routes.draw do
     end
   end
 
+  # customized argument creation to include the option
+  get 'pages/:page_id/arguments/:option/new' => 'arguments#new'
+  post 'pages/:page_id/arguments/:option' => 'arguments#create'
+
   get 'pages:page_id/arguments1/:argument_id/:option/new' => 'arguments#new'
 
   get 'pages/:page_id/versions' => 'pages#versions', as: :versions_page
@@ -25,15 +29,6 @@ Prosncons::Application.routes.draw do
 
   # XXX: what is the difference between arguments#vote and votes#create?
   post 'pages/votes/:argument_id/:vote' => 'votes#create'
-
-  #get 'pages/:page_id/comments' => 'comments#index'
-  #get 'pages/:page_id/comments/new' => 'comments#new'
-  #post 'pages/:page_id/comments' => 'comments#create'
-
-  #get 'pages/:page_id/arguments/:id/comments' => 'comments#index'
-  #get 'pages/:page_id/arguments/:id/comments/new' => 'comments#new'
-  #post 'pages/:page_id/arguments/:id/comments' => 'comments#create'
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
