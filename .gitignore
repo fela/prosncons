@@ -15,4 +15,7 @@
 /tmp
 
 /thesis/*~*
-.elasticbeanstalk/
+/.elasticbeanstalk/
+/.idea
+/*.iml
+
