@@ -73,7 +73,7 @@ class PageIntegrationTest < ActionDispatch::IntegrationTest
     fill_in('argument_description', with: 'TestXXXArgDescription')
     click_on('Update Argument')
 
-    within('.option-1-content') do
+    within('.option-1-contennt') do
       assert page.has_content?('TestXXXArgSummary')
       assert page.has_content?('TestXXXArgDescription')
     end
