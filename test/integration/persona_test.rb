@@ -19,18 +19,18 @@ class PersonaTest < ActionDispatch::IntegrationTest
   end
 
   # meta test
-  test 'login test helper' do
-    email1 = users(:alice).primary_email
-    email2 = users(:bob).primary_email
-    # normal login
-    visit(root_path)
-    login(email1)
-    # add new login
-    login(email2)
-    # use existing login
-    login(email1)
-    logout
-  end
+  # test 'login test helper' do
+  #   email1 = users(:alice).primary_email
+  #   email2 = users(:bob).primary_email
+  #   # normal login
+  #   visit(root_path)
+  #   login(email1)
+  #   # add new login
+  #   login(email2)
+  #   # use existing login
+  #   login(email1)
+  #   logout
+  # end
 
   test 'normal login' do
     visit(root_path)
