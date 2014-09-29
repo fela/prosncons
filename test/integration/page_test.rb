@@ -41,8 +41,45 @@ class PageIntegrationTest < ActionDispatch::IntegrationTest
       assert page.has_content?('Test title XXX')
     end
 
-    # add argument
-    page.all('.option-header')[1].find('.btn').click
+    # add argument and then go back
+    page.find('.option-1-content > .option-header .btn').click
+    click_on('Back')
+    assert page.has_content?('Content 222')
+    within('.page-header') do
+      assert page.has_content?('Test title XXX')
+    end
+
+    # add argument for real
+    page.find('.option-1-content > .option-header .btn').click
+
+    fill_in('argument_summary', with: 'TestArgSummary')
+    fill_in('argument_description', with: 'TestArgDescription')
+    click_on('Create Argument')
+    within('.option-1-content') do
+      assert page.has_content?('TestArgSummary')
+      assert page.has_content?('TestArgDescription')
+    end
+
+    within('.option-0-content') do
+      assert page.has_no_content?('TestArgSummary')
+      assert page.has_no_content?('TestArgDescription')
+    end
+
+    within('.option-1-content') do
+      click_on('edit')
+    end
+
+    fill_in('argument_summary', with: 'TestXXXArgSummary')
+    fill_in('argument_description', with: 'TestXXXArgDescription')
+    click_on('Update Argument')
+
+    within('.option-1-content') do
+      assert page.has_content?('TestXXXArgSummary')
+      assert page.has_content?('TestXXXArgDescription')
+    end
+
+    sleep 10
+
 
     # TODO: to be finished
   end

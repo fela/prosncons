@@ -1,4 +1,4 @@
-.col-sm-6
+.col-sm-6{class: "option-#{option}-content"}
   %h2.option-header
     = @page.options[option]
     - if can? :create, Argument
@@ -11,7 +11,7 @@
         %h4
           = a.summary
           - if can? :edit, a
-            %small [#{link_to 'edit', edit_argument_path(a)}]
+            %small [#{link_to 'edit', edit_page_argument_path(@page, a)}]
         :safemarkdown
           #{a.description}
         .pull-right

@@ -25,6 +25,9 @@ module PagesHelper
     end
   end
   def update_or_create_path(argument)
+    unless argument.is_a? Argument
+      raise ArgumentError.new('argument must be of class Argument')
+    end
     page = argument.page
     option = argument.option
     puts option.inspect
@@ -32,7 +35,7 @@ module PagesHelper
       url = base_argument_path(page, option)
       method = :post
     else
-      url = base_argument_path(page, option) + "/#{argument.id}/"
+      url = page_argument_path(page, argument)
       method = :put
     end
     {url: url, method: method}
