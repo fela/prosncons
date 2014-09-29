@@ -59,10 +59,8 @@ private
   def verify_assertion
     assertion = params[:assertion]
     audience = request.host
-    #puts "Assertion: #{assertion}"
-    #puts "Audience: #{audience}"
 
-    use_proxy = `iwconfig wlan2` =~ /GenuaWifi/
+    use_proxy = false #`iwconfig wlan2` =~ /GenuaWifi/
     proxy, port = use_proxy ? ['wifiproxy.unige.it', 80] : [nil, nil]
     http = Net::HTTP.new('verifier.login.persona.org', 443, proxy, port)
 
