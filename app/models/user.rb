@@ -105,9 +105,10 @@ class User < ActiveRecord::Base
   end
 
   def beta_tester?
-    hash = Digest::SHA256.new.base64digest primary_email + SALT
+    true
+    #hash = Digest::SHA256.new.base64digest primary_email + SALT
     # TODO: remove ID
-    BETA_TESTERS.include? hash or id == 902541637
+    #BETA_TESTERS.include? hash or id == 902541637
   end
 
   private
