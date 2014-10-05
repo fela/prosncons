@@ -6,6 +6,8 @@ class Argument < ActiveRecord::Base
   has_paper_trail :on => [:update, :destroy]
   attr_accessible :summary, :description, :option
   validates_presence_of :summary, :description, :option, :page
+  validates :summary, length: {in: 6..64}
+
   belongs_to :page
   has_many :votes, as: :votable
   has_many :comments, as: :about

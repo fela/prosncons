@@ -1,8 +1,11 @@
 class Page < ActiveRecord::Base
   has_paper_trail :on => [:update, :destroy]
   attr_accessible :content, :option1, :option2, :title
-  validates_presence_of :title, :content
+  validates_presence_of :content
+  validates :title, length: { in: 6..128 }
+  #validates :content, length: { minimum: 16}  # have to fix form first
   validate :options_should_be_different
+
 
   has_many :arguments, -> {order [:option, :created_at]}, dependent: :destroy
   has_many :votes, as: :votable
